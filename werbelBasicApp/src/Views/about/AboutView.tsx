@@ -1,0 +1,29 @@
+import { Component } from "../../libs/worbl/Component.js";
+import { BaseComponent, JSX } from "../../libs/worbl/JSX.js";
+import { Route } from "../../libs/worbl/Router.js";
+
+@Route("#about")
+@Route("#about/{page}")
+@Component("about-view")
+export class AboutView extends BaseComponent<unknown> {
+    Name: string;
+    public constructor() {
+        super();
+
+        this.Render();
+    }
+
+    protected makeContainer(): HTMLElement {
+        return this.makeContainerDefault(AboutView,{ class: "AboutView"});
+    }
+
+    public SetParam(name: string, value: any) {
+        if (name === "page"){
+            window.document.title = value;
+        }
+    }
+
+    protected View(): HTMLElement {
+        return <div>blarg</div>;
+    }
+}

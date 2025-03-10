@@ -1,0 +1,9 @@
+
+{
+"$schema": "http://json.schemastore.org/template",
+"author": "The Confusiarch",
+"classifications": ["omnicatz", "werbl"],
+"identity": "Omnicatz.ConsoleTemplate.CSharp",
+"name": "Omnicatz Werbl",
+"shortName": "werbl"
+}

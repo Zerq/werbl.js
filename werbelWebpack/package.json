@@ -1,0 +1,13 @@
+{
+    "scripts": {
+        "build": "webpack && gulp"
+    },
+    "devDependencies": {
+        "typescript":"5.7.3",
+        "@types/react":"19.0.8",
+        "gulp":"5.0.0",
+        "gulp-newer":"1.4.0",
+        "webpack":"5.98.0",
+        "ts-loader":"9.5.2"
+    }
+}

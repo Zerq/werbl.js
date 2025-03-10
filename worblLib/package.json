@@ -1,0 +1,34 @@
+{
+  "name": "worbllib",
+  "version": "1.0.0",
+  "description": "SPA framework based on just core DOM features and basic typescript with basically zero dependencies only dev dependencies",
+  "main": "index.js",
+  "type": "module",
+  
+  "scripts": {
+    "build": "tsc && gulp",
+    "buildOnly": "tsc"
+    
+  },
+  "devDependencies": {
+  "typescript":"5.8.2",
+  "@types/react":"19.0.10",
+  "gulp":"5.0.0"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "yes"
+  },
+  "keywords": [
+    "spa",
+    "esm",
+    "react",
+    "Templates",
+    "Typescript",
+    "radical",
+    "simplicity"
+  ],
+  "author": "The Confushiarch",
+  "license": "GPL-3.0-or-later"
+}
