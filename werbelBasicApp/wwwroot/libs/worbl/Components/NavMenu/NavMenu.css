@@ -1,13 +1,8 @@
-.logo {
-    width: 3rem;
-}
-
 header {
     height: fit-content;
-    width: calc(100% - 1rem);
+    width: calc(100%);
     margin-block: auto;
     display: flex;
-    padding: 0.5rem;
 
     h1 {
         width: fit-content;

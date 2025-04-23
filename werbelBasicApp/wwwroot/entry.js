@@ -7,18 +7,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+import { IOC } from "./libs/worbl/IOC.js";
+import "./libs/worbl/MetaData.js";
+import "./libs/worbl/ComponentRegistry.js";
+import "./libs/worbl/Router.js";
+import "./libs/worbl/JSX.js";
 import { JSX, __frag } from "./libs/worbl/JSX.js";
 import { CSS } from "./libs/worbl/CSS.js";
-import "./libs/worbl/types.js";
-import "./libs/worbl/JSX.js";
-import "./libs/worbl/Router.js";
-import "./libs/worbl/MetaData.js";
 import { Component } from "./libs/worbl/Component.js";
 import "./libs/worbl/Components/NavMenu/NavMenu.js";
 import { BasicAppRoot } from "./libs/worbl/BasicApproot.js";
 import "./Views/Home/HomeView.js";
 import "./Views/about/AboutView.js";
-import { Router } from "./libs/worbl/Router.js";
+import { IRouter } from "./libs/worbl/types.js";
 let AppComponent = class AppComponent extends BasicAppRoot {
     Route(router) {
     }
@@ -26,7 +27,7 @@ let AppComponent = class AppComponent extends BasicAppRoot {
     constructor() {
         super();
         this.setInitialView("#home");
-        Router.Instance.defaultRouteHandler = (tag, params) => {
+        IOC.Instance.Service(IRouter).defaultRouteHandler = (tag, params) => {
             this.renderView(tag, params, []);
         };
     }

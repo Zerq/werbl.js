@@ -12,9 +12,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "HomeView": () => (/* binding */ HomeView)
 /* harmony export */ });
-/* harmony import */ var _libs_worbl_Component_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../libs/worbl/Component.js */ "./src/libs/worbl/Component.js");
-/* harmony import */ var _libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../libs/worbl/JSX.js */ "./src/libs/worbl/JSX.js");
-/* harmony import */ var _libs_worbl_Router_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../libs/worbl/Router.js */ "./src/libs/worbl/Router.js");
+/* harmony import */ var _libs_worbl_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../libs/worbl/BaseComponent.js */ "./src/libs/worbl/BaseComponent.js");
+/* harmony import */ var _libs_worbl_Component_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../libs/worbl/Component.js */ "./src/libs/worbl/Component.js");
+/* harmony import */ var _libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../libs/worbl/JSX.js */ "./src/libs/worbl/JSX.js");
+/* harmony import */ var _libs_worbl_Router_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../libs/worbl/Router.js */ "./src/libs/worbl/Router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -28,7 +29,8 @@ var HomeView_1;
 
 
 
-let HomeView = HomeView_1 = class HomeView extends _libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_1__.BaseComponent {
+
+let HomeView = HomeView_1 = class HomeView extends _libs_worbl_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__.BaseComponent {
     Name;
     constructor() {
         super();
@@ -50,12 +52,33 @@ let HomeView = HomeView_1 = class HomeView extends _libs_worbl_JSX_js__WEBPACK_I
         console.log("checkbox changed to " + e.detail);
     }
     View() {
-        return (0,_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_1__.JSX)("div", null, "Hello!");
+        return (0,_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_2__.JSX)("div", null,
+            (0,_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_2__.JSX)("h2", null, "What is Werbl"),
+            (0,_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_2__.JSX)("p", null,
+                "Its a nonsense word i came up with.",
+                (0,_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_2__.JSX)("br", null),
+                "Its my low dependency frontend library.",
+                (0,_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_2__.JSX)("br", null),
+                (0,_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_2__.JSX)("br", null),
+                "Basically the goal is to make things as simple as possible and ideally make the source code always avalible and very easy to read and understand.",
+                (0,_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_2__.JSX)("br", null),
+                "if people look at it and go wait this is so fucking simple i could write this shit.",
+                (0,_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_2__.JSX)("br", null),
+                (0,_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_2__.JSX)("br", null),
+                "that yay! that is what i was aiming for.",
+                (0,_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_2__.JSX)("br", null),
+                "Ideally it should be so simple it can be re-writen from scratch in a week or two.. that may not be entierly achivable but hey best attempt.",
+                (0,_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_2__.JSX)("br", null),
+                "Jquery becase redundant as web tech moved on this project is basically here to see how far of are we from making thing like react and angular redundant.",
+                (0,_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_2__.JSX)("br", null),
+                (0,_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_2__.JSX)("br", null),
+                "or at least so simple to recreate yourself that its near redundant.",
+                (0,_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_2__.JSX)("br", null)));
     }
 };
 HomeView = HomeView_1 = __decorate([
-    (0,_libs_worbl_Router_js__WEBPACK_IMPORTED_MODULE_2__.Route)("#home"),
-    (0,_libs_worbl_Component_js__WEBPACK_IMPORTED_MODULE_0__.Component)("home-view"),
+    (0,_libs_worbl_Router_js__WEBPACK_IMPORTED_MODULE_3__.Route)("#home"),
+    (0,_libs_worbl_Component_js__WEBPACK_IMPORTED_MODULE_1__.Component)("home-view"),
     __metadata("design:paramtypes", [])
 ], HomeView);
 
@@ -73,9 +96,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AboutView": () => (/* binding */ AboutView)
 /* harmony export */ });
-/* harmony import */ var _libs_worbl_Component_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../libs/worbl/Component.js */ "./src/libs/worbl/Component.js");
-/* harmony import */ var _libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../libs/worbl/JSX.js */ "./src/libs/worbl/JSX.js");
-/* harmony import */ var _libs_worbl_Router_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../libs/worbl/Router.js */ "./src/libs/worbl/Router.js");
+/* harmony import */ var _libs_worbl_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../libs/worbl/BaseComponent.js */ "./src/libs/worbl/BaseComponent.js");
+/* harmony import */ var _libs_worbl_Component_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../libs/worbl/Component.js */ "./src/libs/worbl/Component.js");
+/* harmony import */ var _libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../libs/worbl/JSX.js */ "./src/libs/worbl/JSX.js");
+/* harmony import */ var _libs_worbl_Router_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../libs/worbl/Router.js */ "./src/libs/worbl/Router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -89,7 +113,8 @@ var AboutView_1;
 
 
 
-let AboutView = AboutView_1 = class AboutView extends _libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_1__.BaseComponent {
+
+let AboutView = AboutView_1 = class AboutView extends _libs_worbl_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__.BaseComponent {
     Name;
     constructor() {
         super();
@@ -104,17 +129,81 @@ let AboutView = AboutView_1 = class AboutView extends _libs_worbl_JSX_js__WEBPAC
         }
     }
     View() {
-        return (0,_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_1__.JSX)("div", null, "blarg");
+        return (0,_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_2__.JSX)("div", null, "blarg");
     }
 };
 AboutView = AboutView_1 = __decorate([
-    (0,_libs_worbl_Router_js__WEBPACK_IMPORTED_MODULE_2__.Route)("#about"),
-    (0,_libs_worbl_Router_js__WEBPACK_IMPORTED_MODULE_2__.Route)("#about/{page}"),
-    (0,_libs_worbl_Component_js__WEBPACK_IMPORTED_MODULE_0__.Component)("about-view"),
+    (0,_libs_worbl_Router_js__WEBPACK_IMPORTED_MODULE_3__.Route)("#about"),
+    (0,_libs_worbl_Router_js__WEBPACK_IMPORTED_MODULE_3__.Route)("#about/{page}"),
+    (0,_libs_worbl_Component_js__WEBPACK_IMPORTED_MODULE_1__.Component)("about-view"),
     __metadata("design:paramtypes", [])
 ], AboutView);
 
 
+
+/***/ }),
+
+/***/ "./src/libs/worbl/BaseComponent.js":
+/*!*****************************************!*\
+  !*** ./src/libs/worbl/BaseComponent.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "BaseComponent": () => (/* binding */ BaseComponent)
+/* harmony export */ });
+/* harmony import */ var _IOC_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IOC.js */ "./src/libs/worbl/IOC.js");
+/* harmony import */ var _types_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types.js */ "./src/libs/worbl/types.js");
+
+
+class BaseComponent {
+    model;
+    #container;
+    #id;
+    get Id() {
+        return this.#id;
+    }
+    set Id(val) {
+        this.#id = val;
+    }
+    get Container() {
+        return this.#container;
+    }
+    constructor() {
+        this.#container = this.makeContainer();
+    }
+    children;
+    SetChildren(children) {
+        this.children = children;
+    }
+    makeContainerDefault(ctr, params = { tagType: undefined, class: undefined }) {
+        this.Id = crypto.randomUUID();
+        ;
+        const componentRegistry = _IOC_js__WEBPACK_IMPORTED_MODULE_0__.IOC.Instance.Service(_types_js__WEBPACK_IMPORTED_MODULE_1__.IComponentRegistry);
+        /*optional params --> */
+        const element = document.createElement(params.tagType ?? "div");
+        if (params.class) {
+            element.className = params.class;
+        }
+        /*<-- optional params  */
+        const tag = componentRegistry.GetTag(ctr);
+        if (tag === undefined) {
+            return undefined;
+        }
+        element.setAttribute("data-tagtype", tag);
+        element.id = this.Id;
+        return element;
+    }
+    Render() {
+        this.#container.innerHTML = "";
+        const view = this.View();
+        if (view !== null) {
+            this.#container.appendChild(view);
+        }
+    }
+}
+//# sourceMappingURL=BaseComponent.js.map
 
 /***/ }),
 
@@ -128,33 +217,39 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "BasicAppRoot": () => (/* binding */ BasicAppRoot)
 /* harmony export */ });
-/* harmony import */ var _JSX_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./JSX.js */ "./src/libs/worbl/JSX.js");
-/* harmony import */ var _Router_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Router.js */ "./src/libs/worbl/Router.js");
+/* harmony import */ var _IOC_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IOC.js */ "./src/libs/worbl/IOC.js");
+/* harmony import */ var _JSX_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./JSX.js */ "./src/libs/worbl/JSX.js");
+/* harmony import */ var _BaseComponent_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BaseComponent.js */ "./src/libs/worbl/BaseComponent.js");
+/* harmony import */ var _types_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./types.js */ "./src/libs/worbl/types.js");
 
 
-class BasicAppRoot extends _JSX_js__WEBPACK_IMPORTED_MODULE_0__.BaseComponent {
+
+
+class BasicAppRoot extends _BaseComponent_js__WEBPACK_IMPORTED_MODULE_2__.BaseComponent {
     constructor() {
         super();
         window.addEventListener("hashchange", e => {
-            _Router_js__WEBPACK_IMPORTED_MODULE_1__.Router.Instance.HandleRout(location.hash);
+            this.#router.HandleRout(location.hash);
         });
-        this.Route(_Router_js__WEBPACK_IMPORTED_MODULE_1__.Router.Instance);
+        this.Route(this.#router);
     }
+    #router = _IOC_js__WEBPACK_IMPORTED_MODULE_0__.IOC.Instance.Service(_types_js__WEBPACK_IMPORTED_MODULE_3__.IRouter);
+    #componentRegistry = _IOC_js__WEBPACK_IMPORTED_MODULE_0__.IOC.Instance.Service(_types_js__WEBPACK_IMPORTED_MODULE_3__.IComponentRegistry);
     setInitialView(view) {
         requestAnimationFrame(() => {
             location.hash = view;
-            _Router_js__WEBPACK_IMPORTED_MODULE_1__.Router.Instance.HandleRout(location.hash);
+            this.#router.HandleRout(location.hash);
         });
     }
     renderView(view, params, children) {
-        const result = window.Omnicatz.Components.CreateElement(view, params, children);
+        const result = this.#componentRegistry.CreateElement(view, params, children);
         this.Container.querySelector("main").innerHTML = "";
         result.Render();
         this.Container.querySelector("main").appendChild(result.Container);
     }
     makeContainer() {
         this.Id = crypto.randomUUID();
-        return (0,_JSX_js__WEBPACK_IMPORTED_MODULE_0__.JSX)("div", { id: this.Id });
+        return (0,_JSX_js__WEBPACK_IMPORTED_MODULE_1__.JSX)("div", { id: this.Id });
     }
     SetParam(name, value) { }
 }
@@ -196,12 +291,81 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Component": () => (/* binding */ Component)
 /* harmony export */ });
+/* harmony import */ var _IOC_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IOC.js */ "./src/libs/worbl/IOC.js");
+/* harmony import */ var _types_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types.js */ "./src/libs/worbl/types.js");
+
+
 function Component(tagName) {
     return (ctor) => {
-        window.Omnicatz.Components.RegisterElement(tagName, ctor);
+        _IOC_js__WEBPACK_IMPORTED_MODULE_0__.IOC.Instance.Service(_types_js__WEBPACK_IMPORTED_MODULE_1__.IComponentRegistry).RegisterElement(tagName, ctor);
     };
 }
 //# sourceMappingURL=Component.js.map
+
+/***/ }),
+
+/***/ "./src/libs/worbl/ComponentRegistry.js":
+/*!*********************************************!*\
+  !*** ./src/libs/worbl/ComponentRegistry.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _IOC_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IOC.js */ "./src/libs/worbl/IOC.js");
+/* harmony import */ var _types_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types.js */ "./src/libs/worbl/types.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+let ComponentRegistry = class ComponentRegistry {
+    GetTag(ctr) {
+        if (!this.#reverseMap?.has(ctr)) {
+            return undefined;
+        }
+        return this.#reverseMap.get(ctr);
+    }
+    GetTagByCtrName(ctrName) {
+        let result = undefined;
+        this.#reverseMap.forEach((val, key) => {
+            if (key.name === ctrName) {
+                result = val;
+            }
+        });
+        return result;
+    }
+    #map = new Map();
+    #reverseMap = new Map();
+    // public Register(string, )
+    static instance;
+    Has(tag) {
+        return this.#map.has(tag);
+    }
+    RegisterElement(tag, ctr) {
+        this.#map.set(tag, ctr);
+        this.#reverseMap.set(ctr, tag);
+    }
+    CreateElement(tag, params, children) {
+        let ctr = this.#map.get(tag);
+        if (ctr === undefined) {
+            return undefined;
+        }
+        const newComponent = new ctr();
+        for (let key in params) {
+            newComponent.SetParam(key, params[key]);
+        }
+        newComponent.SetChildren(children);
+        newComponent.Render();
+        return newComponent;
+    }
+};
+ComponentRegistry = __decorate([
+    (0,_IOC_js__WEBPACK_IMPORTED_MODULE_0__.RegisterService)(_types_js__WEBPACK_IMPORTED_MODULE_1__.IComponentRegistry)
+], ComponentRegistry);
+//# sourceMappingURL=ComponentRegistry.js.map
 
 /***/ }),
 
@@ -218,6 +382,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Component_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Component.js */ "./src/libs/worbl/Component.js");
 /* harmony import */ var _CSS_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../CSS.js */ "./src/libs/worbl/CSS.js");
 /* harmony import */ var _JSX_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../JSX.js */ "./src/libs/worbl/JSX.js");
+/* harmony import */ var _BaseComponent_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../BaseComponent.js */ "./src/libs/worbl/BaseComponent.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -231,7 +396,8 @@ var NavMenu_1;
 
 
 
-let NavMenu = NavMenu_1 = class NavMenu extends _JSX_js__WEBPACK_IMPORTED_MODULE_2__.BaseComponent {
+
+let NavMenu = NavMenu_1 = class NavMenu extends _BaseComponent_js__WEBPACK_IMPORTED_MODULE_3__.BaseComponent {
     constructor() {
         super();
         this.model = { Title: "", Items: [] };
@@ -267,6 +433,55 @@ NavMenu = NavMenu_1 = __decorate([
 
 /***/ }),
 
+/***/ "./src/libs/worbl/IOC.js":
+/*!*******************************!*\
+  !*** ./src/libs/worbl/IOC.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "IOC": () => (/* binding */ IOC),
+/* harmony export */   "RegisterService": () => (/* binding */ RegisterService)
+/* harmony export */ });
+function RegisterService(abs, ...params) {
+    return (ctor) => {
+        IOC.Instance.RegisterService(abs, new ctor(params));
+    };
+}
+class IOC {
+    static instance;
+    static get Instance() {
+        if (IOC?.instance === undefined) {
+            IOC.instance = new IOC();
+        }
+        return IOC.instance;
+    }
+    constructor() {
+    }
+    ctrs = new Map();
+    RegisterCtr(abs, ctr) {
+        this.ctrs.set(abs.name, ctr);
+    }
+    New(abs, ...params) {
+        const ctr = this.ctrs.get(abs.name);
+        if (ctr === undefined) {
+            throw new Error(abs.name + "had no matching constructor");
+        }
+        return new ctr(params);
+    }
+    services = new Map();
+    RegisterService(abs, inst) {
+        this.services.set(abs.name, inst);
+    }
+    Service(abs) {
+        return this.services.get(abs.name);
+    }
+}
+//# sourceMappingURL=IOC.js.map
+
+/***/ }),
+
 /***/ "./src/libs/worbl/JSX.js":
 /*!*******************************!*\
   !*** ./src/libs/worbl/JSX.js ***!
@@ -275,18 +490,24 @@ NavMenu = NavMenu_1 = __decorate([
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "BaseComponent": () => (/* binding */ BaseComponent),
 /* harmony export */   "JSX": () => (/* binding */ JSX),
 /* harmony export */   "__frag": () => (/* binding */ __frag)
 /* harmony export */ });
-/* harmony import */ var _Omnicatz_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Omnicatz.js */ "./src/libs/worbl/Omnicatz.js");
+/* harmony import */ var _IOC_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IOC.js */ "./src/libs/worbl/IOC.js");
+/* harmony import */ var _types_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types.js */ "./src/libs/worbl/types.js");
+
 
 const __frag = "__frag";
 function JSX(tag, attributes, ...children) {
+    const metaData = _IOC_js__WEBPACK_IMPORTED_MODULE_0__.IOC.Instance.Service(_types_js__WEBPACK_IMPORTED_MODULE_1__.IMetaDataService);
+    const componentRegistry = _IOC_js__WEBPACK_IMPORTED_MODULE_0__.IOC.Instance.Service(_types_js__WEBPACK_IMPORTED_MODULE_1__.IComponentRegistry);
+    // let contexts = {    ...(attributes[ContexTagtName] || {}) };
+    // if (tag === ContexTagtName){
+    // }
     if (tag === __frag) {
         const docFrag = document.createDocumentFragment();
         children.forEach(child => {
-            const type = window.Omnicatz.MetaData.Get(child);
+            const type = metaData.Get(child);
             if (type.Name === "string") {
                 docFrag.appendChild(document.createTextNode(child));
                 return;
@@ -311,8 +532,12 @@ function JSX(tag, attributes, ...children) {
         });
         return docFrag;
     }
-    if (window.Omnicatz.Components.Has(tag)) {
-        return window.Omnicatz.Components.CreateElement(tag, attributes, children).Container;
+    if (componentRegistry.Has(tag)) {
+        const newElement = componentRegistry.CreateElement(tag, attributes, children);
+        if (newElement === undefined) {
+            throw new Error("");
+        }
+        return newElement.Container;
     }
     const newElement = document.createElement(tag);
     for (const key in attributes) {
@@ -326,7 +551,7 @@ function JSX(tag, attributes, ...children) {
         if (!elm) {
             return;
         }
-        const type = window.Omnicatz.MetaData.Get(elm);
+        const type = metaData.Get(elm);
         if (type.Name === "string") {
             newElement.appendChild(document.createTextNode(elm));
             return;
@@ -351,92 +576,6 @@ function JSX(tag, attributes, ...children) {
     });
     return newElement;
 }
-class ComponentRegistry {
-    GetTag(ctr) {
-        return this.#reverseMap.get(ctr);
-    }
-    GetTagByCtrName(ctrName) {
-        let result = undefined;
-        this.#reverseMap.forEach((val, key) => {
-            if (key.name === ctrName) {
-                result = val;
-            }
-        });
-        return result;
-    }
-    #map = new Map();
-    #reverseMap = new Map();
-    // public Register(string, )
-    static instance;
-    Has(tag) {
-        return this.#map.has(tag);
-    }
-    RegisterElement(tag, ctr) {
-        this.#map.set(tag, ctr);
-        this.#reverseMap.set(ctr, tag);
-    }
-    CreateElement(tag, params, children) {
-        let ctr = this.#map.get(tag);
-        const newComponent = new ctr();
-        for (let key in params) {
-            newComponent.SetParam(key, params[key]);
-        }
-        newComponent.SetChildren(children);
-        newComponent.Render();
-        return newComponent;
-    }
-}
-class BaseComponent {
-    model;
-    #container;
-    #id;
-    get Id() {
-        return this.#id;
-    }
-    set Id(val) {
-        this.#id = val;
-    }
-    get Container() {
-        return this.#container;
-    }
-    constructor() {
-        this.#container = this.makeContainer();
-    }
-    children;
-    SetChildren(children) {
-        this.children = children;
-    }
-    makeContainerDefault(ctr, params = { tagType: undefined, class: undefined }) {
-        this.Id = crypto.randomUUID();
-        ;
-        /*optional params --> */
-        const element = document.createElement(params.tagType ?? "div");
-        if (params.class) {
-            element.className = params.class;
-        }
-        /*<-- optional params  */
-        element.setAttribute("data-tagtype", window.Omnicatz.Components.GetTag(ctr));
-        element.id = this.Id;
-        return element;
-    }
-    Render() {
-        this.#container.innerHTML = "";
-        const view = this.View();
-        if (view !== null) {
-            this.#container.appendChild(view);
-        }
-    }
-}
-if (!window.Omnicatz.Components) {
-    Object.defineProperty(window.Omnicatz, "Components", {
-        get value() {
-            if (!ComponentRegistry.instance) {
-                ComponentRegistry.instance = new ComponentRegistry();
-            }
-            return ComponentRegistry.instance;
-        }
-    });
-}
 //# sourceMappingURL=JSX.js.map
 
 /***/ }),
@@ -448,9 +587,17 @@ if (!window.Omnicatz.Components) {
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Omnicatz_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Omnicatz.js */ "./src/libs/worbl/Omnicatz.js");
+/* harmony import */ var _IOC_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IOC.js */ "./src/libs/worbl/IOC.js");
+/* harmony import */ var _types_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types.js */ "./src/libs/worbl/types.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 
-class MetaData {
+
+let MetaDataService = class MetaDataService {
     #annotations = new Map();
     GetAnnotate(typeName) {
         return this.#annotations.get(typeName);
@@ -460,6 +607,9 @@ class MetaData {
             this.#annotations.set(type, []);
         }
         const list = this.#annotations.get(type);
+        if (list === undefined) {
+            throw new Error("could not get annotation list");
+        }
         if (list.indexOf(annotationData) === -1) {
             list.push(annotationData);
         }
@@ -469,6 +619,9 @@ class MetaData {
             this.#annotations.set(type, []);
         }
         const list = this.#annotations.get(type);
+        if (list === undefined) {
+            throw new Error("could not get annotation list");
+        }
         const index = list.indexOf(annotationData);
         if (index !== -1) {
             list.splice(index, 1);
@@ -482,34 +635,30 @@ class MetaData {
         result = Object.getPrototypeOf(object).constructor.name;
         return { Name: result, IsPrimitive: false };
     }
-    static instance;
-}
-if (!window.Omnicatz.MetaData) {
-    Object.defineProperty(window.Omnicatz, "MetaData", {
-        get value() {
-            if (!MetaData.instance) {
-                MetaData.instance = new MetaData();
-            }
-            return MetaData.instance;
-        }
-    });
-}
+};
+MetaDataService = __decorate([
+    (0,_IOC_js__WEBPACK_IMPORTED_MODULE_0__.RegisterService)(_types_js__WEBPACK_IMPORTED_MODULE_1__.IMetaDataService)
+], MetaDataService);
 //# sourceMappingURL=MetaData.js.map
 
 /***/ }),
 
-/***/ "./src/libs/worbl/Omnicatz.js":
-/*!************************************!*\
-  !*** ./src/libs/worbl/Omnicatz.js ***!
-  \************************************/
+/***/ "./src/libs/worbl/PsudoInterface.js":
+/*!******************************************!*\
+  !*** ./src/libs/worbl/PsudoInterface.js ***!
+  \******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
-if (!window.Omnicatz) {
-    window.Omnicatz = {};
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PsudoInterface": () => (/* binding */ PsudoInterface)
+/* harmony export */ });
+class PsudoInterface {
+    constructor() {
+        throw new Error("Do not extend PsudoInterface based class it intended to be implemented and treated as an interface the class should be abstract and the constructor private");
+    }
 }
-
-//# sourceMappingURL=Omnicatz.js.map
+//# sourceMappingURL=PsudoInterface.js.map
 
 /***/ }),
 
@@ -522,25 +671,22 @@ if (!window.Omnicatz) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Route": () => (/* binding */ Route),
-/* harmony export */   "Router": () => (/* binding */ Router),
-/* harmony export */   "Routmappinng": () => (/* binding */ Routmappinng)
+/* harmony export */   "Router": () => (/* binding */ Router)
 /* harmony export */ });
-class Routmappinng {
-    ctrName;
-    func;
-    constructor(ctrName, func) {
-        this.ctrName = ctrName;
-        this.func = func;
-    }
-}
-class Router {
-    static instance;
-    static get Instance() {
-        if (!Router.instance) {
-            Router.instance = new Router();
-        }
-        return Router.instance;
-    }
+/* harmony import */ var _IOC_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IOC.js */ "./src/libs/worbl/IOC.js");
+/* harmony import */ var _types_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types.js */ "./src/libs/worbl/types.js");
+/* harmony import */ var _Routmappinng_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Routmappinng.js */ "./src/libs/worbl/Routmappinng.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+let Router = class Router {
+    componentRegistry = _IOC_js__WEBPACK_IMPORTED_MODULE_0__.IOC.Instance.Service(_types_js__WEBPACK_IMPORTED_MODULE_1__.IComponentRegistry);
     Parse(format, data) {
         const rex = /({([^^}]*)})(.?)/g;
         const formatRex = new RegExp(format.replace(rex, "(?<$2>[^\\$3])$3").replace("[^\\]", ".*"), "g");
@@ -553,26 +699,56 @@ class Router {
             if (new RegExp(key).test(hash)) {
                 const params = this.Parse(key, hash);
                 const route = this.routeMappings.get(key);
-                const func = route.func;
+                const func = route?.func;
                 if (func) {
                     func(params ? params : {});
                 }
                 else {
-                    const tag = window.Omnicatz.Components.GetTagByCtrName(route.ctrName);
-                    this.defaultRouteHandler(tag, params ? params : {});
+                    if (route === undefined) {
+                        throw new Error("Route not defined");
+                    }
+                    const tag = this.componentRegistry.GetTagByCtrName(route.ctrName);
+                    this.defaultRouteHandler?.(tag, params ? params : {});
                 }
             }
         });
     }
     ;
     routeMappings = new Map();
-}
+};
+Router = __decorate([
+    (0,_IOC_js__WEBPACK_IMPORTED_MODULE_0__.RegisterService)(_types_js__WEBPACK_IMPORTED_MODULE_1__.IRouter)
+], Router);
+
 function Route(path) {
     return (ctor) => {
-        Router.Instance.routeMappings.set(path, new Routmappinng(ctor.name));
+        const service = _IOC_js__WEBPACK_IMPORTED_MODULE_0__.IOC.Instance.Service(_types_js__WEBPACK_IMPORTED_MODULE_1__.IRouter);
+        service.routeMappings.set(path, new _Routmappinng_js__WEBPACK_IMPORTED_MODULE_2__.Routmappinng(ctor.name));
     };
 }
 //# sourceMappingURL=Router.js.map
+
+/***/ }),
+
+/***/ "./src/libs/worbl/Routmappinng.js":
+/*!****************************************!*\
+  !*** ./src/libs/worbl/Routmappinng.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Routmappinng": () => (/* binding */ Routmappinng)
+/* harmony export */ });
+class Routmappinng {
+    ctrName;
+    func;
+    constructor(ctrName, func) {
+        this.ctrName = ctrName;
+        this.func = func;
+    }
+}
+//# sourceMappingURL=Routmappinng.js.map
 
 /***/ }),
 
@@ -583,7 +759,23 @@ function Route(path) {
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "IComponentRegistry": () => (/* binding */ IComponentRegistry),
+/* harmony export */   "IMetaDataService": () => (/* binding */ IMetaDataService),
+/* harmony export */   "IRouter": () => (/* binding */ IRouter)
+/* harmony export */ });
+/* harmony import */ var _PsudoInterface_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PsudoInterface.js */ "./src/libs/worbl/PsudoInterface.js");
 
+class IComponentRegistry extends _PsudoInterface_js__WEBPACK_IMPORTED_MODULE_0__.PsudoInterface {
+    constructor() { super(); }
+}
+class IMetaDataService extends _PsudoInterface_js__WEBPACK_IMPORTED_MODULE_0__.PsudoInterface {
+    constructor() { super(); }
+}
+class IRouter extends _PsudoInterface_js__WEBPACK_IMPORTED_MODULE_0__.PsudoInterface {
+    constructor() { super(); }
+    defaultRouteHandler;
+}
 //# sourceMappingURL=types.js.map
 
 /***/ })
@@ -654,16 +846,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppComponent": () => (/* binding */ AppComponent)
 /* harmony export */ });
-/* harmony import */ var _libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./libs/worbl/JSX.js */ "./src/libs/worbl/JSX.js");
-/* harmony import */ var _libs_worbl_CSS_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./libs/worbl/CSS.js */ "./src/libs/worbl/CSS.js");
-/* harmony import */ var _libs_worbl_types_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./libs/worbl/types.js */ "./src/libs/worbl/types.js");
+/* harmony import */ var _libs_worbl_IOC_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./libs/worbl/IOC.js */ "./src/libs/worbl/IOC.js");
+/* harmony import */ var _libs_worbl_MetaData_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./libs/worbl/MetaData.js */ "./src/libs/worbl/MetaData.js");
+/* harmony import */ var _libs_worbl_ComponentRegistry_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./libs/worbl/ComponentRegistry.js */ "./src/libs/worbl/ComponentRegistry.js");
 /* harmony import */ var _libs_worbl_Router_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./libs/worbl/Router.js */ "./src/libs/worbl/Router.js");
-/* harmony import */ var _libs_worbl_MetaData_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./libs/worbl/MetaData.js */ "./src/libs/worbl/MetaData.js");
-/* harmony import */ var _libs_worbl_Component_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./libs/worbl/Component.js */ "./src/libs/worbl/Component.js");
-/* harmony import */ var _libs_worbl_Components_NavMenu_NavMenu_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./libs/worbl/Components/NavMenu/NavMenu.js */ "./src/libs/worbl/Components/NavMenu/NavMenu.js");
-/* harmony import */ var _libs_worbl_BasicApproot_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./libs/worbl/BasicApproot.js */ "./src/libs/worbl/BasicApproot.js");
-/* harmony import */ var _Views_Home_HomeView_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Views/Home/HomeView.js */ "./src/Views/Home/HomeView.tsx");
-/* harmony import */ var _Views_about_AboutView_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Views/about/AboutView.js */ "./src/Views/about/AboutView.tsx");
+/* harmony import */ var _libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./libs/worbl/JSX.js */ "./src/libs/worbl/JSX.js");
+/* harmony import */ var _libs_worbl_CSS_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./libs/worbl/CSS.js */ "./src/libs/worbl/CSS.js");
+/* harmony import */ var _libs_worbl_Component_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./libs/worbl/Component.js */ "./src/libs/worbl/Component.js");
+/* harmony import */ var _libs_worbl_Components_NavMenu_NavMenu_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./libs/worbl/Components/NavMenu/NavMenu.js */ "./src/libs/worbl/Components/NavMenu/NavMenu.js");
+/* harmony import */ var _libs_worbl_BasicApproot_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./libs/worbl/BasicApproot.js */ "./src/libs/worbl/BasicApproot.js");
+/* harmony import */ var _Views_Home_HomeView_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Views/Home/HomeView.js */ "./src/Views/Home/HomeView.tsx");
+/* harmony import */ var _Views_about_AboutView_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Views/about/AboutView.js */ "./src/Views/about/AboutView.tsx");
+/* harmony import */ var _libs_worbl_types_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./libs/worbl/types.js */ "./src/libs/worbl/types.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -685,31 +879,32 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-let AppComponent = class AppComponent extends _libs_worbl_BasicApproot_js__WEBPACK_IMPORTED_MODULE_7__.BasicAppRoot {
+
+let AppComponent = class AppComponent extends _libs_worbl_BasicApproot_js__WEBPACK_IMPORTED_MODULE_8__.BasicAppRoot {
     Route(router) {
     }
     menuItems = [{ Name: "Home", Url: "#home" }, { Name: "About", Url: "#about" }];
     constructor() {
         super();
         this.setInitialView("#home");
-        _libs_worbl_Router_js__WEBPACK_IMPORTED_MODULE_3__.Router.Instance.defaultRouteHandler = (tag, params) => {
+        _libs_worbl_IOC_js__WEBPACK_IMPORTED_MODULE_0__.IOC.Instance.Service(_libs_worbl_types_js__WEBPACK_IMPORTED_MODULE_11__.IRouter).defaultRouteHandler = (tag, params) => {
             this.renderView(tag, params, []);
         };
     }
     View() {
-        return (0,_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_0__.JSX)(_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_0__.__frag, null,
-            (0,_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_0__.JSX)("nav-box", { title: "My Test App", items: this.menuItems }),
-            (0,_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_0__.JSX)("main", { class: "MyApp" }));
+        return (0,_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_4__.JSX)(_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_4__.__frag, null,
+            (0,_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_4__.JSX)("nav-box", { title: "My Test App", items: this.menuItems }),
+            (0,_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_4__.JSX)("main", { class: "MyApp" }));
     }
 };
 AppComponent = __decorate([
-    (0,_libs_worbl_CSS_js__WEBPACK_IMPORTED_MODULE_1__.CSS)("/layout.css"),
-    (0,_libs_worbl_Component_js__WEBPACK_IMPORTED_MODULE_5__.Component)("my-app"),
+    (0,_libs_worbl_CSS_js__WEBPACK_IMPORTED_MODULE_5__.CSS)("/layout.css"),
+    (0,_libs_worbl_Component_js__WEBPACK_IMPORTED_MODULE_6__.Component)("my-app"),
     __metadata("design:paramtypes", [])
 ], AppComponent);
 
 (() => {
-    document.body.appendChild((0,_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_0__.JSX)("my-app", null));
+    document.body.appendChild((0,_libs_worbl_JSX_js__WEBPACK_IMPORTED_MODULE_4__.JSX)("my-app", null));
 })();
 
 })();

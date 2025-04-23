@@ -1,5 +1,6 @@
+import { BaseComponent } from "../../libs/worbl/BaseComponent.js";
 import { Component } from "../../libs/worbl/Component.js";
-import { BaseComponent, JSX } from "../../libs/worbl/JSX.js";
+import { JSX } from "../../libs/worbl/JSX.js";
 import { Route } from "../../libs/worbl/Router.js";
 
 @Route("#about")

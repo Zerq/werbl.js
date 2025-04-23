@@ -1,8 +1,9 @@
-import { BaseComponent } from "./JSX.js";
-import { Ctr } from "./types.js";
+import { IOC } from "./IOC.js";
+import { BaseComponent } from "./BaseComponent.js";
+import { Ctr, IComponentRegistry } from "./types.js";
 
 export function Component<V, T extends BaseComponent<V>>(tagName: string) {
     return (ctor: Ctr<T>) => {
-        window.Omnicatz.Components.RegisterElement(tagName, ctor);
+        IOC.Instance.Service(IComponentRegistry).RegisterElement(tagName, ctor);
     };
 }

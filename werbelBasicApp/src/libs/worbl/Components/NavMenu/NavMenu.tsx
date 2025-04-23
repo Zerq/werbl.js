@@ -1,6 +1,7 @@
 import { Component } from "../../Component.js";
 import { CSS } from "../../CSS.js";
-import { BaseComponent, JSX } from "../../JSX.js"
+import { JSX } from "../../JSX.js"
+import { BaseComponent } from "../../BaseComponent.js";
 
 export interface LinkLike {
     Name: string;
@@ -36,8 +37,7 @@ export class NavMenu extends BaseComponent<MenuDataLike> {
 
     protected View(): HTMLElement {
         return <header> 
-            <img class="logo" src="./assets/worbl.svg" alt="logo" />
-            <h1>  {this.model.Title}</h1>
+            <h1>{this.model.Title}</h1>
             <nav>
                 <ul>
                     {...this.model.Items.map(n => <li><a href={n.Url}>{n.Name}</a></li>)}

@@ -1,10 +1,16 @@
-import "./Omnicatz.js";
+import { IOC } from "./IOC.js";
+import { IComponentRegistry, IMetaDataService } from "./types.js";
 export const __frag = "__frag";
 export function JSX(tag, attributes, ...children) {
+    const metaData = IOC.Instance.Service(IMetaDataService);
+    const componentRegistry = IOC.Instance.Service(IComponentRegistry);
+    // let contexts = {    ...(attributes[ContexTagtName] || {}) };
+    // if (tag === ContexTagtName){
+    // }
     if (tag === __frag) {
         const docFrag = document.createDocumentFragment();
         children.forEach(child => {
-            const type = window.Omnicatz.MetaData.Get(child);
+            const type = metaData.Get(child);
             if (type.Name === "string") {
                 docFrag.appendChild(document.createTextNode(child));
                 return;
@@ -29,8 +35,12 @@ export function JSX(tag, attributes, ...children) {
         });
         return docFrag;
     }
-    if (window.Omnicatz.Components.Has(tag)) {
-        return window.Omnicatz.Components.CreateElement(tag, attributes, children).Container;
+    if (componentRegistry.Has(tag)) {
+        const newElement = componentRegistry.CreateElement(tag, attributes, children);
+        if (newElement === undefined) {
+            throw new Error("");
+        }
+        return newElement.Container;
     }
     const newElement = document.createElement(tag);
     for (const key in attributes) {
@@ -44,7 +54,7 @@ export function JSX(tag, attributes, ...children) {
         if (!elm) {
             return;
         }
-        const type = window.Omnicatz.MetaData.Get(elm);
+        const type = metaData.Get(elm);
         if (type.Name === "string") {
             newElement.appendChild(document.createTextNode(elm));
             return;
@@ -68,91 +78,5 @@ export function JSX(tag, attributes, ...children) {
         newElement.appendChild(elm);
     });
     return newElement;
-}
-class ComponentRegistry {
-    GetTag(ctr) {
-        return this.#reverseMap.get(ctr);
-    }
-    GetTagByCtrName(ctrName) {
-        let result = undefined;
-        this.#reverseMap.forEach((val, key) => {
-            if (key.name === ctrName) {
-                result = val;
-            }
-        });
-        return result;
-    }
-    #map = new Map();
-    #reverseMap = new Map();
-    // public Register(string, )
-    static instance;
-    Has(tag) {
-        return this.#map.has(tag);
-    }
-    RegisterElement(tag, ctr) {
-        this.#map.set(tag, ctr);
-        this.#reverseMap.set(ctr, tag);
-    }
-    CreateElement(tag, params, children) {
-        let ctr = this.#map.get(tag);
-        const newComponent = new ctr();
-        for (let key in params) {
-            newComponent.SetParam(key, params[key]);
-        }
-        newComponent.SetChildren(children);
-        newComponent.Render();
-        return newComponent;
-    }
-}
-export class BaseComponent {
-    model;
-    #container;
-    #id;
-    get Id() {
-        return this.#id;
-    }
-    set Id(val) {
-        this.#id = val;
-    }
-    get Container() {
-        return this.#container;
-    }
-    constructor() {
-        this.#container = this.makeContainer();
-    }
-    children;
-    SetChildren(children) {
-        this.children = children;
-    }
-    makeContainerDefault(ctr, params = { tagType: undefined, class: undefined }) {
-        this.Id = crypto.randomUUID();
-        ;
-        /*optional params --> */
-        const element = document.createElement(params.tagType ?? "div");
-        if (params.class) {
-            element.className = params.class;
-        }
-        /*<-- optional params  */
-        element.setAttribute("data-tagtype", window.Omnicatz.Components.GetTag(ctr));
-        element.id = this.Id;
-        return element;
-    }
-    Render() {
-        this.#container.innerHTML = "";
-        const view = this.View();
-        if (view !== null) {
-            this.#container.appendChild(view);
-        }
-    }
-}
-if (!window.Omnicatz.Components) {
-    Object.defineProperty(window.Omnicatz, "Components", {
-        get value() {
-            if (!ComponentRegistry.instance) {
-                ComponentRegistry.instance = new ComponentRegistry();
-            }
-            return ComponentRegistry.instance;
-        }
-    });
 }
 //# sourceMappingURL=JSX.js.map

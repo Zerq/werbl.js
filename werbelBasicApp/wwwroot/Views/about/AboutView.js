@@ -8,8 +8,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var AboutView_1;
+import { BaseComponent } from "../../libs/worbl/BaseComponent.js";
 import { Component } from "../../libs/worbl/Component.js";
-import { BaseComponent, JSX } from "../../libs/worbl/JSX.js";
+import { JSX } from "../../libs/worbl/JSX.js";
 import { Route } from "../../libs/worbl/Router.js";
 let AboutView = AboutView_1 = class AboutView extends BaseComponent {
     Name;

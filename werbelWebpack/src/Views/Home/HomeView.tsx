@@ -1,14 +1,13 @@
+import { BaseComponent } from "../../libs/worbl/BaseComponent.js";
 import { Component } from "../../libs/worbl/Component.js";
-import { BaseComponent, JSX } from "../../libs/worbl/JSX.js";
+import { JSX } from "../../libs/worbl/JSX.js";
 import { Route } from "../../libs/worbl/Router.js";
 
 type TestTypeItem = { burklax: number, blarg: boolean, splarg: string };
-
 type TestType = {
     checked: boolean,
     list: Array<TestTypeItem>;
 }
-
 @Route("#home")
 @Component("home-view")
 export class HomeView extends BaseComponent<TestType> {
@@ -23,8 +22,7 @@ export class HomeView extends BaseComponent<TestType> {
         this.Render();
     }
 
-    protected makeContainer(): HTMLElement {
-    
+    protected makeContainer(): HTMLElement {    
         return this.makeContainerDefault(HomeView,{ class: "HomeView"});
     }
 
@@ -39,8 +37,22 @@ export class HomeView extends BaseComponent<TestType> {
     }
 
     protected View(): HTMLElement {
+
         return <div>
-            Hello!
+            <h2>What is Werbl</h2>
+            <p>
+                Its a nonsense word i came up with.<br/>
+                Its my low dependency frontend library.<br/>
+                <br/>
+                Basically the goal is to make things as simple as possible and ideally make the source code always avalible and very easy to read and understand.<br/>
+                if people look at it and go wait this is so fucking simple i could write this shit.<br/>
+                <br/>
+                that yay! that is what i was aiming for.<br/>
+                Ideally it should be so simple it can be re-writen from scratch in a week or two.. that may not be entierly achivable but hey best attempt.<br/>
+                Jquery becase redundant as web tech moved on this project is basically here to see how far of are we from making thing like react and angular redundant.<br/>
+                <br/>
+                or at least so simple to recreate yourself that its near redundant.<br/>
+            </p>
         </div>;
     }
 }

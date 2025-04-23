@@ -1,6 +1,7 @@
 import { Component } from "../../Component.js";
 import { CSS } from "../../CSS.js";
-import { BaseComponent, JSX } from "../../JSX.js"
+import { JSX } from "../../JSX.js"
+import { BaseComponent } from "../../BaseComponent.js";
 
 export interface LinkLike {
     Name: string;

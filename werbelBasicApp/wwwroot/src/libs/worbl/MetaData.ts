@@ -1,17 +1,13 @@
-import "./Omnicatz.js";
+import { RegisterService } from "./IOC.js";
+import { PsudoInterface } from "./PsudoInterface.js";
+import { IMetaDataService, AnnotationDataLike,TypeMetadataLike } from "./types.js";
 
-export interface MetaDataLike {
-    Get(object: unknown): TypeMetadataLike;
-    GetAnnotate(typeName: string): Array<AnnotationDataLike>;
-    Annotate(type: string, annotationData: AnnotationDataLike): void;
-    Remove(type: string, annotationData: AnnotationDataLike): void;
-}
-
-class MetaData implements MetaDataLike {
+@RegisterService(IMetaDataService)
+class MetaDataService implements IMetaDataService {
 
     #annotations: Map<string, Array<AnnotationDataLike>> = new Map();
 
-    public GetAnnotate(typeName: string): Array<AnnotationDataLike> {
+    public GetAnnotate(typeName: string): Array<AnnotationDataLike>|undefined {
         return this.#annotations.get(typeName);
     }
 
@@ -21,6 +17,10 @@ class MetaData implements MetaDataLike {
         }
 
         const list = this.#annotations.get(type);
+
+        if (list === undefined){
+            throw new Error("could not get annotation list");
+        }
 
         if (list.indexOf(annotationData) === -1) {
             list.push(annotationData);
@@ -34,13 +34,15 @@ class MetaData implements MetaDataLike {
         }
 
         const list = this.#annotations.get(type);
+        if (list === undefined){
+            throw new Error("could not get annotation list");
+        }
+
         const index = list.indexOf(annotationData);
         if (index !== -1) {
             list.splice(index, 1);
         }
     }
-
-
 
 
     public Get(object: unknown) {
@@ -52,26 +54,4 @@ class MetaData implements MetaDataLike {
         result = Object.getPrototypeOf(object).constructor.name;
         return <TypeMetadataLike>{ Name: result, IsPrimitive: false };
     }
-
-    static instance: MetaData;
-
-}
-
-interface AnnotationDataLike {
-}
-interface TypeMetadataLike {
-    Name: string;
-    IsPrimitive: boolean;
-    Anotations: Map<string, AnnotationDataLike>;
-}
-
-if (!window.Omnicatz.MetaData) {
-    Object.defineProperty(window.Omnicatz, "MetaData", {
-        get value(): MetaDataLike {
-            if (!MetaData.instance) {
-                MetaData.instance = new MetaData();
-            }
-            return MetaData.instance;
-        }
-    })
 }

@@ -10,7 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var NavMenu_1;
 import { Component } from "../../Component.js";
 import { CSS } from "../../CSS.js";
-import { BaseComponent, JSX } from "../../JSX.js";
+import { JSX } from "../../JSX.js";
+import { BaseComponent } from "../../BaseComponent.js";
 let NavMenu = NavMenu_1 = class NavMenu extends BaseComponent {
     constructor() {
         super();

@@ -1,25 +1,19 @@
-import { BaseComponent } from "./JSX.js";
-import { Ctr } from "./types";
+import { IOC, RegisterService } from "./IOC.js";
+import { BaseComponent } from "./BaseComponent.js";
+import { Ctr, IComponentRegistry, IRouter } from "./types.js";
+import { Routmappinng } from "./Routmappinng.js";
 export type ParamsObj = { [key: string]: string };
 
-export class Routmappinng {
-    public constructor(public ctrName: string, public func?: (params: ParamsObj) => void) { }
-}
+@RegisterService(IRouter)
+export class Router implements IRouter {
 
-export class Router {
-    public static instance: Router;
+    private componentRegistry = IOC.Instance.Service(IComponentRegistry);
 
-    public static get Instance(): Router {
-        if (!Router.instance) {
-            Router.instance = new Router()
-        }
-        return Router.instance;
-    }
-    private Parse(format: string, data: string): ParamsObj {
+    private Parse(format: string, data: string): ParamsObj|undefined {
         const rex = /({([^^}]*)})(.?)/g;
         const formatRex = new RegExp(format.replace(rex, "(?<$2>[^\\$3])$3").replace("[^\\]", ".*"), "g");
         const matches = formatRex.exec(data)
-        return matches?.groups;
+        return matches?.groups!;
     }
 
     public defaultRouteHandler?: (tag, params: ParamsObj) => void;
@@ -29,15 +23,17 @@ export class Router {
             if (new RegExp(key).test(hash)) {
                 const params = this.Parse(key, hash);
                 const route = this.routeMappings.get(key);
-                const func = route.func;
+                const func = route?.func;
 
                 if (func) {
                     func(params ? params : {});
                 }
-                else {
-                    const tag = window.Omnicatz.Components.GetTagByCtrName(route.ctrName);
-
-                    this.defaultRouteHandler(tag, params ? params : {});
+                else {                    
+                    if (route=== undefined){
+                        throw new Error("Route not defined");
+                    }
+                    const tag = this.componentRegistry.GetTagByCtrName(route.ctrName);
+                    this.defaultRouteHandler?.(tag, params ? params : {});
                 }
             }
         });
@@ -48,6 +44,7 @@ export class Router {
 
 export function Route<V, T extends BaseComponent<V>>(path: string) {
     return (ctor: Ctr<T>) => {
-        Router.Instance.routeMappings.set(path, new Routmappinng(ctor.name));
+        const service = IOC.Instance.Service(IRouter);
+        service.routeMappings.set(path, new Routmappinng(ctor.name));
     };
 }

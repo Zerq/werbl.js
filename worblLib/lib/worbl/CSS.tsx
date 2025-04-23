@@ -1,4 +1,5 @@
-import { BaseComponent, JSX } from "./JSX.js";
+import { JSX } from "./JSX.js";
+import { BaseComponent } from "./BaseComponent.js";
 import { Ctr } from "./types.js";
 
 

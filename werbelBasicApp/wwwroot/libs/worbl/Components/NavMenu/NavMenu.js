@@ -10,7 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var NavMenu_1;
 import { Component } from "../../Component.js";
 import { CSS } from "../../CSS.js";
-import { BaseComponent, JSX } from "../../JSX.js";
+import { JSX } from "../../JSX.js";
+import { BaseComponent } from "../../BaseComponent.js";
 let NavMenu = NavMenu_1 = class NavMenu extends BaseComponent {
     constructor() {
         super();
@@ -31,10 +32,7 @@ let NavMenu = NavMenu_1 = class NavMenu extends BaseComponent {
     }
     View() {
         return JSX("header", null,
-            JSX("img", { class: "logo", src: "./assets/worbl.svg", alt: "logo" }),
-            JSX("h1", null,
-                "  ",
-                this.model.Title),
+            JSX("h1", null, this.model.Title),
             JSX("nav", null,
                 JSX("ul", null, ...this.model.Items.map(n => JSX("li", null,
                     JSX("a", { href: n.Url }, n.Name))))));

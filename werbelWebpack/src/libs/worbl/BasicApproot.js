@@ -1,21 +1,25 @@
-import { BaseComponent, JSX } from "./JSX.js";
-import { Router } from "./Router.js";
+import { IOC } from "./IOC.js";
+import { JSX } from "./JSX.js";
+import { BaseComponent } from "./BaseComponent.js";
+import { IComponentRegistry, IRouter } from "./types.js";
 export class BasicAppRoot extends BaseComponent {
     constructor() {
         super();
         window.addEventListener("hashchange", e => {
-            Router.Instance.HandleRout(location.hash);
+            this.#router.HandleRout(location.hash);
         });
-        this.Route(Router.Instance);
+        this.Route(this.#router);
     }
+    #router = IOC.Instance.Service(IRouter);
+    #componentRegistry = IOC.Instance.Service(IComponentRegistry);
     setInitialView(view) {
         requestAnimationFrame(() => {
             location.hash = view;
-            Router.Instance.HandleRout(location.hash);
+            this.#router.HandleRout(location.hash);
         });
     }
     renderView(view, params, children) {
-        const result = window.Omnicatz.Components.CreateElement(view, params, children);
+        const result = this.#componentRegistry.CreateElement(view, params, children);
         this.Container.querySelector("main").innerHTML = "";
         result.Render();
         this.Container.querySelector("main").appendChild(result.Container);
