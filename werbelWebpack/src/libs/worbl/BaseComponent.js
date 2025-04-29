@@ -38,6 +38,8 @@ export class BaseComponent {
         element.id = this.Id;
         return element;
     }
+    baseSetParam(name, value) {
+    }
     Render() {
         this.#container.innerHTML = "";
         const view = this.View();

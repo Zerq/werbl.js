@@ -56,7 +56,9 @@ export abstract class BaseComponent<T> implements BaseComponentLike<T> {
     }
 
     public abstract SetParam(name: string, value: any);
-
+    public baseSetParam(name: string, value: any){
+        
+    }
     protected abstract View(): HTMLElement;
 
     public Render() {

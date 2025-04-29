@@ -1,9 +1,15 @@
 
 {
-"$schema": "http://json.schemastore.org/template",
-"author": "The Confusiarch",
-"classifications": ["omnicatz", "werbl"],
-"identity": "Omnicatz.ConsoleTemplate.CSharp",
-"name": "Omnicatz Werbl",
-"shortName": "werbl"
-}
+    "$schema": "http://json.schemastore.org/template",
+    "author": "The Confusiarch",
+    "classifications": ["omnicatz", "werbl", "webpack"],
+    "identity": "Omnicatz.Werbl.webpack",
+    "name": "Omnicatz Werbl Webpack",
+    "shortName": "werbl_webpack",
+    "tags": {
+        "language": "C# & Typescript",
+        "type": "project"
+    },
+    "description": "A low dependency SPA solution using dotnet and typescript with react style templates routing and a component model. this version compromises a bit and uses webpack."
+    }
+    

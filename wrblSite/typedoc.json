@@ -1,0 +1,16 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "entryPoints": [
+        "./src/libs/worbl/BaseComponent.ts",
+        "./src/libs/worbl/BasicApproot.ts",
+        "./src/libs/worbl/CSS.ts",
+        "./src/libs/worbl/Component.ts",
+        "./src/libs/worbl/Components/NavMenu/NavMenu.tsx",
+        "./src/libs/worbl/IOC.ts",
+        "./src/libs/worbl/JSX.ts",
+        "./src/libs/worbl/PsudoInterface.ts",
+        "./src/libs/worbl/Routmappinng.ts",
+        "./src/libs/worbl/types.ts"
+    ]
+
+}

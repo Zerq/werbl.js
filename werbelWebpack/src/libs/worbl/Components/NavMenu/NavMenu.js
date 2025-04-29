@@ -28,10 +28,14 @@ let NavMenu = NavMenu_1 = class NavMenu extends BaseComponent {
         if (name.toLowerCase() === "items") {
             this.model.Items = value;
         }
+        if (name.toLowerCase() === "logo") {
+            this.model.Logo = value;
+        }
         this.Render();
     }
     View() {
         return JSX("header", null,
+            JSX("img", { src: this.model.Logo, alt: "" }),
             JSX("h1", null, this.model.Title),
             JSX("nav", null,
                 JSX("ul", null, ...this.model.Items.map(n => JSX("li", null,
