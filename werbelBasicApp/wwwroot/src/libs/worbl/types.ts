@@ -50,4 +50,5 @@ export interface BaseComponentLike<T> {
     SetChildren(children: Array<string | HTMLElement>): void;
     SetParam(name: string, value: any);
     Render(): void;
+    IsInitialized:boolean;
 }

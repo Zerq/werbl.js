@@ -16,6 +16,7 @@ export class BaseComponent {
     constructor() {
         this.#container = this.makeContainer();
     }
+    IsInitialized = false;
     children;
     SetChildren(children) {
         this.children = children;

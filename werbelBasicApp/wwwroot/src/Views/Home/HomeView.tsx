@@ -25,13 +25,16 @@ export class HomeView extends BaseComponent<TestType> {
     }
 
     protected makeContainer(): HTMLElement {
-
         return this.makeContainerDefault(HomeView, { class: "HomeView" });
     }
 
     public SetParam(name: string, value: any) {
         if (name === "Name") {
             this.Name = value;
+        
+        }
+        if (this.IsInitialized){
+            this.Render();
         }
     }
 
@@ -40,7 +43,6 @@ export class HomeView extends BaseComponent<TestType> {
     }
 
     protected View(): HTMLElement {
-
         return <div>
             <h2>What is Werbl</h2>
 

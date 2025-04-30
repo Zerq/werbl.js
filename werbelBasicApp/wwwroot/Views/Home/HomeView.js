@@ -29,6 +29,9 @@ let HomeView = HomeView_1 = class HomeView extends BaseComponent {
         if (name === "Name") {
             this.Name = value;
         }
+        if (this.IsInitialized) {
+            this.Render();
+        }
     }
     changed(e) {
         console.log("checkbox changed to " + e.detail);

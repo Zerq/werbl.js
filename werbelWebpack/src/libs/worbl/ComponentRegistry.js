@@ -39,9 +39,11 @@ let ComponentRegistry = class ComponentRegistry {
             return undefined;
         }
         const newComponent = new ctr();
+        newComponent.IsInitialized = false;
         for (let key in params) {
             newComponent.SetParam(key, params[key]);
         }
+        newComponent.IsInitialized = true;
         newComponent.SetChildren(children);
         newComponent.Render();
         return newComponent;

@@ -48,10 +48,11 @@ class ComponentRegistry implements IComponentRegistry {
         }
 
         const newComponent = new ctr();
-
+        newComponent.IsInitialized= false;
         for (let key in params) {
             newComponent.SetParam(key, params[key]);
         }
+        newComponent.IsInitialized = true;
 
         newComponent.SetChildren(children);
 

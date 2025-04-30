@@ -23,6 +23,8 @@ export abstract class BaseComponent<T> implements BaseComponentLike<T> {
         this.#container = this.makeContainer();
     }
 
+    public IsInitialized:boolean = false;
+
 
     protected children: Array<string | HTMLElement>;
 
