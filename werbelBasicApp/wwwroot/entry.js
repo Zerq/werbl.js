@@ -33,7 +33,7 @@ let AppComponent = class AppComponent extends BasicAppRoot {
     }
     View() {
         return JSX(__frag, null,
-            JSX("nav-box", { title: "My Test App", items: this.menuItems }),
+            JSX("nav-box", { logo: "./assets/worbl.svg", title: "My Test App", items: this.menuItems }),
             JSX("main", { class: "MyApp" }));
     }
 };

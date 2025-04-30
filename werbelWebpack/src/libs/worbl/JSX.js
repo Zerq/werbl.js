@@ -1,5 +1,8 @@
 import { IOC } from "./IOC.js";
 import { IComponentRegistry, IMetaDataService } from "./types.js";
+class jsxContext {
+    static nameSpace = undefined;
+}
 export const __frag = "__frag";
 export function JSX(tag, attributes, ...children) {
     const metaData = IOC.Instance.Service(IMetaDataService);
@@ -7,6 +10,13 @@ export function JSX(tag, attributes, ...children) {
     // let contexts = {    ...(attributes[ContexTagtName] || {}) };
     // if (tag === ContexTagtName){
     // }
+    if (tag === "xml-namespace") {
+        jsxContext.nameSpace = children[0];
+        if (jsxContext.nameSpace === "") {
+            jsxContext.nameSpace = undefined;
+        }
+        return;
+    }
     if (tag === __frag) {
         const docFrag = document.createDocumentFragment();
         children.forEach(child => {
@@ -42,7 +52,16 @@ export function JSX(tag, attributes, ...children) {
         }
         return newElement.Container;
     }
-    const newElement = document.createElement(tag);
+    let newElement;
+    if (jsxContext.nameSpace === undefined) {
+        newElement = document.createElement(tag);
+    }
+    if (jsxContext.nameSpace !== undefined) {
+        newElement = document.createElementNS(jsxContext.nameSpace, tag);
+    }
+    if (newElement === undefined) {
+        throw new Error("could not create element");
+    }
     for (const key in attributes) {
         if (key.startsWith("on")) {
             newElement.addEventListener(key.substring(2).toLowerCase(), attributes[key]);

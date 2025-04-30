@@ -2,24 +2,36 @@ import { ReactNode } from "react";
 import { ContexTagtName } from "./Components/Context/WerblContext.js";
 import { IOC } from "./IOC.js";
 import { IComponentRegistry, IMetaDataService } from "./types.js";
-
+class jsxContext {
+    static nameSpace:string|undefined = undefined;
+}
 
 export const __frag = "__frag";
-
 export function JSX(tag: string, attributes: { [name: string]: any; }, ...children: Array<string | number | boolean | bigint | Date | HTMLElement>) {
     const metaData = IOC.Instance.Service(IMetaDataService);
     const componentRegistry = IOC.Instance.Service(IComponentRegistry);
     // let contexts = {    ...(attributes[ContexTagtName] || {}) };
 
     // if (tag === ContexTagtName){
-        
+
     // }
+
+    if (tag === "xml-namespace"){
+        jsxContext.nameSpace =  children[0] as string;
+
+        if (jsxContext.nameSpace === ""){
+            jsxContext.nameSpace = undefined;
+        }
+
+        return;
+    }
+
 
     if (tag === __frag) {
         const docFrag = document.createDocumentFragment();
         children.forEach(child => {
 
-            
+
             const type = metaData.Get(child);
 
             if (type.Name === "string") {
@@ -55,14 +67,29 @@ export function JSX(tag: string, attributes: { [name: string]: any; }, ...childr
 
     if (componentRegistry.Has(tag)) {
         const newElement = componentRegistry.CreateElement(tag, attributes, children);
-        if (newElement === undefined){
+        if (newElement === undefined) {
             throw new Error("");
         }
 
         return newElement.Container;
     }
 
-    const newElement = document.createElement(tag);
+
+
+
+    let newElement:Element|undefined;
+    
+    if (jsxContext.nameSpace === undefined){
+        newElement= document.createElement(tag);
+    }
+
+    if (jsxContext.nameSpace !== undefined){
+        newElement= document.createElementNS(jsxContext.nameSpace, tag);
+    }
+
+    if (newElement === undefined){
+        throw new Error("could not create element");
+    }
 
     for (const key in attributes) {
         if (key.startsWith("on")) {

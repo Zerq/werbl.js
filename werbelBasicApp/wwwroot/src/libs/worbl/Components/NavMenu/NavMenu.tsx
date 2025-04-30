@@ -11,11 +11,14 @@ export interface LinkLike {
 export interface MenuDataLike {
     Items: Array<LinkLike>;
     Title: string;
+    Logo?: string;
 }
 
 @Component("nav-box")
 @CSS("/libs/worbl/Components/NavMenu/NavMenu.css")
 export class NavMenu extends BaseComponent<MenuDataLike> {
+   
+
     public constructor() {
         super();
         this.model = { Title: "", Items: [] };
@@ -32,11 +35,16 @@ export class NavMenu extends BaseComponent<MenuDataLike> {
         if (name.toLowerCase() === "items") {
             this.model.Items = value;
         }
+        if (name.toLowerCase() === "logo") {
+            this.model.Logo = value;
+        }
+
         this.Render();
     }
 
     protected View(): HTMLElement {
         return <header> 
+            <img src={this.model.Logo} alt="" />
             <h1>{this.model.Title}</h1>
             <nav>
                 <ul>

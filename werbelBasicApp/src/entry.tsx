@@ -39,7 +39,7 @@ export class AppComponent extends BasicAppRoot {
 
     protected View(): HTMLElement {
         return <>
-            <nav-box title="My Test App" items={this.menuItems}></nav-box>
+            <nav-box logo="./assets/worbl.svg" title="My Test App" items={this.menuItems}></nav-box>
             <main class="MyApp">
             </main>
         </>;
