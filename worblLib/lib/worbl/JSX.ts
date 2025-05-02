@@ -30,7 +30,10 @@ export function JSX(tag: string, attributes: { [name: string]: any; }, ...childr
     if (tag === __frag) {
         const docFrag = document.createDocumentFragment();
         children.forEach(child => {
-
+          
+            if (!child){
+                return;
+            }
 
             const type = metaData.Get(child);
 

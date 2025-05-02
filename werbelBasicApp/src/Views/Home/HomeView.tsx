@@ -45,8 +45,7 @@ export class HomeView extends BaseComponent<TestType> {
     protected View(): HTMLElement {
         return <div>
             <h2>What is Werbl</h2>
-
-            <xml-namespace>http://www.w3.org/2000/svg</xml-namespace>
+             <xml-namespace>http://www.w3.org/2000/svg</xml-namespace>
             <svg style="width:5rem;" viewBox="0 0 500 500" version="1.1" id="svg65" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
                 <defs id="defs21">
                     <linearGradient id="gradient-2" bx:pinned="true">
