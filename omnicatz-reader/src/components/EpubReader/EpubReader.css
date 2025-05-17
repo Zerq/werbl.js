@@ -1,0 +1,50 @@
+.epubViewer {
+
+    nav.tableOfContent {
+        flex: 1;
+        max-width: 15%;
+    }
+
+    div.BookText {
+        pre {
+            white-space: pre-line;
+            margin-bottom: 2rem;
+        }
+        position: relative;
+        top: -5rem;
+        max-width: 90%;
+        height: calc(100% + 4rem);
+        overflow-y: scroll;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+
+
+
+    div {
+        display: flex;
+        height: calc(100vh - 9rem);
+    }
+
+
+    .tableOfContent ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+
+            color: silver;
+            margin-bottom: 0.5rem;
+
+            li {
+                color: white;
+                margin-bottom: 0.5rem;
+            }
+        }
+    }
+
+
+}
