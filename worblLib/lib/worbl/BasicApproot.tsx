@@ -7,9 +7,13 @@ export abstract class BasicAppRoot extends BaseComponent<unknown> {
     public constructor() {
         super();
         window.addEventListener("hashchange", e => {
-            this.#router.HandleRout(location.hash);
+            this.#router.HandleRoute(location.hash);
         });
-        this.Route(this.#router);
+
+    }
+
+    public get router(): IRouter{
+      return  this.#router;
     }
 
     #router = IOC.Instance.Service(IRouter);
@@ -18,14 +22,12 @@ export abstract class BasicAppRoot extends BaseComponent<unknown> {
     protected setInitialView(view: string) {
         requestAnimationFrame(() => {
             location.hash = view
-            this.#router.HandleRout(location.hash);
+            this.#router.HandleRoute(location.hash);
         });
     }
 
-    public abstract Route(router: IRouter);
-
+   
     public renderView(view: string, params: { [name: string]: any }, children: Array<string | HTMLElement>) {
-
         const result = this.#componentRegistry.CreateElement(view, params, children);
         this.Container.querySelector("main").innerHTML = "";
         result.Render();
