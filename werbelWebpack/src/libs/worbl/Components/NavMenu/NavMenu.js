@@ -15,7 +15,7 @@ import { BaseComponent } from "../../BaseComponent.js";
 let NavMenu = NavMenu_1 = class NavMenu extends BaseComponent {
     constructor() {
         super();
-        this.model = { Title: "", Items: [] };
+        this.Model = { Title: "", Items: [] };
         this.Render();
     }
     makeContainer() {
@@ -23,22 +23,19 @@ let NavMenu = NavMenu_1 = class NavMenu extends BaseComponent {
     }
     SetParam(name, value) {
         if (name.toLowerCase() === "title") {
-            this.model.Title = value;
+            this.Model.Title = value;
         }
         if (name.toLowerCase() === "items") {
-            this.model.Items = value;
-        }
-        if (name.toLowerCase() === "logo") {
-            this.model.Logo = value;
+            this.Model.Items = value;
         }
         this.Render();
     }
     View() {
         return JSX("header", null,
-            JSX("img", { src: this.model.Logo, alt: "" }),
-            JSX("h1", null, this.model.Title),
+            JSX("span", { className: "branding" },
+                JSX("h1", null, this.Model.Title)),
             JSX("nav", null,
-                JSX("ul", null, ...this.model.Items.map(n => JSX("li", null,
+                JSX("ul", null, ...this.Model.Items.map(n => JSX("li", null,
                     JSX("a", { href: n.Url }, n.Name))))));
     }
 };

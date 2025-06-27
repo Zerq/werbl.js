@@ -1,7 +1,44 @@
+import { PsudoInterface } from "./PsudoInterface.js";
 export function RegisterService(abs, ...params) {
     return (ctor) => {
         IOC.Instance.RegisterService(abs, new ctor(params));
     };
+}
+export class IPipe extends PsudoInterface {
+    constructor() { super(); }
+}
+[RegisterService(IPipe)];
+export class Pipe {
+    #map = new Map();
+    Subscribe(name, subscriber) {
+        if (!this.#map.has(name)) {
+            this.#map.set(name, []);
+        }
+        const index = this.#map.get(name).indexOf(subscriber);
+        if (index === -1) {
+            this.#map.get(name).push(subscriber);
+        }
+        else {
+            this.#map.get(name)[index] = (subscriber);
+        }
+    }
+    Unsubscribe(name, subscriber) {
+        if (!this.#map.has(name)) {
+            this.#map.set(name, []);
+        }
+        const index = this.#map.get(name).indexOf(subscriber);
+        if (index !== -1) {
+            this.#map.get(name).splice(index, 1);
+        }
+    }
+    Dispatch(name, message) {
+        if (!this.#map.has(name)) {
+            this.#map.set(name, []);
+        }
+        this.#map.get(name).forEach(sub => {
+            sub(message);
+        });
+    }
 }
 export class IOC {
     static instance;

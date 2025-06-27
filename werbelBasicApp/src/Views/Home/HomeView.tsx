@@ -17,7 +17,7 @@ export class HomeView extends BaseComponent<TestType> {
 
     public constructor() {
         super();
-        this.model = {
+        this.Model = {
             checked: true,
             list: [{ burklax: 3, blarg: true, splarg: "hello" }, { burklax: 23, blarg: false, splarg: "zog zog zog" }, { burklax: 223, blarg: true, splarg: "weeee" }]
         };

@@ -1,8 +1,15 @@
 import { IOC } from "./IOC.js";
 import { BaseComponentLike, Ctr, IComponentRegistry } from "./types.js";
 
+
+export function GetComponent<T extends BaseComponent<V>, V>(queryString:string){
+   return (document.querySelector(queryString) as any).Component as BaseComponent<T>;
+}
+
+
+
 export abstract class BaseComponent<T> implements BaseComponentLike<T> {
-    protected model: T;
+    public Model: T;
     #container: HTMLElement;
 
     #id: string;
@@ -21,6 +28,7 @@ export abstract class BaseComponent<T> implements BaseComponentLike<T> {
 
     public constructor() {
         this.#container = this.makeContainer();
+        (this.Container as any).Component = this
     }
 
     public IsInitialized:boolean = false;
@@ -34,7 +42,7 @@ export abstract class BaseComponent<T> implements BaseComponentLike<T> {
 
     protected abstract makeContainer(): HTMLElement;
 
-    protected makeContainerDefault(ctr: Ctr<BaseComponent<any>>, params: { tagType?: string; class?: string; } = { tagType: undefined, class: undefined }): HTMLElement | undefined {
+    protected makeContainerDefault(ctr: Ctr<BaseComponent<any>>, params: { tagType?: string; class?: string; } = { tagType: undefined, class: undefined }): HTMLElement  {
         this.Id = crypto.randomUUID();;
         const componentRegistry = IOC.Instance.Service(IComponentRegistry);
 
@@ -48,7 +56,7 @@ export abstract class BaseComponent<T> implements BaseComponentLike<T> {
         const tag = componentRegistry.GetTag(ctr);
 
         if (tag === undefined) {
-            return undefined;
+            throw Error("Tag is undefined failed to create container");
         }
 
         element.setAttribute("data-tagtype", tag);
@@ -69,6 +77,5 @@ export abstract class BaseComponent<T> implements BaseComponentLike<T> {
         if (view !== null) {
             this.#container.appendChild(view);
         }
-
     }
 }

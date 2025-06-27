@@ -18,9 +18,12 @@ export class Router implements IRouter {
 
     public defaultRouteHandler?: (tag, params: ParamsObj) => void;
 
-    public HandleRout(hash: string) {
+    public HandleRoute(hash: string) {
         this.routeMappings.forEach((val: Routmappinng, key: string) => {
-            if (new RegExp(key).test(hash)) {
+
+        const parsed = key.replaceAll(/({([^^}]*)})(.?)/g, "(?<$2>.*)");
+
+            if (new RegExp(parsed).test(hash)) {
                 const params = this.Parse(key, hash);
                 const route = this.routeMappings.get(key);
                 const func = route?.func;

@@ -3,7 +3,7 @@ const { src, dest } = require("gulp");
 
 exports.default = async function () {
     src([
-        "./lib/**/*.*"        
+        "./libs/**/*.*"        
     ],
-        { base: "./lib" }).pipe(dest("../werbelBasicApp/src/libs")).pipe(dest("../werbelWebpack/src/libs"));
+        { base: "./libs" }).pipe(dest("../werbelBasicApp/src/libs")).pipe(dest("../werbelWebpack/src/libs"));
 };

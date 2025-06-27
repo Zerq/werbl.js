@@ -1,7 +1,10 @@
 import { IOC } from "./IOC.js";
 import { IComponentRegistry } from "./types.js";
+export function GetComponent(queryString) {
+    return document.querySelector(queryString).Component;
+}
 export class BaseComponent {
-    model;
+    Model;
     #container;
     #id;
     get Id() {
@@ -15,6 +18,7 @@ export class BaseComponent {
     }
     constructor() {
         this.#container = this.makeContainer();
+        this.Container.Component = this;
     }
     IsInitialized = false;
     children;
@@ -33,7 +37,7 @@ export class BaseComponent {
         /*<-- optional params  */
         const tag = componentRegistry.GetTag(ctr);
         if (tag === undefined) {
-            return undefined;
+            throw Error("Tag is undefined failed to create container");
         }
         element.setAttribute("data-tagtype", tag);
         element.id = this.Id;

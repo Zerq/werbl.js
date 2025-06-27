@@ -6,16 +6,18 @@ export class BasicAppRoot extends BaseComponent {
     constructor() {
         super();
         window.addEventListener("hashchange", e => {
-            this.#router.HandleRout(location.hash);
+            this.#router.HandleRoute(location.hash);
         });
-        this.Route(this.#router);
+    }
+    get router() {
+        return this.#router;
     }
     #router = IOC.Instance.Service(IRouter);
     #componentRegistry = IOC.Instance.Service(IComponentRegistry);
     setInitialView(view) {
         requestAnimationFrame(() => {
             location.hash = view;
-            this.#router.HandleRout(location.hash);
+            this.#router.HandleRoute(location.hash);
         });
     }
     renderView(view, params, children) {

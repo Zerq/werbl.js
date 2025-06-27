@@ -16,9 +16,10 @@ let Router = class Router {
         return matches?.groups;
     }
     defaultRouteHandler;
-    HandleRout(hash) {
+    HandleRoute(hash) {
         this.routeMappings.forEach((val, key) => {
-            if (new RegExp(key).test(hash)) {
+            const parsed = key.replaceAll(/({([^^}]*)})(.?)/g, "(?<$2>.*)");
+            if (new RegExp(parsed).test(hash)) {
                 const params = this.Parse(key, hash);
                 const route = this.routeMappings.get(key);
                 const func = route?.func;

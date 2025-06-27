@@ -20,6 +20,9 @@ export function JSX(tag, attributes, ...children) {
     if (tag === __frag) {
         const docFrag = document.createDocumentFragment();
         children.forEach(child => {
+            if (!child) {
+                return;
+            }
             const type = metaData.Get(child);
             if (type.Name === "string") {
                 docFrag.appendChild(document.createTextNode(child));
