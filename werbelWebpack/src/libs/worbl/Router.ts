@@ -18,18 +18,59 @@ export class Router implements IRouter {
 
     public defaultRouteHandler?: (tag, params: ParamsObj) => void;
 
-    public HandleRoute(hash: string) {
-        this.routeMappings.forEach((val: Routmappinng, key: string) => {
 
-        const parsed = key.replaceAll(/({([^^}]*)})(.?)/g, "(?<$2>.*)");
+    public HasMatch(hash: string): boolean {
+        const keys =  Array.from(this.routeMappings.keys());
+        for (let x in keys){
+            let key = keys[x];
+            let val = this.routeMappings.get(key);
 
-            if (new RegExp(parsed).test(hash)) {
+
+            const parsed = key.replaceAll(/({([^^}]*)})(.?)/g, "(?<$2>.*)");
+            
+            const leftOvers = hash.replace(new RegExp(parsed), "");
+
+            if (leftOvers === ""){ //new RegExp(parsed).test(hash)) {
                 const params = this.Parse(key, hash);
                 const route = this.routeMappings.get(key);
                 const func = route?.func;
 
-                if (func) {
+                if (func) { 
+                  return true;
+                }
+                else {                    
+                    if (route=== undefined){
+                       return false;
+                    }
+                    return true;
+                    break;
+                }
+            }
+        }
+    }
+
+
+    public HandleRoute(hash: string) {
+
+        
+        const keys =  Array.from(this.routeMappings.keys());
+        for (let x in keys){
+            let key = keys[x];
+            let val = this.routeMappings.get(key);
+
+
+            const parsed = key.replaceAll(/({([^^}]*)})(.?)/g, "(?<$2>.*)");
+            const leftOvers = hash.replace(new RegExp(parsed), "");
+
+            
+            if (leftOvers === "") {
+                const params = this.Parse(key, hash);
+                const route = this.routeMappings.get(key);
+                const func = route?.func;
+
+                if (func) {void
                     func(params ? params : {});
+                    break;
                 }
                 else {                    
                     if (route=== undefined){
@@ -37,9 +78,12 @@ export class Router implements IRouter {
                     }
                     const tag = this.componentRegistry.GetTagByCtrName(route.ctrName);
                     this.defaultRouteHandler?.(tag, params ? params : {});
+                    break;
                 }
             }
-        });
+
+
+        }
     };
 
     public routeMappings: Map<string, Routmappinng> = new Map();

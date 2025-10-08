@@ -34,6 +34,7 @@ export abstract class IRouter extends PsudoInterface {
     public defaultRouteHandler?: (tag, params: ParamsObj) => void;
     public abstract HandleRoute(hash: string): void;
     public abstract routeMappings: Map<string, Routmappinng>;
+    public abstract HasMatch(hash: string): boolean;
 }
 
 /** abstract class type */
@@ -50,5 +51,6 @@ export interface BaseComponentLike<T> {
     SetChildren(children: Array<string | HTMLElement>): void;
     SetParam(name: string, value: any);
     Render(): void;
+    RenderAsync?:() => void;
     IsInitialized:boolean;
 }

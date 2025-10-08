@@ -5,19 +5,17 @@ import "./libs/worbl/ComponentRegistry.js";
 import "./libs/worbl/Router.js";
 import "./libs/worbl/JSX.js"
 
-
 import { JSX, __frag } from "./libs/worbl/JSX.js"
 import { CSS } from "./libs/worbl/CSS.js"
 
-
-
 import { Component } from "./libs/worbl/Component.js";
 import "./libs/worbl/Components/NavMenu/NavMenu.js";
-import { LinkLike } from "./libs/worbl/Components/NavMenu/NavMenu.js";
+import { LinkLike, LogoPosition, BrandingDisplayMode, TitleSize } from "./libs/worbl/Components/NavMenu/NavMenu.js";
+
+
 import { BasicAppRoot } from "./libs/worbl/BasicApproot.js";
 import "./Views/Home/HomeView.js";
 import "./Views/about/AboutView.js";
-
 import { IRouter } from "./libs/worbl/types.js";
 
 
@@ -38,17 +36,27 @@ export class AppComponent extends BasicAppRoot {
     }
 
     protected View(): HTMLElement {
+        const logo = "./assets/worbl.svg";
+        const displaymode: BrandingDisplayMode = "IconOnly"
+        const position: LogoPosition = "Below";
+        const titlesize: TitleSize = "N";
+        const title = "My Test App";
+
         return <>
-            <nav-box logo="./assets/worbl.svg" title="My Test App" items={this.menuItems}></nav-box>
+            <nav-box
+                logo={logo}
+                displaymode={displaymode}
+                position={position}
+                titlesize={titlesize}
+                title={title}
+                items={this.menuItems} ></nav-box>
+
             <main class="MyApp">
             </main>
-        </>;
+        </>
     }
 }
 
 (() => {
-
-
-
     document.body.appendChild(<my-app></my-app>);
 })();

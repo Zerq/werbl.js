@@ -25,6 +25,99 @@ export class AboutView extends BaseComponent<unknown> {
     }
 
     protected View(): HTMLElement {
-        return <div>blarg</div>;
+        return <div>blarg blarg blarg blarg blarg blarg
+             blarg blarg blarg blarg blarg blarg blarg blarg
+              blarg blarg blarg blarg blarg blarg blarg blarg 
+              blarg blarg blarg blarg blarg blarg blarg blarg blarg
+               blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+               blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+               blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+               blarg blarg blarg blarg blarg blarg blarg blarg
+                blarg blarg blarg blarg blarg blarg blarg blarg 
+                blarg blarg blarg blarg blarg blarg blarg blarg blarg
+                 blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                 blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                 blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                 blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                 blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                 blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                 blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                 blarg blarg blarg blarg blarg blarg blarg blarg
+                  blarg blarg blarg blarg blarg blarg blarg blarg blarg
+                   blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                   blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                   blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                   blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                   blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                   blarg blarg blarg blarg blarg blarg blarg
+                    blarg blarg blarg blarg blarg blarg blarg 
+                    blarg blarg blarg blarg blarg blarg blarg 
+                    blarg blarg blarg blarg blarg blarg blarg 
+                    blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                    blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg
+                     blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg
+                      blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                      blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                      blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                      blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                      blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                      blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                      blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                      blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                      blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                      blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                      blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                      blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                      blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg
+                      blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg
+                       blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg blar
+                       g blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg bla
+                       rg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg bl
+                       arg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg b
+                       larg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                       blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg
+                        blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg bla
+                        rg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                        blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg bla
+                        rg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                        blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg bla
+                        rg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                        blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg bla
+                        rg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                        blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg bla
+                        rg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                        blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg bla
+                        rg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                        blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg bla
+                        rg blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                        blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg
+                         blarg blarg blarg blarg blarg blarg blarg blarg blarg blar
+                         g blarg blarg blarg blarg blarg blarg blarg blarg blarg bl
+                         arg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                         blarg blarg blarg blarg blarg blarg blarg blarg blarg blar
+                         g blarg blarg blarg blarg blarg blarg blarg blarg blarg bl
+                         arg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                         blarg blarg blarg blarg blarg blarg blarg blarg blarg blar
+                         g blarg blarg blarg blarg blarg blarg blarg blarg blarg bl
+                         arg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                         blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                         blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                         blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                         blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                         blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                         blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                         blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                         blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                         blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                         blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                         blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                         blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                         blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                         blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                         blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                         blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                         blarg blarg blarg blarg blarg blarg blarg blarg blarg blarg 
+                         blarg blarg blarg blarg blarg blarg blarg blarg
+                          blarg blarg blarg </div>;
     }
 }

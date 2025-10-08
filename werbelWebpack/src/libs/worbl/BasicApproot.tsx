@@ -38,7 +38,7 @@ export abstract class BasicAppRoot extends BaseComponent<unknown> {
 
     protected makeContainer(): HTMLElement {
         this.Id = crypto.randomUUID();
-        return <div id={this.Id}></div>;
+        return <div class="appContainer" id={this.Id}></div>;
     }
 
     public SetParam(name: string, value: any) { }

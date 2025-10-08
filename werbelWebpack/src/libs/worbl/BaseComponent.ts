@@ -1,12 +1,14 @@
 import { IOC } from "./IOC.js";
+import { PsudoInterface } from "./PsudoInterface.js";
 import { BaseComponentLike, Ctr, IComponentRegistry } from "./types.js";
 
-
-export function GetComponent<T extends BaseComponent<V>, V>(queryString:string){
-   return (document.querySelector(queryString) as any).Component as BaseComponent<T>;
+/**
+ * @param queryString selector must point to a valid components container element
+ * @returns instance of the component.
+ */
+export function GetComponent<T>(queryString: string) {
+    return (document.querySelector(queryString) as any).Component as T;
 }
-
-
 
 export abstract class BaseComponent<T> implements BaseComponentLike<T> {
     public Model: T;
@@ -31,7 +33,7 @@ export abstract class BaseComponent<T> implements BaseComponentLike<T> {
         (this.Container as any).Component = this
     }
 
-    public IsInitialized:boolean = false;
+    public IsInitialized: boolean = false;
 
 
     protected children: Array<string | HTMLElement>;
@@ -42,7 +44,7 @@ export abstract class BaseComponent<T> implements BaseComponentLike<T> {
 
     protected abstract makeContainer(): HTMLElement;
 
-    protected makeContainerDefault(ctr: Ctr<BaseComponent<any>>, params: { tagType?: string; class?: string; } = { tagType: undefined, class: undefined }): HTMLElement  {
+    protected makeContainerDefault(ctr: Ctr<BaseComponent<any>>, params: { tagType?: string; class?: string; } = { tagType: undefined, class: undefined }): HTMLElement | undefined {
         this.Id = crypto.randomUUID();;
         const componentRegistry = IOC.Instance.Service(IComponentRegistry);
 
@@ -56,7 +58,7 @@ export abstract class BaseComponent<T> implements BaseComponentLike<T> {
         const tag = componentRegistry.GetTag(ctr);
 
         if (tag === undefined) {
-            throw Error("Tag is undefined failed to create container");
+            return undefined;
         }
 
         element.setAttribute("data-tagtype", tag);
@@ -66,10 +68,29 @@ export abstract class BaseComponent<T> implements BaseComponentLike<T> {
     }
 
     public abstract SetParam(name: string, value: any);
-    public baseSetParam(name: string, value: any){
-        
+    public baseSetParam(name: string, value: any) {
+
     }
     protected abstract View(): HTMLElement;
+
+    public readonly RenderAsync = async () => {
+        this.#container.innerHTML = "";
+
+        const view = await (this as unknown as AsyncRenderLike).ViewAsync?.() ?? undefined;
+
+        if (view === undefined) {
+            return;
+        }
+
+
+        if (view !== null) {
+            this.#container.appendChild(view);
+        }
+
+        requestAnimationFrame(() => {
+            (this as undefined as PostRenderLike).postRender?.();
+        });
+    }
 
     public Render() {
         this.#container.innerHTML = "";
@@ -77,5 +98,17 @@ export abstract class BaseComponent<T> implements BaseComponentLike<T> {
         if (view !== null) {
             this.#container.appendChild(view);
         }
+        requestAnimationFrame(() => {
+           (this as undefined as PostRenderLike).postRender?.();
+        });
     }
+}
+
+export interface AsyncRenderLike {
+    readonly ViewAsync: () => Promise<HTMLElement>;
+}
+
+
+export interface PostRenderLike {
+    readonly postRender: () => void;
 }

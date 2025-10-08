@@ -12,39 +12,81 @@
     --gradient: linear-gradient(49deg, rgba(136, 63, 7, 1) 0%, rgba(98, 46, 0, 1) 11%, rgba(0, 0, 0, 1) 17%, rgba(147, 69, 0, 1) 20%, rgba(31, 12, 0, 1) 36%, rgba(156, 68, 21, 1) 39%, rgba(3, 1, 0, 1) 67%, rgba(64, 25, 0, 1) 70%, rgba(41, 17, 2, 1) 100%);
 }
 
+body {
+      min-height: 100vh;
+}
 
-    .navMenu {
-        header {
-            width: calc(100% - (var(--border) * 2) - 1rem);
+.appContainer{
+    display: flex;
+    min-height: inherit;
+}
 
-            ul {
-                margin-block-start: 1rem;
-                margin-block-end: 1rem;
-            }
+header {
+
+    background-color: var(--back);
+    border: solid var(--border) var(--fore);
+    color: var(--fore);
+
+    padding: 0.5rem;
+        min-height: calc(100% - 1.2rem)
+}
+
+main {
+    background-color: var(--backDarkestGold);
+    border: solid var(--border) var(--fore);
+    color: white;
+    border-radius: var(--borderR);
+    width: 100%;
+    padding: 1rem;
+}
+
+
+/* .navMenu {
+    header {
+        width: calc(100% - (var(--border) * 2) - 1rem);
+
+        ul {
+            margin-block-start: 1rem;
+            margin-block-end: 1rem;
+        }
+    }
+}
+
+
+
+
+
+header {
+
+    background-color: var(--back);
+    border: solid var(--border) var(--fore);
+    color: var(--fore);
+    display: flex;
+    flex-direction: column;
+    width: fit-content !important;
+    height: 100vh;
+
+    h1 {
+        width: fit-content;
+        padding: 0;
+        margin: 0;
+        height: fit-content;
+        margin-block: auto;
+        padding-right: 1rem;
+
+        img {
+            vertical-align: middle;
+            width: 4rem;
         }
     }
 
+    border-radius: var(--borderR);
 
+    nav {
+        user-select: none;
 
-
-
-    header {
-        background-color: var(--back);
-        border: solid var(--border) var(--fore);
-        color: var(--fore);
-
-        h1 {
-            margin-inline: 1rem;
-            user-select: none;
-            text-shadow: 1px 1px var(--back);
-            color: var(--fore) !important;
-            font-size: larger;
-        }
-
-        border-radius: var(--borderR);
-
-        nav {
-            user-select: none;
+        ul {
+            flex-direction: column;
 
             li {
                 cursor: pointer;
@@ -56,12 +98,15 @@
             }
         }
     }
+}
 
-    main {
-        background-color: var(--backDarkestGold);
-        border: solid var(--border) var(--fore);
-        color: white;
-        border-radius: var(--borderR);
-        height: calc(100vh - 5rem);
-        width: calc(100vw - 2rem);
-    }
+main {
+    background-color: var(--backDarkestGold);
+    border: solid var(--border) var(--fore);
+    color: white;
+    border-radius: var(--borderR);
+    height: calc(100vh - 5rem);
+    width: calc(100vw - 2rem);
+}
+
+ */
