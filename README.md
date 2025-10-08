@@ -18,6 +18,10 @@ Oh and i also have a IOC container that uses abstact classes as psudo interfaces
 
 +++Build and installation instructions++++
 
+develop branch is recomended for now.. i tend to not update the master version very often.. and its not like i have a first final release yet still tinkering a lot...
+part of the idea is that i keep the stuff in a lib folder because your kinda supposed to muck around with the code and make it your own.. eventually i might name a npm package too..
+
+
 running npm build inside teh worblLib
 update the worblLib and werbelWebpack projects (the parcel project is still a work in progress)
 
