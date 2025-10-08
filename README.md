@@ -29,12 +29,18 @@ once it installed
 
 the current template will be added
 
+
 Omnicatz Werbl Basic
-werbl                      
+
+"werbl"                      
+
 this one runs of the native browser ecmascript module loader no bundler needed
 
 
+
 Omnicatz Werbl Webpack                        
-werbl_webpack
+
+"werbl_webpack"
+
 this one just uses webpack so you can use npm dependecies 
 
