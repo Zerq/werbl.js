@@ -2,6 +2,7 @@ import { RegisterService } from "./IOC.js";
 import { BaseComponent } from "./BaseComponent.js";
 import { Ctr, BaseComponentLike, IComponentRegistry } from "./types.js";
 
+
 @RegisterService(IComponentRegistry)
 class ComponentRegistry implements IComponentRegistry {
     public GetTag(ctr: Ctr<BaseComponentLike<any>>): string | undefined {
@@ -25,6 +26,9 @@ class ComponentRegistry implements IComponentRegistry {
         return result;
     }
 
+ 
+
+    
     #map: Map<string, Ctr<BaseComponentLike<any>>> = new Map();
     #reverseMap: Map<Ctr<BaseComponentLike<any>>, string> = new Map();
 
@@ -40,6 +44,8 @@ class ComponentRegistry implements IComponentRegistry {
         this.#reverseMap.set(ctr, tag);
     }
 
+
+    
     public CreateElement<T, V extends BaseComponent<T>>(tag: string, params: { [name: string]: any; }, children: Array<string | HTMLElement>): V | undefined {
         let ctr = this.#map.get(tag);
 
@@ -48,12 +54,20 @@ class ComponentRegistry implements IComponentRegistry {
         }
 
         const newComponent = new ctr();
-
+        newComponent.IsInitialized= false;
+        newComponent.SetChildren(children);
         for (let key in params) {
+
+            if (key.startsWith("on")){
+                newComponent[key] = params[key];
+                continue;
+            }
+
             newComponent.SetParam(key, params[key]);
         }
+        newComponent.IsInitialized = true;
 
-        newComponent.SetChildren(children);
+    
 
         newComponent.Render();
 

@@ -1,8 +1,17 @@
 import { IOC } from "./IOC.js";
+import { PsudoInterface } from "./PsudoInterface.js";
 import { BaseComponentLike, Ctr, IComponentRegistry } from "./types.js";
 
+/**
+ * @param queryString selector must point to a valid components container element
+ * @returns instance of the component.
+ */
+export function GetComponent<T>(queryString: string) {
+    return (document.querySelector(queryString) as any).Component as T;
+}
+
 export abstract class BaseComponent<T> implements BaseComponentLike<T> {
-    protected model: T;
+    public Model: T;
     #container: HTMLElement;
 
     #id: string;
@@ -21,7 +30,10 @@ export abstract class BaseComponent<T> implements BaseComponentLike<T> {
 
     public constructor() {
         this.#container = this.makeContainer();
+        (this.Container as any).Component = this
     }
+
+    public IsInitialized: boolean = false;
 
 
     protected children: Array<string | HTMLElement>;
@@ -56,8 +68,29 @@ export abstract class BaseComponent<T> implements BaseComponentLike<T> {
     }
 
     public abstract SetParam(name: string, value: any);
+    public baseSetParam(name: string, value: any) {
 
+    }
     protected abstract View(): HTMLElement;
+
+    public readonly RenderAsync = async () => {
+        this.#container.innerHTML = "";
+
+        const view = await (this as unknown as AsyncRenderLike).ViewAsync?.() ?? undefined;
+
+        if (view === undefined) {
+            return;
+        }
+
+
+        if (view !== null) {
+            this.#container.appendChild(view);
+        }
+
+        requestAnimationFrame(() => {
+            (this as undefined as PostRenderLike).postRender?.();
+        });
+    }
 
     public Render() {
         this.#container.innerHTML = "";
@@ -65,6 +98,17 @@ export abstract class BaseComponent<T> implements BaseComponentLike<T> {
         if (view !== null) {
             this.#container.appendChild(view);
         }
-
+        requestAnimationFrame(() => {
+           (this as undefined as PostRenderLike).postRender?.();
+        });
     }
+}
+
+export interface AsyncRenderLike {
+    readonly ViewAsync: () => Promise<HTMLElement>;
+}
+
+
+export interface PostRenderLike {
+    readonly postRender: () => void;
 }

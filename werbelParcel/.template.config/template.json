@@ -1,0 +1,14 @@
+
+{
+"$schema": "http://json.schemastore.org/template",
+"author": "The Confusiarch",
+"classifications": ["omnicatz", "werbl", "Parcel"],
+"identity": "Omnicatz.Werbl",
+"name": "Omnicatz Werbl Parcel",
+"shortName": "werblParcel",
+"tags": {
+    "language": "C# & Typescript",
+    "type": "project"
+},
+"description": "A low dependency SPA solution using dotnet and typescript with react style templates routing and a component model."
+}
