@@ -2,10 +2,12 @@ import { Component } from "../../Component.js";
 import { CSS } from "../../CSS.js";
 import { JSX } from "../../JSX.js"
 import { BaseComponent } from "../../BaseComponent.js";
+import { PsudoInterface } from "../../PsudoInterface.js";
 
 export interface LinkLike {
     Name: string;
-    Url: string;
+    Url?: string;
+    action?: (e:Event) => void;
 }
 
 export type LogoPosition = undefined | "Before" | "After" | "Above" | "Below";
@@ -22,7 +24,7 @@ export interface MenuDataLike {
     DisplayMode: BrandingDisplayMode;
 }
 
-@Component("nav-box")
+@Component("navbox")
 @CSS("./NavMenu.css", import.meta)
 export class NavMenu extends BaseComponent<MenuDataLike> {
     protected ViewAsync?: () => Promise<HTMLElement>;
@@ -65,12 +67,12 @@ export class NavMenu extends BaseComponent<MenuDataLike> {
             this.Model.Items = value;
         }
 
-       if (name.toLowerCase() === "iconsize") {
+        if (name.toLowerCase() === "iconsize") {
             this.Model.IconSize === value;
-       }
-       if (this.IsInitialized){
-        this.Render();
-       }
+        }
+        if (this.IsInitialized) {
+            this.Render();
+        }
     }
 
     readonly #formatBranding = () => {
@@ -106,7 +108,15 @@ export class NavMenu extends BaseComponent<MenuDataLike> {
             </div>
             <nav>
                 <ul>
-                    {...this.Model.Items.map(n => <li><a href={n.Url}>{n.Name}</a></li>)}
+                    {...this.Model.Items.map(n => {
+                        if (n.action) {
+                            return <li><a href={location.hash} onClick={e => n.action(e)}>{n.Name}</a></li>;
+                        }
+                        if (n.Url) {
+                            return <li><a href={n.Url}>{n.Name}</a></li>;
+                        }
+                    }
+                    )}
                 </ul>
             </nav>
         </header >;

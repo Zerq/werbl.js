@@ -6,17 +6,25 @@
     color: white;
     --fore: rgb(87, 49, 0);
     --back: gold;
+    --backDarker: rgb(181, 153, 0);
     --backDarkestGold: rgb(80, 68, 0);
+
+    --darkBoxBg: rgb(40, 34, 0);
+    --darkBoxfore: white;
+    
+
+
     --border: 0.05rem;
     --borderR: 0.5rem;
     --gradient: linear-gradient(49deg, rgba(136, 63, 7, 1) 0%, rgba(98, 46, 0, 1) 11%, rgba(0, 0, 0, 1) 17%, rgba(147, 69, 0, 1) 20%, rgba(31, 12, 0, 1) 36%, rgba(156, 68, 21, 1) 39%, rgba(3, 1, 0, 1) 67%, rgba(64, 25, 0, 1) 70%, rgba(41, 17, 2, 1) 100%);
 }
 
+
 body {
-      min-height: 100vh;
+    min-height: 100vh;
 }
 
-.appContainer{
+.appContainer {
     display: flex;
     min-height: inherit;
 }
@@ -28,7 +36,7 @@ header {
     color: var(--fore);
 
     padding: 0.5rem;
-        min-height: calc(100% - 1.2rem)
+    min-height: calc(100% - 1.2rem)
 }
 
 main {

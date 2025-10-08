@@ -110,7 +110,11 @@ export function JSX(tag: string, attributes: { [name: string]: any; }, ...childr
         const type = metaData.Get(elm);
 
         if (type.Name === "string") {
-            newElement.appendChild(document.createTextNode(elm as string));
+            let txt = (elm as string).replace(`
+`, "\n");
+
+ 
+            newElement.appendChild(document.createTextNode(txt));
             return;
         }
 

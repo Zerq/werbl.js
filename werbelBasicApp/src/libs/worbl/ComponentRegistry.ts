@@ -1,4 +1,4 @@
-import { RegisterService } from "./IOC.js";
+import { IOC, RegisterService } from "./IOC.js";
 import { BaseComponent } from "./BaseComponent.js";
 import { Ctr, BaseComponentLike, IComponentRegistry } from "./types.js";
 

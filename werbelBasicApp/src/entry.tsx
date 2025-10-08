@@ -10,14 +10,21 @@ import { CSS } from "./libs/worbl/CSS.js"
 
 import { Component } from "./libs/worbl/Component.js";
 import "./libs/worbl/Components/NavMenu/NavMenu.js";
+import "./libs/worbl/Components/Box/Box.js";
+import "./libs/worbl/Components/TabView/TabView.js";
+
+
 import { LinkLike, LogoPosition, BrandingDisplayMode, TitleSize } from "./libs/worbl/Components/NavMenu/NavMenu.js";
 
+import "./components/FormatCode/FormatCode.js";
 
 import { BasicAppRoot } from "./libs/worbl/BasicApproot.js";
 import "./Views/Home/HomeView.js";
-import "./Views/about/AboutView.js";
-import { IRouter } from "./libs/worbl/types.js";
+import "./Views/Components/ComponentsView.js";
+import "./Views/NameSpaceShifting/NameSpaceShifting.js";
 
+
+import { IRouter } from "./libs/worbl/types.js";
 
 @CSS("/layout.css")
 @Component("my-app")
@@ -25,7 +32,32 @@ export class AppComponent extends BasicAppRoot {
     public Route(router: IRouter) {
     }
 
-    protected menuItems: LinkLike[] = [{ Name: "Home", Url: "#home" }, { Name: "About", Url: "#about" }]
+    protected menuItems: LinkLike[] =
+        [
+            { Name: "Home", Url: "#home" },
+            { Name: "Namespace changing", Url: "#changens" },
+            { Name: "Components", Url: "#components" },
+            {
+                Name: "Invert", action: (e: Event) => {
+                    e.preventDefault();
+                    if (document.body.style.filter === "") {
+                        document.body.style.filter = "invert()";
+                    } else {
+                        document.body.style.filter = "";
+                    }
+                }
+            },
+            {
+                Name: "Sepia", action: (e: Event) => {
+                    e.preventDefault();
+                    if (document.body.style.filter === "") {
+                        document.body.style.filter = "sepia(1)";
+                    } else {
+                        document.body.style.filter = "";
+                    }
+                }
+            }
+        ];
 
     public constructor() {
         super();
@@ -36,21 +68,18 @@ export class AppComponent extends BasicAppRoot {
     }
 
     protected View(): HTMLElement {
-        const logo = "./assets/worbl.svg";
         const displaymode: BrandingDisplayMode = "IconOnly"
         const position: LogoPosition = "Below";
         const titlesize: TitleSize = "N";
-        const title = "My Test App";
 
         return <>
-            <nav-box
-                logo={logo}
+            <navbox
                 displaymode={displaymode}
                 position={position}
                 titlesize={titlesize}
-                title={title}
-                items={this.menuItems} ></nav-box>
-
+                title="My Test App"
+                logo="./assets/worbl.svg"
+                items={this.menuItems} ></navbox>
             <main class="MyApp">
             </main>
         </>
