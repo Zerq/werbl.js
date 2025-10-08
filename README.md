@@ -16,10 +16,18 @@ Oh and i also have a IOC container that uses abstact classes as psudo interfaces
 
 
 
-Build and installation instructions
++++Build and installation instructions++++
 
 running npm build inside teh worblLib
 update the worblLib and werbelWebpack projects (the parcel project is still a work in progress)
 
 on linux at least running the ./install.sh file should install the dotnet cli tempalte i've not looked into creating a nuget package yet...
 i am still working on the templates and maybe doing a better example website since the current one is a bit plain and really does not show of the capabilities of the system..
+
+
+once it installed 
+
+the current template will be added
+Omnicatz Werbl Basic                          werbl                       C# & Typescript  omnicatz/werbl/basic     <-- this one runs of the native browser ecmascript module loader no bundler needed                                    
+Omnicatz Werbl Webpack                        werbl_webpack               C# & Typescript  omnicatz/werbl/webpack   <-- this one just uses webpack so you can use npm dependecies 
+
