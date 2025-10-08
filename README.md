@@ -28,6 +28,13 @@ i am still working on the templates and maybe doing a better example website sin
 once it installed 
 
 the current template will be added
-Omnicatz Werbl Basic                          werbl                       C# & Typescript  omnicatz/werbl/basic     <-- this one runs of the native browser ecmascript module loader no bundler needed                                    
-Omnicatz Werbl Webpack                        werbl_webpack               C# & Typescript  omnicatz/werbl/webpack   <-- this one just uses webpack so you can use npm dependecies 
+
+Omnicatz Werbl Basic
+werbl                      
+this one runs of the native browser ecmascript module loader no bundler needed
+
+
+Omnicatz Werbl Webpack                        
+werbl_webpack
+this one just uses webpack so you can use npm dependecies 
 
