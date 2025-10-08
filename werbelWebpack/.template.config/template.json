@@ -6,6 +6,7 @@
     "identity": "Omnicatz.Werbl.webpack",
     "name": "Omnicatz Werbl Webpack",
     "shortName": "werbl_webpack",
+    "sourceName": "$safeprojectname$",
     "tags": {
         "language": "C# & Typescript",
         "type": "project"

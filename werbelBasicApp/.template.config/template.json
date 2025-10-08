@@ -6,6 +6,7 @@
 "identity": "Omnicatz.Werbl",
 "name": "Omnicatz Werbl Basic",
 "shortName": "werbl",
+"sourceName": "$safeprojectname$",
 "tags": {
     "language": "C# & Typescript",
     "type": "project"
