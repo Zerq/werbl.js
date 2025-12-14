@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
-import { BaseComponent } from "./BaseComponent.js";
-import { ParamsObj, Router } from "./Router.js";
-import { PsudoInterface } from "./PsudoInterface.js";
-import { Routmappinng } from "./Routmappinng.js";
+import { BaseComponent } from "./BaseComponent.js";//[[ts]]
+import { ParamsObj, Router } from "./Router.js";//[[ts]]
+import { PsudoInterface } from "./PsudoInterface.js";//[[ts]]
+import { Routmappinng } from "./Routmappinng.js";//[[ts]]
 
 export abstract class IComponentRegistry extends PsudoInterface {
     private constructor() { super(); }

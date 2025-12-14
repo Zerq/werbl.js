@@ -1,4 +1,4 @@
-import { BaseComponent } from "../../libs/worbl/BaseComponent.js";
+import { BaseComponent, GetComponent } from "../../libs/worbl/BaseComponent.js";
 import { Component } from "../../libs/worbl/Component.js";
 import { JSX } from "../../libs/worbl/JSX.js";
 import { Route } from "../../libs/worbl/Router.js";
@@ -200,10 +200,36 @@ export class testComponent extends BaseComponent<{ name?: string, age?: number }
 
                     </li>
                 </ol>
-
-
-
             </p>
+
+        <p>
+            For the menu you add that in the entry.tsx file and it can either carry a hash url or a click event that prevents the default behaviour.
+        </p>
+
+                                <format-code text={`@CSS("/layout.css")
+@Component("my-app")
+export class AppComponent extends BasicAppRoot {
+    public Route(router: IRouter) {}
+
+    protected menuItems: LinkLike[] = [
+                                        { Name: "Home", Url: "#home" },
+                                        { Name: "Namespace changing", Url: "#changens" },
+                                        { Name: "Sepia", action: (e: Event) => {
+e.preventDefault();
+    if (document.body.style.filter === "") {
+        document.body.style.filter = "sepia(1)";
+    } else {
+        document.body.style.filter = "";
+            }
+        }
+    }
+];
+                                
+public constructor() {`}></format-code>
+
+<strong>You can also grab refrences to other components by using a selector and a psudointerface to type the expected instance</strong>
+ <format-code text={`const someComponentInstance = GetComponent<SomePsudoInterface>("#someCSSSelector");`}></format-code>
+
 
         </div>;
     }

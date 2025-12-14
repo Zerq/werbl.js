@@ -1,6 +1,6 @@
-import { RegisterService } from "./IOC.js";
-import { PsudoInterface } from "./PsudoInterface.js";
-import { IMetaDataService, AnnotationDataLike,TypeMetadataLike } from "./types.js";
+import { RegisterService } from "./IOC.js";//[[ts]]
+import { PsudoInterface } from "./PsudoInterface.js";//[[ts]]
+import { IMetaDataService, AnnotationDataLike,TypeMetadataLike } from "./types.js";//[[ts]]
 
 @RegisterService(IMetaDataService)
 class MetaDataService implements IMetaDataService {

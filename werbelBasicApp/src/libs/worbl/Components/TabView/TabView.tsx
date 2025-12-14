@@ -1,9 +1,50 @@
-import { BaseComponent } from "../../BaseComponent.js";
-import { Component } from "../../Component.js";
-import { __frag, JSX } from "../../JSX.js";
-import { CSS } from "../../CSS.js";
+import { BaseComponent } from "../../BaseComponent.js";//[[ts]]
+import { Component } from "../../Component.js";//[[tsx]]
+import { __frag, JSX } from "../../JSX.js";//[[ts]]
+import { Header } from "../../CSS.js";//[[tsx]]
 
-@CSS("./TabView.css", import.meta)
+
+@Header(<style id="TabView.css" type="text/css">{`.TabView {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background-color: var(--back);
+    color: var(--fore);
+    
+    ul {
+        margin: 0rem;
+        padding: 0rem;
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        background-color: var(--pageBg);
+
+        li {
+            width: fit-content;
+            padding: 0.4rem;
+            background-color: var(--back2);
+            border-radius: 0.5rem;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            background-color: var(--backDarker);
+            border: solid 0.1rem black;
+            border-bottom: 0;
+        }
+
+    }
+
+    .selected {
+        background-color: var(--back);
+        border: solid 0.1rem var(--backDarker);
+        border-bottom: 0;
+    }
+
+    .content{
+      border: solid 0.1rem black;
+    }
+}`}</style>)
+//@CSS("/libs/worbl/Components/TabView/TabView.css")
 @Component("tabview")
 export class TabView extends BaseComponent<number> {
     protected ViewAsync?: () => Promise<HTMLElement>;

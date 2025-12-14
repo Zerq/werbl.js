@@ -28,7 +28,7 @@ exports.default = async function () {
             "./src/**/*.jpg",
             "./src/**/*.jpeg",           
             "./src/**/*.gif"],   
-            { base: "./src" }).pipe(dest("wwwroot/"));
+            { base: "./src", encoding: false }).pipe(dest("wwwroot/"));
 };
 
 

@@ -7,8 +7,8 @@
   
   "scripts": {
     "build": "tsc && gulp",
-    "buildOnly": "tsc"
-    
+    "buildOnly": "tsc",
+    "replace": " dotnet run --project ../extCopy --r ./libs ./dist/r && dotnet run --project ../extCopy --c ./libs ./dist/c"   
   },
   "devDependencies": {
   "typescript":"5.8.2",

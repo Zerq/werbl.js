@@ -1,5 +1,5 @@
-import { PsudoInterface } from "./PsudoInterface.js";
-import { AbsCtr, Ctr } from "./types.js";
+import { PsudoInterface } from "./PsudoInterface.js";//[[ts]]
+import { AbsCtr, Ctr } from "./types.js";//[[ts]]
 
 export function RegisterService<A>(abs: AbsCtr<A>, ...params: unknown[]) {
     return (ctor: Ctr<A>) => {

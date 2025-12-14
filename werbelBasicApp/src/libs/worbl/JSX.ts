@@ -1,8 +1,13 @@
 import { ReactNode } from "react";
-import { IOC } from "./IOC.js";
-import { IComponentRegistry, IMetaDataService } from "./types.js";
+import { IOC } from "./IOC.js";//[[ts]]
+import { IComponentRegistry, IMetaDataService } from "./types.js";//[[ts]]
+
 class jsxContext {
     static nameSpace:string|undefined = undefined;
+}
+
+export function SetNameSpace(namespace:string){
+    jsxContext.nameSpace = namespace;
 }
 
 export const __frag = "__frag";
@@ -14,6 +19,9 @@ export function JSX(tag: string, attributes: { [name: string]: any; }, ...childr
     // if (tag === ContexTagtName){
 
     // }
+
+
+
 
     if (tag === "xml-namespace"){
         jsxContext.nameSpace =  children[0] as string;
@@ -80,7 +88,7 @@ export function JSX(tag: string, attributes: { [name: string]: any; }, ...childr
 
 
     let newElement:Element|undefined;
-    
+
     if (jsxContext.nameSpace === undefined){
         newElement= document.createElement(tag);
     }

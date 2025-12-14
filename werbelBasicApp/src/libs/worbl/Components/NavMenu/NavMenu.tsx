@@ -1,13 +1,13 @@
-import { Component } from "../../Component.js";
-import { CSS } from "../../CSS.js";
-import { JSX } from "../../JSX.js"
-import { BaseComponent } from "../../BaseComponent.js";
-import { PsudoInterface } from "../../PsudoInterface.js";
+import { Component } from "../../Component.js";//[[tsx]]
+import { Header } from "../../CSS.js";//[[tsx]]
+import { JSX, __frag } from "../../JSX.js"//[[ts]]
+import { BaseComponent } from "../../BaseComponent.js";//[[ts]]
+import type { ReactElement, ReactSVGElement } from 'react';
 
 export interface LinkLike {
     Name: string;
     Url?: string;
-    action?: (e:Event) => void;
+    action?: (e: Event) => void;
 }
 
 export type LogoPosition = undefined | "Before" | "After" | "Above" | "Below";
@@ -17,15 +17,30 @@ export type BrandingDisplayMode = undefined | "TitleOnly" | "IconOnly" | "IconAn
 export interface MenuDataLike {
     Items: Array<LinkLike>;
     Title: string;
-    Logo?: string;
+    Logo?: string | ReactSVGElement;
     LogoPosition: LogoPosition;
     IconSize: string;
     TitleSize: TitleSize;
     DisplayMode: BrandingDisplayMode;
 }
 
+
+
+@Header(<style id="NavMenu.css" type="text/css">{`h1.IconBelow {
+         img {
+             display: block;
+             margin-inline: auto;
+         }
+     }
+
+     h1.IconAbove {
+         img {
+             display: block;
+             margin-inline: auto;
+         }
+     }`}</style>)
 @Component("navbox")
-@CSS("./NavMenu.css", import.meta)
+//@CSS("/libs/worbl/Components/NavMenu/NavMenu.css")
 export class NavMenu extends BaseComponent<MenuDataLike> {
     protected ViewAsync?: () => Promise<HTMLElement>;
 
@@ -75,6 +90,62 @@ export class NavMenu extends BaseComponent<MenuDataLike> {
         }
     }
 
+    readonly #Branding = () => {
+        if (typeof (this.Model?.Logo) === "string") { 
+            return this.#formatBranding(); 
+        }
+        else { 
+            return this.#formatInlineBranding() as unknown as ReactElement[];
+        }
+    };
+
+    readonly #formatInlineBranding = () => {
+        const size = `font_size_${this.Model.TitleSize ?? "N"}`;
+
+        if (this.Model.DisplayMode === "IconAndTitle" && (this.Model.LogoPosition === "Before" || this.Model.LogoPosition === undefined)) {
+            const logo = this.Model.Logo as unknown as SVGElement;
+            logo.style.width = this.Model.IconSize;
+
+            return <h1 class={`${size}`}>
+                <img style={`width: ${this.Model.IconSize};`} src={this.Model.Logo} alt="" />
+                {logo}
+                {this.Model.Title}</h1>;
+        }
+
+        if (this.Model.DisplayMode === "IconAndTitle" && this.Model.LogoPosition === "Above") {
+            const logo = this.Model.Logo as unknown as SVGElement;
+            logo.style.width = this.Model.IconSize;
+            return <h1 class={`${size} IconAbove`}>
+                {logo}
+                {this.Model.Title}</h1>;
+        }
+
+        if (this.Model.DisplayMode === "IconAndTitle" && this.Model.LogoPosition === "After") {
+            const logo = this.Model.Logo as unknown as SVGElement;
+            logo.style.width = this.Model.IconSize;
+            return <h1 class={`${size}`}>{this.Model.Title}
+                {logo}
+            </h1>;
+        }
+
+        if (this.Model.DisplayMode === "IconAndTitle" && this.Model.LogoPosition === "Below") {
+            const logo = this.Model.Logo as unknown as SVGElement;
+            logo.style.width = this.Model.IconSize;
+            return <h1 class={`${size} IconBelow`}>{this.Model.Title}
+                {logo}
+            </h1>;
+        }
+
+        if (this.Model.DisplayMode === "IconOnly") {
+            const logo = this.Model.Logo as unknown as SVGElement;
+            logo.style.width = this.Model.IconSize;
+           return  logo;
+        }
+
+        return <h1 style={`width: ${this.Model.IconSize};`} class={size}>{this.Model.Title}</h1>;
+
+    };
+
     readonly #formatBranding = () => {
         const size = `font_size_${this.Model.TitleSize ?? "N"}`;
 
@@ -104,7 +175,7 @@ export class NavMenu extends BaseComponent<MenuDataLike> {
     protected View(): HTMLElement {
         return <header>
             <div class="branding">
-                {this.#formatBranding()}
+                {this.#Branding()}
             </div>
             <nav>
                 <ul>

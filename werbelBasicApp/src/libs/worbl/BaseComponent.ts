@@ -1,6 +1,6 @@
-import { IOC } from "./IOC.js";
-import { PsudoInterface } from "./PsudoInterface.js";
-import { BaseComponentLike, Ctr, IComponentRegistry } from "./types.js";
+import { IOC } from "./IOC.js";//[[ts]]
+import { PsudoInterface } from "./PsudoInterface.js";//[[ts]]
+import { BaseComponentLike, Ctr, IComponentRegistry } from "./types.js";//[[ts]]
 
 /**
  * @param queryString selector must point to a valid components container element

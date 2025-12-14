@@ -1,11 +1,33 @@
-import { BaseComponent } from "../../BaseComponent.js";
-import { Component } from "../../Component.js";
-import { __frag, JSX } from "../../JSX.js";
-import { CSS } from "../../CSS.js";
+import { BaseComponent } from "../../BaseComponent.js";//[[ts]]
+import { Component } from "../../Component.js";//[[tsx]]
+import { __frag, JSX } from "../../JSX.js";//[[ts]]
+import { CSS, Header } from "../../CSS.js";//[[tsx]]
 
-declare type Orientation = "Vertical" | "Horizontal"| "V" | "H";
+declare type Orientation = "Vertical" | "Horizontal" | "V" | "H";
 
-@CSS("./Box.css", import.meta)
+@Header(<style id="Box.css" type="text/css">{`
+.Box {
+    width: 100%;
+    height: 100%;
+}
+
+.Box[data-orientation=Horizontal], .Box[data-orientation=H] {
+    display: flex;
+    flex-direction:row;
+}
+
+.Box[data-orientation=Vertical], .Box[data-orientation=V] {
+    display: flex;
+    flex-direction:column;
+}
+
+.Box>* {     
+    flex: auto;
+}
+.Box>.spring {     
+    flex-grow: 100;
+}
+    `}</style>)
 @Component("box")
 export class Box extends BaseComponent<Orientation> {
     protected ViewAsync?: () => Promise<HTMLElement>;
@@ -22,10 +44,10 @@ export class Box extends BaseComponent<Orientation> {
     }
 
     protected View(): HTMLElement {
-        if (typeof( this.children) === "object" && Object.getPrototypeOf(this.children).constructor.name === "Array"){
+        if (typeof (this.children) === "object" && Object.getPrototypeOf(this.children).constructor.name === "Array") {
             return <>{...this.children}</>;
         }
-    
+
         return <div></div>;
     }
 }

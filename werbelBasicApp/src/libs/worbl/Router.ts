@@ -1,7 +1,8 @@
-import { IOC, RegisterService } from "./IOC.js";
-import { BaseComponent } from "./BaseComponent.js";
-import { Ctr, IComponentRegistry, IRouter } from "./types.js";
-import { Routmappinng } from "./Routmappinng.js";
+import { IOC, RegisterService } from "./IOC.js";//[[ts]]
+import { BaseComponent } from "./BaseComponent.js";//[[ts]]
+import { Ctr, IComponentRegistry, IRouter } from "./types.js";//[[ts]]
+import { Routmappinng } from "./Routmappinng.js";//[[ts]]
+
 export type ParamsObj = { [key: string]: string };
 
 @RegisterService(IRouter)

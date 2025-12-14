@@ -1,9 +1,8 @@
-import { BaseComponent } from "../../BaseComponent.js";
-import { Component } from "../../Component.js";
-import { __frag, JSX } from "../../JSX.js";
-import { CSS } from "../../CSS.js";
+import { BaseComponent } from "../../BaseComponent.js";//[[ts]]
+import { Component } from "../../Component.js";//[[tsx]]
+import { __frag, JSX } from "../../JSX.js";//[[ts]]
+import { Header } from "../../CSS.js";//[[tsx]]
  
-
 export interface IconLike {
     Vector?: string;
     Icon16?: string;
@@ -44,7 +43,10 @@ export interface ListViewModelLike<T> {
     GetIcon: (item: T) => string;
 }
 
-@CSS("./ListView.css", import.meta)
+@Header(<style id="listview.css" type="text/css">{`
+    
+    
+    `}</style>)
 @Component("listview")
 export class ListView<T> extends BaseComponent<ListViewModelLike<T>> {
     protected ViewAsync?: () => Promise<HTMLElement>;
