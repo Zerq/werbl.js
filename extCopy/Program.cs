@@ -19,7 +19,7 @@ public class App
         var dir = new DirectoryInfo(folder);
         foreach (FileInfo file in dir.GetFiles())
         {
-            if (file.Name.EndsWith(".ts") || file.Name.EndsWith(".ts"))
+            if (file.Name.EndsWith(".ts") || file.Name.EndsWith(".tsx"))
             {
                 var code = File.ReadAllText(file.FullName);
 
@@ -36,7 +36,7 @@ public class App
 
                      switch (command)
                      {
-                         case "--r":
+                         case "--replace":
                              if (old.EndsWith(".jsx"))
                              {
                                  return $@"{firstPart} ""{old.Replace(".jsx", "." + newExt)}"";";
@@ -48,7 +48,7 @@ public class App
                              }
                              break;
 
-                         case "--p":
+                         case "--purge":
                              if (old.EndsWith(".jsx"))
                              {
                                  return $@"{firstPart} ""{old.Replace(".jsx", "")}"";";
@@ -61,7 +61,7 @@ public class App
                              break;
 
 
-                         case "--c":
+                         case "--cleanse":
                              if (old.EndsWith(".jsx"))
                              {
                                  return $@"{firstPart} ""{old}"";";
@@ -107,18 +107,22 @@ public class App
     {
         Console.WriteLine(@"<command> <src folder> <dest>
 Commands avalible:
---r     Replace replaces js/jsx with ts/tsx where properly annotated for example import { IOC } from ""./IOC.js"";//[[ts]
+--replace     Replace replaces js/jsx with ts/tsx where properly annotated for example import { IOC } from ""./IOC.js"";//[[ts]
         this will replace the ""./IOC.js"" with ""./IOC.ts""
---p     Purge will blank out the extension in import statments etc,
---c     Clean ESM removes the annotation.
---h     Show Help");
+--purge     Purge will blank out the extension in import statments etc,
+--cleanse     Clean ESM removes the annotation.
+--help     Show Help");
 
 
     }
 
     public void Run(string[] args)
     {
-        if (args.Length > 0 && args[0] == "--h")
+
+
+
+
+        if (args.Length > 0 && args[0] == "--help")
         {
             ShowHelp();
             return;

@@ -1,7 +1,7 @@
 import { CSS } from "../../libs/worbl/CSS.js";
 import { Component } from "../../libs/worbl/Component.js";
 import { BaseComponent } from "../../libs/worbl/BaseComponent.js";
-import { JSX, __frag } from "../../libs/worbl/JSX.js";
+import { React } from "../../libs/worbl/JSX.js";
 
 @CSS("./FormatCode.css", import.meta)
 @Component("format-code")

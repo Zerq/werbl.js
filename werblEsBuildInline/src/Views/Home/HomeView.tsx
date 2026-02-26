@@ -1,11 +1,7 @@
-import { BaseComponent, GetComponent } from "../../libs/worbl/BaseComponent.js";
+import { BaseComponent } from "../../libs/worbl/BaseComponent.js";
 import { Component } from "../../libs/worbl/Component.js";
-import { JSX } from "../../libs/worbl/JSX.js";
+import { React } from "../../libs/worbl/JSX.js";
 import { Route } from "../../libs/worbl/Router.js";
-import { CSS } from "../../libs/worbl/CSS.js";
-import { PsudoInterface } from "../../libs/worbl/PsudoInterface.js";
-import { FormatCode } from "../../components/FormatCode/FormatCode.js";
-import { IRouter } from "../../libs/worbl/types.js";
 
 type TestTypeItem = { burklax: number, blarg: boolean, splarg: string };
 
@@ -18,7 +14,7 @@ type TestType = {
 @Route("#home")
 @Component("home-view")
 export class HomeView extends BaseComponent<TestType> {
-    Name: string;
+    Name = "";
 
     public constructor() {
         super();

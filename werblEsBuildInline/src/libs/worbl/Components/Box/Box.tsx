@@ -1,7 +1,7 @@
-import { BaseComponent } from "../../BaseComponent.js";//[[ts]]
-import { Component } from "../../Component.js";//[[tsx]]
-import { __frag, JSX } from "../../JSX.js";//[[ts]]
-import { CSS, Header } from "../../CSS.js";//[[tsx]]
+import { BaseComponent } from "../../BaseComponent";
+import { Component } from "../../Component";
+import { React } from "../../JSX";
+import { CSS, Header } from "../../CSS";
 
 declare type Orientation = "Vertical" | "Horizontal" | "V" | "H";
 
@@ -33,7 +33,12 @@ export class Box extends BaseComponent<Orientation> {
     protected ViewAsync?: () => Promise<HTMLElement>;
     protected makeContainer(): HTMLElement {
         const defaultOrientation: Orientation = "Vertical";
-        return this.makeContainerDefault(Box, { "class": "Box", "data-orientation": defaultOrientation } as any);
+        const result = this.makeContainerDefault(Box, { "class": "Box", "data-orientation": defaultOrientation } as any);
+        if (result === undefined){
+            throw Error("failed to make default container");
+        }
+        return result;
+
     }
 
     public SetParam(name: string, value: any) {

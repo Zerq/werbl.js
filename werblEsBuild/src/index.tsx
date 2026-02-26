@@ -1,5 +1,5 @@
 import "./entry.js";
-import { JSX } from "./libs/worbl/JSX.js";
+import { React } from "./libs/worbl/JSX.js";
 
 (() => {
     document.addEventListener("readystatechange",()=> {

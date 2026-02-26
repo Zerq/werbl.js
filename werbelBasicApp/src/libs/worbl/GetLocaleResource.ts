@@ -1,5 +1,5 @@
-import { AbsCtr, Ctr } from "./types.js";//[[ts]]
-import {whiteList} from "../../locals/config.js";//[[ts]]
+import { AbsCtr, Ctr } from "./types.js";
+import {whiteList} from "../../locals/config.js";
 export type LangCode = "zu" | "za" | "yo" | "yi" | "xh" | "wo" | "fy" | "cy" | "wa" | "vo" | "vi" | "ve" | "uz" | "ur" |
     "uk" | "ug" | "tw" | "tk" | "tr" | "tn" | "ts" | "to" | "ti" | "bo" | "th" | "te" | "tt" | "ta" | "tg" | "ty" | "tl" |
     "sv" | "ss" | "sw" | "su" | "es" | "st" | "nr" | "so" | "sl" | "sk" | "si" | "sd" | "ii" | "sn" | "sr" | "sc" | "sa" |

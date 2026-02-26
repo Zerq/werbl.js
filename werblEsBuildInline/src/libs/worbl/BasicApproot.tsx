@@ -1,8 +1,8 @@
-import { LinkLike } from "./Components/NavMenu/NavMenu.js";//[[tsx]]
-import { IOC } from "./IOC.js";//[[ts]]
-import { JSX } from "./JSX.js";//[[ts]]
-import { BaseComponent } from "./BaseComponent.js";//[[ts]]
-import { IComponentRegistry, IRouter } from "./types.js";//[[ts]]
+import { LinkLike } from "./Components/NavMenu/NavMenu";
+import { IOC } from "./IOC";
+import { React } from "./JSX";
+import { BaseComponent } from "./BaseComponent";
+import { IComponentRegistry, IRouter } from "./types";
 
 export abstract class BasicAppRoot extends BaseComponent<unknown> {
     public constructor() {

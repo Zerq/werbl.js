@@ -17,7 +17,7 @@ export class Router implements IRouter {
         return matches?.groups!;
     }
 
-    public defaultRouteHandler?: (tag, params: ParamsObj) => void;
+    public defaultRouteHandler?: (tag: string, params: ParamsObj) => void;
 
 
     public HasMatch(hash: string): boolean {

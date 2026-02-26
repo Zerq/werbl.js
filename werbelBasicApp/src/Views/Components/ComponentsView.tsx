@@ -1,13 +1,13 @@
 import { BaseComponent } from "../../libs/worbl/BaseComponent.js";
 import { Component } from "../../libs/worbl/Component.js";
-import { JSX } from "../../libs/worbl/JSX.js";
+import { React } from "../../libs/worbl/JSX.js";
 import { Route } from "../../libs/worbl/Router.js";
 
 @Route("#components")
 @Route("#components/{tab}")
 @Component("components-view")
 export class ComponentsView extends BaseComponent<unknown> {
-    Name: string;
+    Name ="";
     public constructor() {
         super();
 

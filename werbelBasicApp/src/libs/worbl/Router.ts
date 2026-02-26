@@ -1,7 +1,7 @@
-import { IOC, RegisterService } from "./IOC.js";//[[ts]]
-import { BaseComponent } from "./BaseComponent.js";//[[ts]]
-import { Ctr, IComponentRegistry, IRouter } from "./types.js";//[[ts]]
-import { Routmappinng } from "./Routmappinng.js";//[[ts]]
+import { IOC, RegisterService } from "./IOC.js";
+import { BaseComponent } from "./BaseComponent.js";
+import { Ctr, IComponentRegistry, IRouter } from "./types.js";
+import { Routmappinng } from "./Routmappinng.js";
 
 export type ParamsObj = { [key: string]: string };
 
@@ -17,7 +17,7 @@ export class Router implements IRouter {
         return matches?.groups!;
     }
 
-    public defaultRouteHandler?: (tag, params: ParamsObj) => void;
+    public defaultRouteHandler?: (tag: string, params: ParamsObj) => void;
 
 
     public HasMatch(hash: string): boolean {

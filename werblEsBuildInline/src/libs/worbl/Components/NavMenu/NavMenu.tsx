@@ -1,9 +1,9 @@
-import { Component } from "../../Component.js";//[[tsx]]
-import { Header } from "../../CSS.js";//[[tsx]]
-import { JSX, __frag } from "../../JSX.js"//[[ts]]
-import { BaseComponent } from "../../BaseComponent.js";//[[ts]]
-import React, { ReactNode, ReactElement, ReactSVGElement } from 'react';
-import { ReactNode } from 'react';
+import { Component } from "../../Component";
+import { Header } from "../../CSS";
+import { React,ReactNode } from "../../JSX.js"//[[ts]]
+import { BaseComponent } from "../../BaseComponent";
+import {  ReactElement, ReactSVGElement } from 'react';
+ 
 
 export interface LinkLike {
     Name: string;
@@ -182,7 +182,7 @@ export class NavMenu extends BaseComponent<MenuDataLike> {
                 <ul>
                     {...this.Model.Items.map(n => {
                         if (n.action) {
-                            return <li><a href={location.hash} onClick={e => n.action(e)}>{n.Name}</a></li>;
+                            return <li><a href={location.hash} onClick={(e:MouseEvent) => n.action?.(e)}>{n.Name}</a></li>;
                         }
                         if (n.Url) {
                             return <li><a href={n.Url}>{n.Name}</a></li>;

@@ -1,7 +1,7 @@
-import { BaseComponent } from "../../BaseComponent.js";//[[ts]]
-import { Component } from "../../Component.js";//[[tsx]]
-import { __frag, JSX } from "../../JSX.js";//[[ts]]
-import { Header } from "../../CSS.js";//[[tsx]]
+import { BaseComponent } from "../../BaseComponent";
+import { Component } from "../../Component";
+import { React } from "../../JSX";
+import { Header } from "../../CSS";
  
 export interface IconLike {
     Vector?: string;
@@ -61,28 +61,28 @@ export class ListView<T> extends BaseComponent<ListViewModelLike<T>> {
         return this.makeContainerDefault(ListView, { "class": "ListView" } as any);
     }
 
-    public SetParam(name: string, value: any) {
+    public SetParam(name: string, value: any) {      
         if (name.toLowerCase() === "data" && typeof (value) === "object" && Object.getPrototypeOf(value).constructor.name === "Array") {
-            this.Model.Data = value;
+            this.Model!.Data = value;
         }
 
         if (name.toLowerCase() === "iconsource" && typeof (value) === "object") {
-            this.Model.IconSource = value;
+            this.Model!.IconSource = value;
         }
 
         if (name.toLowerCase() === "geticon" && typeof (value) === "function") {
-            this.Model.GetIcon = value;
+            this.Model!.GetIcon = value;
         }
 
         if (name.toLowerCase() === "getters" && typeof (value) === "object" && Object.getPrototypeOf(value).constructor.name === "Array") {
-            this.Model.Getters = value;
+            this.Model!.Getters = value;
         }
 
         if (name.toLowerCase() === "selection" && typeof (value) === "object") {
-            this.Model.Selection = value;
+            this.Model!.Selection = value;
         }
         if (name.toLowerCase() === "rendermode" && IsValidRenederMode(value)) {
-            this.Model.RenderMode = value;
+            this.Model!.RenderMode = value;
         }
 
         if (this.IsInitialized) {

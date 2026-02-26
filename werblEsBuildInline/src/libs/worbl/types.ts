@@ -1,14 +1,14 @@
 import { ReactNode } from "react";
-import { BaseComponent } from "./BaseComponent.js";//[[ts]]
-import { ParamsObj, Router } from "./Router.js";//[[ts]]
-import { PsudoInterface } from "./PsudoInterface.js";//[[ts]]
-import { Routmappinng } from "./Routmappinng.js";//[[ts]]
+import { BaseComponent } from "./BaseComponent";
+import { ParamsObj, Router } from "./Router";
+import { PsudoInterface } from "./PsudoInterface";
+import { Routmappinng } from "./Routmappinng";
 
 export abstract class IComponentRegistry extends PsudoInterface {
     private constructor() { super(); }
     public abstract RegisterElement<T>(tag: string, ctr: Ctr<BaseComponentLike<T>>): void;
     public abstract CreateElement<T, V extends BaseComponentLike<T>>(tag: string, params: { [name: string]: any; }, children: Array<string | boolean | number | bigint | Date | HTMLElement>): BaseComponentLike<V>| undefined;
-    public abstract Has(tag): boolean;
+    public abstract Has(tag:string): boolean;
     public abstract GetTag(ctr: Ctr<BaseComponentLike<any>>): string|undefined;
     public abstract GetTagByCtrName(ctrName: string): string|undefined;
 }
@@ -31,7 +31,7 @@ export interface TypeMetadataLike {
 
 export abstract class IRouter extends PsudoInterface {
     private constructor() { super(); }
-    public defaultRouteHandler?: (tag, params: ParamsObj) => void;
+    public defaultRouteHandler?: (tag:string, params: ParamsObj) => void;
     public abstract HandleRoute(hash: string): void;
     public abstract routeMappings: Map<string, Routmappinng>;
     public abstract HasMatch(hash: string): boolean;
@@ -49,7 +49,7 @@ export type VoidFunc = () => void;
 export interface BaseComponentLike<T> {
     get Container(): HTMLElement;
     SetChildren(children: Array<string | HTMLElement>): void;
-    SetParam(name: string, value: any);
+    SetParam(name: string, value: any):void;
     Render(): void;
     RenderAsync?:() => void;
     IsInitialized:boolean;

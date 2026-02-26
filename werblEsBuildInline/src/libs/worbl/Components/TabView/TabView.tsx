@@ -1,8 +1,7 @@
-import { BaseComponent } from "../../BaseComponent.js";//[[ts]]
-import { Component } from "../../Component.js";//[[tsx]]
-import { __frag, JSX } from "../../JSX.js";//[[ts]]
-import { Header } from "../../CSS.js";//[[tsx]]
-
+import { BaseComponent } from "../../BaseComponent";
+import { Component } from "../../Component";
+import { React } from "../../JSX";
+import { Header } from "../../CSS";
 
 @Header(<style id="TabView.css" type="text/css">{`.TabView {
     display: flex;
@@ -76,9 +75,9 @@ export class TabView extends BaseComponent<number> {
                     {...this.children.map((n, index) => 
                     {
                         if (index === this.Model){
-                         return  <li class="selected" onClick={e => this.#click(index)}>{(n as HTMLElement).title}</li>;
+                         return  <li class="selected" onClick={(e:MouseEvent) => this.#click(index)}>{(n as HTMLElement).title}</li>;
                         }else {
-                             return  <li onClick={e => this.#click(index)}>{(n as HTMLElement).title}</li>;
+                             return  <li onClick={(e:MouseEvent) => this.#click(index)}>{(n as HTMLElement).title}</li>;
                         }
                     }
                    )}

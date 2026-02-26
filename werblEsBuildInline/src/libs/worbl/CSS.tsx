@@ -1,6 +1,6 @@
-import { JSX } from "./JSX.js";//[[ts]]
-import { BaseComponent } from "./BaseComponent.js";//[[ts]]
-import { Ctr } from "./types.js";//[[ts]]
+import { React } from "./JSX";
+import { BaseComponent } from "./BaseComponent";
+import { Ctr } from "./types";
 import { CSSProperties, ReactElement, ReactNode } from "react";
 
 

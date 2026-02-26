@@ -4,7 +4,7 @@ import "./libs/worbl/MetaData.js";
 import "./libs/worbl/ComponentRegistry.js";
 import "./libs/worbl/Router.js";
 import "./libs/worbl/JSX.js"
-import { JSX, SetNameSpace, __frag } from "./libs/worbl/JSX.js"
+import { React, SetNameSpace } from "./libs/worbl/JSX.js"
 import { Header } from "./libs/worbl/CSS.js"
 import { Component } from "./libs/worbl/Component.js";
 import "./libs/worbl/Components/NavMenu/NavMenu.js";

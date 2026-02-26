@@ -1,8 +1,7 @@
-import { CSS, Header } from "../../libs/worbl/CSS.js";
+import { Header } from "../../libs/worbl/CSS.js";
 import { Component } from "../../libs/worbl/Component.js";
 import { BaseComponent } from "../../libs/worbl/BaseComponent.js";
-import { JSX, __frag } from "../../libs/worbl/JSX.js";
-import { TypeMetadataLike } from '../../../wwwroot/src/libs/worbl/types';
+import { React } from "../../libs/worbl/JSX.js";;
 
 @Header(<style type="text/css">{`
 .formatedCode {

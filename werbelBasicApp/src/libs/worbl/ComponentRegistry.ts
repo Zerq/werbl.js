@@ -1,6 +1,6 @@
-import { IOC, RegisterService } from "./IOC.js";//[[ts]]
-import { BaseComponent } from "./BaseComponent.js";//[[ts]]
-import { Ctr, BaseComponentLike, IComponentRegistry } from "./types.js";//[[ts]]
+import { IOC, RegisterService } from "./IOC.js";
+import { BaseComponent } from "./BaseComponent.js";
+import { Ctr, BaseComponentLike, IComponentRegistry } from "./types.js";
 
 
 @RegisterService(IComponentRegistry)
@@ -35,7 +35,7 @@ class ComponentRegistry implements IComponentRegistry {
     // public Register(string, )
     public static instance: ComponentRegistry;
 
-    public Has(tag): boolean {
+    public Has(tag:string): boolean {
         return this.#map.has(tag);
     }
 
@@ -59,7 +59,7 @@ class ComponentRegistry implements IComponentRegistry {
         for (let key in params) {
 
             if (key.startsWith("on")){
-                newComponent[key] = params[key];
+                (newComponent as any)[key] = params[key];
                 continue;
             }
 

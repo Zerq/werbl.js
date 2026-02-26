@@ -6,7 +6,13 @@ function install_template() {
     cd ".."
     dotnet new install $1 --force
 }
+function propLib(){
+    cd ./worblLib
+    npm run build
+}
 
+echo "---starting installation---"
+propLib
 install_template "./werbelBasicApp"
 install_template "./werblEsBuildInline"
 install_template "./werblEsBuild"

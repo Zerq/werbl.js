@@ -1,6 +1,6 @@
-import { IOC } from "./IOC.js";//[[ts]]
-import { PsudoInterface } from "./PsudoInterface.js";//[[ts]]
-import { BaseComponentLike, Ctr, IComponentRegistry } from "./types.js";//[[ts]]
+import { IOC } from "./IOC";
+import { PsudoInterface } from "./PsudoInterface";
+import { BaseComponentLike, Ctr, IComponentRegistry } from "./types";
 
 /**
  * @param queryString selector must point to a valid components container element
@@ -11,12 +11,16 @@ export function GetComponent<T>(queryString: string) {
 }
 
 export abstract class BaseComponent<T> implements BaseComponentLike<T> {
-    public Model: T;
+    public Model!: T;
     #container: HTMLElement;
 
-    #id: string;
+    #id: string | undefined;
 
     public get Id(): string {
+        if(this.#id === undefined){
+            throw Error("Component Id not assigned before request!");
+        }
+
         return this.#id;
     }
 
@@ -36,7 +40,7 @@ export abstract class BaseComponent<T> implements BaseComponentLike<T> {
     public IsInitialized: boolean = false;
 
 
-    protected children: Array<string | HTMLElement>;
+    protected children: Array<string | HTMLElement> =[];
 
     SetChildren(children: Array<string | HTMLElement>): void {
         this.children = children;
@@ -44,7 +48,7 @@ export abstract class BaseComponent<T> implements BaseComponentLike<T> {
 
     protected abstract makeContainer(): HTMLElement;
 
-    protected makeContainerDefault(ctr: Ctr<BaseComponent<any>>, params: { tagType?: string; class?: string; } = { tagType: undefined, class: undefined }): HTMLElement | undefined {
+    protected makeContainerDefault(ctr: Ctr<BaseComponent<any>>, params: { tagType?: string; class?: string; } = { tagType: undefined, class: undefined }): HTMLElement {
         this.Id = crypto.randomUUID();;
         const componentRegistry = IOC.Instance.Service(IComponentRegistry);
 
@@ -58,7 +62,7 @@ export abstract class BaseComponent<T> implements BaseComponentLike<T> {
         const tag = componentRegistry.GetTag(ctr);
 
         if (tag === undefined) {
-            return undefined;
+            throw new Error(`MakeContainrDefault could not find the specified tag "${tag}"`)
         }
 
         element.setAttribute("data-tagtype", tag);
@@ -67,7 +71,7 @@ export abstract class BaseComponent<T> implements BaseComponentLike<T> {
         return element;
     }
 
-    public abstract SetParam(name: string, value: any);
+    public abstract SetParam(name: string, value: any):void;
     public baseSetParam(name: string, value: any) {
 
     }
@@ -88,7 +92,7 @@ export abstract class BaseComponent<T> implements BaseComponentLike<T> {
         }
 
         requestAnimationFrame(() => {
-            (this as undefined as PostRenderLike).postRender?.();
+            (this as unknown as PostRenderLike).postRender?.();
         });
     }
 
@@ -99,7 +103,7 @@ export abstract class BaseComponent<T> implements BaseComponentLike<T> {
             this.#container.appendChild(view);
         }
         requestAnimationFrame(() => {
-           (this as undefined as PostRenderLike).postRender?.();
+           (this as unknown as PostRenderLike).postRender?.();
         });
     }
 }

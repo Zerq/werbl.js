@@ -1,6 +1,6 @@
 import { BaseComponent } from "../../libs/worbl/BaseComponent.js";
 import { Component } from "../../libs/worbl/Component.js";
-import { JSX } from "../../libs/worbl/JSX.js";
+import { React } from "../../libs/worbl/JSX.js";
 import { Route } from "../../libs/worbl/Router.js";
 
 type TestTypeItem = { burklax: number, blarg: boolean, splarg: string };
@@ -13,7 +13,7 @@ type TestType = {
 @Route("#changens")
 @Component("change-ns-view")
 export class NameSpaceShifting extends BaseComponent<TestType> {
-    Name: string;
+    Name = "";
 
     public constructor() {
         super();

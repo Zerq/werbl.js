@@ -5,7 +5,7 @@ import "./libs/worbl/ComponentRegistry.js";
 import "./libs/worbl/Router.js";
 import "./libs/worbl/JSX.js"
 
-import { JSX, __frag } from "./libs/worbl/JSX.js"
+import { React } from "./libs/worbl/JSX.js"
 import { CSS } from "./libs/worbl/CSS.js"
 
 import { Component } from "./libs/worbl/Component.js";
