@@ -1,9 +1,11 @@
-export { ReactNode } from "react";
 import { IOC } from "./IOC.js";//[[ts]]
 import { IComponentRegistry, IMetaDataService } from "./types.js";//[[ts]]
 class jsxContext {
     static nameSpace: string | undefined = undefined;
 }
+
+export const Fragment = Symbol.for("react.fragment");
+
 export namespace React {
 
     export function createElement(tag: string, attributes: { [name: string]: any; }, ...children: Array<string | number | boolean | bigint | Date | HTMLElement>) {
@@ -22,7 +24,7 @@ export namespace React {
         }
 
 
-        if (tag === React.JSX.Fragment) {
+        if (tag as any === Fragment) {
             const docFrag = document.createDocumentFragment();
             children.forEach(child => {
 
@@ -142,9 +144,6 @@ export namespace React {
     }
 
     export namespace JSX {
-        export const Fragment = "__frag";
-
-
         function SetNameSpace(namespace: string) {
             jsxContext.nameSpace = namespace;
         }
@@ -153,9 +152,7 @@ export namespace React {
         export interface IntrinsicElements {
             [name: string]: any;
         }
-
     }
-
 }
 
 

@@ -26,13 +26,13 @@ export class Pipe implements IPipe {
             this.#map.set(name, []);
         }
 
-        const index = this.#map.get(name).indexOf(subscriber as any);
+        const index = this.#map.get(name)!.indexOf(subscriber as any);
 
         if (index === -1) {
-            this.#map.get(name).push(subscriber as any);
+            this.#map.get(name)!.push(subscriber as any);
         }
         else {
-        (this.#map.get(name) as any)[index] = (subscriber);
+        (this.#map.get(name) as any)![index] = (subscriber);
         }
     }
 
@@ -42,10 +42,10 @@ export class Pipe implements IPipe {
             this.#map.set(name, []);
         }
 
-        const index = this.#map.get(name).indexOf(subscriber as any);
+        const index = this.#map.get(name)!.indexOf(subscriber as any);
 
         if (index !== -1) {
-            this.#map.get(name).splice(index, 1);
+            this.#map.get(name)!.splice(index, 1);
         }
     }
 
@@ -54,7 +54,7 @@ export class Pipe implements IPipe {
             this.#map.set(name, []);
         }
 
-        this.#map.get(name).forEach(sub => {
+        this.#map.get(name)!.forEach(sub => {
             sub(message);
         })
     }

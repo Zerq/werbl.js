@@ -1,7 +1,7 @@
 import { BaseComponent } from "../../BaseComponent";
 import { Component } from "../../Component";
 import { React } from "../../JSX";
-import { CSS, Header } from "../../CSS";
+import { Header } from "../../CSS";
 
 declare type Orientation = "Vertical" | "Horizontal" | "V" | "H";
 

@@ -1,7 +1,7 @@
 import { BaseComponent } from "../../BaseComponent.js";//[[ts]]
 import { Component } from "../../Component.js";//[[tsx]]
 import { React } from "../../JSX.js";//[[ts]]
-import { CSS, Header } from "../../CSS.js";//[[tsx]]
+import { Header } from "../../CSS.js";//[[tsx]]
 
 declare type Orientation = "Vertical" | "Horizontal" | "V" | "H";
 

@@ -24,15 +24,12 @@ export class Router implements IRouter {
         const keys =  Array.from(this.routeMappings.keys());
         for (let x in keys){
             let key = keys[x];
-            let val = this.routeMappings.get(key);
-
 
             const parsed = key.replaceAll(/({([^^}]*)})(.?)/g, "(?<$2>.*)");
             
             const leftOvers = hash.replace(new RegExp(parsed), "");
 
             if (leftOvers === ""){ //new RegExp(parsed).test(hash)) {
-                const params = this.Parse(key, hash);
                 const route = this.routeMappings.get(key);
                 const func = route?.func;
 
@@ -44,25 +41,18 @@ export class Router implements IRouter {
                        return false;
                     }
                     return true;
-                    break;
                 }
             }
         }
     }
 
-
     public HandleRoute(hash: string) {
-
-        
         const keys =  Array.from(this.routeMappings.keys());
         for (let x in keys){
             let key = keys[x];
-            let val = this.routeMappings.get(key);
-
 
             const parsed = key.replaceAll(/({([^^}]*)})(.?)/g, "(?<$2>.*)");
             const leftOvers = hash.replace(new RegExp(parsed), "");
-
             
             if (leftOvers === "") {
                 const params = this.Parse(key, hash);
@@ -82,8 +72,6 @@ export class Router implements IRouter {
                     break;
                 }
             }
-
-
         }
     };
 

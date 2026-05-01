@@ -1,6 +1,4 @@
-import { ReactNode } from "react";
-import { BaseComponent } from "./BaseComponent";
-import { ParamsObj, Router } from "./Router";
+import { ParamsObj } from "./Router";
 import { PsudoInterface } from "./PsudoInterface";
 import { Routmappinng } from "./Routmappinng";
 

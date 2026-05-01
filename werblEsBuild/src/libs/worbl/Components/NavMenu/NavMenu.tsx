@@ -1,6 +1,6 @@
 import { Component } from "../../Component";
 import { Header } from "../../CSS";
-import { React,ReactNode } from "../../JSX.js"//[[ts]]
+import { React } from "../../JSX.js"//[[ts]]
 import { BaseComponent } from "../../BaseComponent";
 import {  ReactElement, ReactSVGElement } from 'react';
  

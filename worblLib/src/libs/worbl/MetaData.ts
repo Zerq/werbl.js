@@ -1,5 +1,4 @@
 import { RegisterService } from "./IOC.js";//[[ts]]
-import { PsudoInterface } from "./PsudoInterface.js";//[[ts]]
 import { IMetaDataService, AnnotationDataLike,TypeMetadataLike } from "./types.js";//[[ts]]
 
 @RegisterService(IMetaDataService)

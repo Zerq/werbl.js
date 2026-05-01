@@ -1,5 +1,4 @@
 import { RegisterService } from "./IOC";
-import { PsudoInterface } from "./PsudoInterface";
 import { IMetaDataService, AnnotationDataLike,TypeMetadataLike } from "./types";
 
 @RegisterService(IMetaDataService)

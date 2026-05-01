@@ -1,13 +1,15 @@
-function install_template() {
+#!/bin/sh
+
+install_template() {
     cd $1
     npm install
     npm run build
     dotnet build
-    cd ".."
+    cd ..
     dotnet new install $1 --force
 }
-function propLib(){
-    cd ./worblLib
+propLib(){
+    cd worblLib
     npm run build
 }
 
