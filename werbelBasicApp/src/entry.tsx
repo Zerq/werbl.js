@@ -12,6 +12,7 @@ import { Component } from "./libs/worbl/Component.js";
 import "./libs/worbl/Components/NavMenu/NavMenu.js";
 import "./libs/worbl/Components/Box/Box.js";
 import "./libs/worbl/Components/TabView/TabView.js";
+import "./libs/worbl/Components/ListView/ListView.js";
 
 
 import { LinkLike, LogoPosition, BrandingDisplayMode, TitleSize } from "./libs/worbl/Components/NavMenu/NavMenu.js";
@@ -22,6 +23,7 @@ import { BasicAppRoot } from "./libs/worbl/BasicApproot.js";
 import "./Views/Home/HomeView.js";
 import "./Views/Components/ComponentsView.js";
 import "./Views/NameSpaceShifting/NameSpaceShifting.js";
+import "./Views/ListViewTest/ListViewTest.js";
 
 
 import { IRouter } from "./libs/worbl/types.js";
@@ -37,6 +39,8 @@ export class AppComponent extends BasicAppRoot {
             { Name: "Home", Url: "#home" },
             { Name: "Namespace changing", Url: "#changens" },
             { Name: "Components", Url: "#components" },
+            { Name: "ListViewtest", Url: "#listview" },
+            
             {
                 Name: "Invert", action: (e: Event) => {
                     e.preventDefault();

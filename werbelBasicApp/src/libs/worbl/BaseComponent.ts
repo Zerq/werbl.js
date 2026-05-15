@@ -76,6 +76,8 @@ export abstract class BaseComponent<T> implements BaseComponentLike<T> {
 
     }
     protected abstract View(): HTMLElement;
+ 
+
 
     public readonly RenderAsync = async () => {
         this.#container.innerHTML = "";

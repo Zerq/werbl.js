@@ -2,7 +2,7 @@ import { BaseComponent } from "../../BaseComponent.js";
 import { Component } from "../../Component.js";
 import { React } from "../../JSX.js";
 import { Header } from "../../CSS.js";
- 
+
 export interface IconLike {
     Vector?: string;
     Icon16?: string;
@@ -31,7 +31,7 @@ export interface Seleciton {
 
 export interface FieldGetter<T> {
     Title: string;
-    Getter: (item: T) => string;
+    Getter: (item: T) => any;
 }
 
 export interface ListViewModelLike<T> {
@@ -49,8 +49,7 @@ export interface ListViewModelLike<T> {
     `}</style>)
 @Component("listview")
 export class ListView<T> extends BaseComponent<ListViewModelLike<T>> {
-    protected ViewAsync?: () => Promise<HTMLElement>;
-   
+
     public constructor() {
         super();
         this.Model = {} as ListViewModelLike<T>;
@@ -61,7 +60,7 @@ export class ListView<T> extends BaseComponent<ListViewModelLike<T>> {
         return this.makeContainerDefault(ListView, { "class": "ListView" } as any);
     }
 
-    public SetParam(name: string, value: any) {      
+    public SetParam(name: string, value: any) {
         if (name.toLowerCase() === "data" && typeof (value) === "object" && Object.getPrototypeOf(value).constructor.name === "Array") {
             this.Model!.Data = value;
         }
@@ -85,26 +84,15 @@ export class ListView<T> extends BaseComponent<ListViewModelLike<T>> {
             this.Model!.RenderMode = value;
         }
 
-        if (this.IsInitialized) {
+
+        if (this.Model !== undefined && this.Model.GetIcon !== undefined && this.Model.Getters !== undefined && this.Model.IconSource !== undefined && this.Model.RenderMode !== undefined) {
             this.RenderAsync().then();
         }
     }
 
 
-    readonly #RenderAsync = async () => {
-        if (!this.Model) {
-            return <></>;
-        }
-
-        if (!this.Model.Data) {
-            return <></>;
-        }
-
-        if (!this.Model.GetIcon) {
-            return <></>;
-        }
-
-        if (!this.Model.IconSource) {
+    protected readonly ViewAsync = async () => {
+        if (!this.Model || !this.Model.Data || !this.Model.GetIcon || !this.Model.IconSource) {
             return <></>;
         }
 
@@ -116,9 +104,9 @@ export class ListView<T> extends BaseComponent<ListViewModelLike<T>> {
                     let iconPath = icon.Vector ?? icon.Icon256 ?? icon.Icon128 ?? icon.Icon64 ?? icon.Icon48 ?? icon.Icon32 ?? icon.Icon16;
                     return <div>
                         <img src={iconPath} alt={icon.Alt} />
-                        {this.Model.Getters.map(x => {
+                        {...this.Model.Getters.map(x => {
                             <span title={x.Title}>
-                                return x.Getter(n)
+                                {x.Getter(n).toString()}
                             </span>
                         })}
                     </div>;
@@ -136,7 +124,7 @@ export class ListView<T> extends BaseComponent<ListViewModelLike<T>> {
                         <img src={iconPath} alt={icon.Alt} />
                         {...this.Model.Getters.map(x => {
                             <span title={x.Title}>
-                                return x.Getter(n)
+                                {x.Getter(n).toString()}
                             </span>
                         })}
                     </div>;
@@ -150,7 +138,7 @@ export class ListView<T> extends BaseComponent<ListViewModelLike<T>> {
                     <tr>
                         {...this.Model.Getters.map(x => {
                             <td>
-                                {x.Title}
+                                {x.Title.toString()}
                             </td>
                         })}
                     </tr>
@@ -161,7 +149,7 @@ export class ListView<T> extends BaseComponent<ListViewModelLike<T>> {
 
                             {...this.Model.Getters.map(x => {
                                 <td>
-                                    return x.Getter(n)
+                                    {x.Getter(n)}
                                 </td>
                             })}
                         </tr>;
@@ -175,9 +163,9 @@ export class ListView<T> extends BaseComponent<ListViewModelLike<T>> {
 
 
     protected View(): HTMLElement {
-      
 
- 
+
+
 
         return <></>;
     }
