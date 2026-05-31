@@ -1,0 +1,16 @@
+{
+    "scripts": {
+       "build": "node nopack.mjs && gulp"
+    
+    },
+    "devDependencies": {
+        "@types/node": "24.10.2",
+        "@types/react":"19.0.8",
+        "gulp":"5.0.0",
+        "gulp-newer":"1.4.0",
+        "node":"20.19.6",
+        "node-fs":"0.1.7",
+        "typescript":"5.9.3",
+        "esbuild":"0.27.1"
+    }
+}

@@ -4,17 +4,16 @@
   "description": "SPA framework based on just core DOM features and basic typescript with basically zero dependencies only dev dependencies",
   "main": "index.js",
   "type": "module",
-  
   "scripts": {
-    "build": "tsc && gulp",
-    "buildOnly": "tsc"
-    
+    "build": "tsc && npm run esm && npm run badEsm && gulp",
+    "buildOnly": "tsc",
+    "badEsm": "dotnet run --project ../extCopy --purge ./src/libs ./dist/p",
+    "esm":    "dotnet run --project ../extCopy --cleanse ./src/libs ./dist/c"
   },
   "devDependencies": {
-  "typescript":"5.8.2",
-  "@types/react":"19.0.10",
-  "gulp":"5.0.0"
-
+    "typescript": "5.8.2",
+    "@types/react": "19.0.10",
+    "gulp": "5.0.0"
   },
   "repository": {
     "type": "git",

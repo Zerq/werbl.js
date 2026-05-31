@@ -1,0 +1,32 @@
+{
+    "compileOnSave": true, //self explanatory...  though technically it transpile on save not compile on save... but same thing... kinda
+    "compilerOptions": {
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "module": "ES2020", //here we specify which version and type of javascript module we are using i picked the latest ecmascript module.
+        "target": "ES2024", //here we specify what version of ecmascript i.e javascript we are targeting.. i like the latest and greatest personally
+        "jsx": "react", //here we specify that we are using react templates using the react formating
+     
+        "sourceMap": true, //we want to be able to debug our code and get the typescript not the generated js which may not be as readable
+        "sourceRoot": "/src",
+        "rootDir": "./src",
+        "outDir": "./wwwroot",
+
+        "allowJs": true,
+        "moduleResolution": "bundler",
+ 
+        "lib": [
+            "ES2024",
+            "DOM"
+        ], //here we specify what intelicense we want... DOM means we want a page dom model.. if we where doing nodejs that would be unessesary... also specifying the latest ecmascript verison        
+        "skipLibCheck": true
+    },
+       "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "bin/**/*",
+        "wwwroot/**/*",
+        "node_modules/**/*"
+    ]
+}

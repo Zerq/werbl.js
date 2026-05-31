@@ -3,9 +3,10 @@
 "$schema": "http://json.schemastore.org/template",
 "author": "The Confusiarch",
 "classifications": ["omnicatz", "werbl", "basic"],
-"identity": "Omnicatz.Werbl",
+"identity": "Omnicatz.Werbl.Basic",
 "name": "Omnicatz Werbl Basic",
 "shortName": "werbl",
+"sourceName": "$safeprojectname$",
 "tags": {
     "language": "C# & Typescript",
     "type": "project"

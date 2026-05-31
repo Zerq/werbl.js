@@ -2,6 +2,7 @@ import { IOC, RegisterService } from "./IOC.js";
 import { BaseComponent } from "./BaseComponent.js";
 import { Ctr, IComponentRegistry, IRouter } from "./types.js";
 import { Routmappinng } from "./Routmappinng.js";
+
 export type ParamsObj = { [key: string]: string };
 
 @RegisterService(IRouter)
@@ -16,22 +17,19 @@ export class Router implements IRouter {
         return matches?.groups!;
     }
 
-    public defaultRouteHandler?: (tag, params: ParamsObj) => void;
+    public defaultRouteHandler?: (tag: string, params: ParamsObj) => void;
 
 
     public HasMatch(hash: string): boolean {
         const keys =  Array.from(this.routeMappings.keys());
         for (let x in keys){
             let key = keys[x];
-            let val = this.routeMappings.get(key);
-
 
             const parsed = key.replaceAll(/({([^^}]*)})(.?)/g, "(?<$2>.*)");
             
             const leftOvers = hash.replace(new RegExp(parsed), "");
 
             if (leftOvers === ""){ //new RegExp(parsed).test(hash)) {
-                const params = this.Parse(key, hash);
                 const route = this.routeMappings.get(key);
                 const func = route?.func;
 
@@ -43,25 +41,20 @@ export class Router implements IRouter {
                        return false;
                     }
                     return true;
-                    break;
                 }
             }
         }
+
+        return false;
     }
 
-
     public HandleRoute(hash: string) {
-
-        
         const keys =  Array.from(this.routeMappings.keys());
         for (let x in keys){
             let key = keys[x];
-            let val = this.routeMappings.get(key);
-
 
             const parsed = key.replaceAll(/({([^^}]*)})(.?)/g, "(?<$2>.*)");
             const leftOvers = hash.replace(new RegExp(parsed), "");
-
             
             if (leftOvers === "") {
                 const params = this.Parse(key, hash);
@@ -77,12 +70,16 @@ export class Router implements IRouter {
                         throw new Error("Route not defined");
                     }
                     const tag = this.componentRegistry.GetTagByCtrName(route.ctrName);
+                   
+                    if (tag=== undefined){
+                        throw Error("tag not found");
+                    }
+
+
                     this.defaultRouteHandler?.(tag, params ? params : {});
                     break;
                 }
             }
-
-
         }
     };
 

@@ -1,0 +1,15 @@
+
+{
+"$schema": "http://json.schemastore.org/template",
+"author": "The Confusiarch",
+"classifications": ["omnicatz", "werbl", "esbuild"],
+"identity": "Omnicatz.Werbl.esbuild",
+"name": "Omnicatz Werbl Esbuild",
+"shortName": "werbles",
+"sourceName": "$safeprojectname$",
+"tags": {
+    "language": "C# & Typescript",
+    "type": "project"
+},
+"description": "A low dependency SPA solution using dotnet and typescript with react style templates routing and a component model."
+}
