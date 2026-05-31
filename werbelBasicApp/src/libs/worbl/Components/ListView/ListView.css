@@ -1,0 +1,64 @@
+ul.BigList {
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+
+    li {
+        img.icon {
+            align-self: center;
+        }
+
+        border: 0.1rem;
+        padding: 0.5rem;
+        display: flex;
+        flex-direction: column;
+
+        dl {
+            display: grid;
+            grid-template-columns: min-content min-content;
+
+            dd {
+                margin-inline: 0;
+            }
+        }
+
+        .icon {
+            width: 3rem;
+        }
+    }
+}
+
+
+
+ul.SmallList {
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+
+    li {
+        img.icon {
+            align-self: center;
+        }
+
+        border: 0.1rem;
+        padding: 0.5rem;
+        display: flex;
+        flex-direction: column;
+
+        dl {
+            display: grid;
+            grid-template-columns: min-content min-content;
+
+            dd {
+                margin-inline: 0;
+            }
+        }
+
+        .icon {
+            width: 1.5rem;
+        }
+    }
+
+}
+
+.List {}

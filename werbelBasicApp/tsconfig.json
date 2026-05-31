@@ -6,7 +6,8 @@
         "module": "ES2022", //here we specify which version and type of javascript module we are using i picked the latest ecmascript module.
         "target": "ES2024", //here we specify what version of ecmascript i.e javascript we are targeting.. i like the latest and greatest personally
         "jsx": "react", //here we specify that we are using react templates using the react formating
-      
+
+
       "sourceMap": true, //we want to be able to debug our code and get the typescript not the generated js which may not be as readable
         "sourceRoot": "/src",
         "rootDir": "./src",

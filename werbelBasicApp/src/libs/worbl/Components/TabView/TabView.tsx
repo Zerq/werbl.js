@@ -1,6 +1,6 @@
 import { BaseComponent } from "../../BaseComponent.js";
 import { Component } from "../../Component.js";
-import { React } from "../../JSX.js";
+import { React,Fragment } from "../../JSX.js";
 import { Header } from "../../CSS.js";
 
 @Header(<style id="TabView.css" type="text/css">{`.TabView {

@@ -1,13 +1,23 @@
 import { IOC } from "./IOC.js";
 import { PsudoInterface } from "./PsudoInterface.js";
 import { BaseComponentLike, Ctr, IComponentRegistry } from "./types.js";
-
+ 
 /**
  * @param queryString selector must point to a valid components container element
  * @returns instance of the component.
  */
 export function GetComponent<T>(queryString: string) {
-    return (document.querySelector(queryString) as any).Component as T;
+    const item = document.querySelector(queryString) as unknown;
+
+    if (!item){
+        return null;
+    }
+
+    if ((item as any).Component === undefined){
+        return item as T;
+    }
+
+    return (item as any).Component as T;
 }
 
 export abstract class BaseComponent<T> implements BaseComponentLike<T> {

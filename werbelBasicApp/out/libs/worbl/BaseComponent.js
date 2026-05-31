@@ -21,7 +21,14 @@ const types_js_1 = require("./types.js");
  * @returns instance of the component.
  */
 function GetComponent(queryString) {
-    return document.querySelector(queryString).Component;
+    const item = document.querySelector(queryString);
+    if (!item) {
+        return null;
+    }
+    if (item.Component === undefined) {
+        return item;
+    }
+    return item.Component;
 }
 class BaseComponent {
     get Id() {

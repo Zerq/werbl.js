@@ -1,5 +1,5 @@
 import { Component } from "../../Component.js";
-import { Header } from "../../CSS.js";
+import { /*Header,*/ CSS } from "../../CSS.js";
 import { React } from "../../JSX.js"//[[ts]]
 import { BaseComponent } from "../../BaseComponent.js";
 import {  ReactElement, ReactSVGElement } from 'react';
@@ -27,21 +27,21 @@ export interface MenuDataLike {
 
 
 
-@Header(<style id="NavMenu.css" type="text/css">{`h1.IconBelow {
-         img {
-             display: block;
-             margin-inline: auto;
-         }
-     }
+// @Header(<style id="NavMenu.css" type="text/css">{`h1.IconBelow {
+//          img {
+//              display: block;
+//              margin-inline: auto;
+//          }
+//      }
 
-     h1.IconAbove {
-         img {
-             display: block;
-             margin-inline: auto;
-         }
-     }`}</style>)
+//      h1.IconAbove {
+//          img {
+//              display: block;
+//              margin-inline: auto;
+//          }
+//      }`}</style>)
 @Component("navbox")
-//@CSS("/libs/worbl/Components/NavMenu/NavMenu.css")
+@CSS("./NavMenu.css", import.meta)
 export class NavMenu extends BaseComponent<MenuDataLike> {
     protected ViewAsync?: () => Promise<HTMLElement>;
 

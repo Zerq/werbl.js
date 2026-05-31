@@ -20,7 +20,9 @@ var React;
             }
             return;
         }
-        if (tag === exports.Fragment) {
+        ///this is a bit of a dirty hack figure out where there freaking fragment is supposed to go... obviously i got this one wrong in trying to replicate the react structure properly...
+        /// which i did as part of stuffing in the while intrincist component reference and all that jazz to get thing  to work a bit more neatly....  fully understanding the react factory is kinda tricky...
+        if (tag === exports.Fragment || tag === undefined) {
             const docFrag = document.createDocumentFragment();
             children.forEach(child => {
                 if (!child) {

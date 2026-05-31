@@ -44,6 +44,8 @@ export class Router implements IRouter {
                 }
             }
         }
+
+        return false;
     }
 
     public HandleRoute(hash: string) {
@@ -68,6 +70,12 @@ export class Router implements IRouter {
                         throw new Error("Route not defined");
                     }
                     const tag = this.componentRegistry.GetTagByCtrName(route.ctrName);
+                   
+                    if (tag=== undefined){
+                        throw Error("tag not found");
+                    }
+
+
                     this.defaultRouteHandler?.(tag, params ? params : {});
                     break;
                 }
