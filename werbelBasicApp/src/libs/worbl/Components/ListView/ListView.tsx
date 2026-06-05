@@ -5,7 +5,9 @@ import { CSS } from "../../CSS.js";
 
 export interface IconLike {
     Vector?: string;
+    Icon8?: string;    
     Icon16?: string;
+    Icon22?: string;
     Icon32?: string;
     Icon48?: string;
     Icon64?: string;
