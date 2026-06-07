@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.StaticFiles;
 
 
 
+
+
 public class DirectoryController : Controller
 {
 
@@ -76,7 +78,7 @@ public class DirectoryController : Controller
     {
         return new
         {
-            path = str,
+            Path = str,
             Context = ini[str, "Context"],
             Size = parseInt(ini[str, "Size"]),
             MinSize = parseInt(ini[str, "MinSize"]),
@@ -85,29 +87,88 @@ public class DirectoryController : Controller
             Scale = parseInt(ini[str, "Scale"]),
         };
     }
-    private dynamic makeDirectories(IniFile ini)
+    private Dictionary<string, IEnumerable<IIcon>> makeDirectories(IniFile ini, string theme)
     {
         var dirs = ini[iconThemeSection, "Directories"]?.Split(",").Select(n => makeSection(n, ini));
 
-        IDictionary<string, dynamic?> obj = new Dictionary<string, dynamic?>();
+        Dictionary<string, IEnumerable<IIcon>> result = new Dictionary<string, IEnumerable<IIcon>>();
+
+
+
 
         if (dirs != null)
-            foreach (var dir in dirs)
-            {
+        {
 
-                if (dir.Context != null)
+            foreach (var context in dirs.Where(n => n.Context != null).Select(n => n.Context as string).Distinct())
+            {
+                var icons = new List<IIcon>();
+                var iconsPath = $"{homePath}/.icons/{theme}/{dirs.First(n => n.Context == context).Path}";
+                var fileNames = new DirectoryInfo(iconsPath).GetFiles().Select(n => n.Name);
+
+                IDictionary<string, IEnumerable<string>> files = new Dictionary<string, IEnumerable<string>>();
+                result.Add(context, icons);
+
+                foreach (var fileName in fileNames)
                 {
-                    if (!obj.ContainsKey(dir.Context))
+                    IIcon icon = new Icon(fileName);
+                
+                    foreach (var dir in dirs.Where(n => n.Context == context))
                     {
-                        obj.Add(dir.Context, new List<dynamic>());
+
+
+                        var dirIconsPath = $"{homePath}/.icons/{theme}/{dir.Path}/{fileName}";
+                        if (System.IO.File.Exists(dirIconsPath))
+                        {
+                            switch (dir.Size)
+                            {
+                                case 8: icon.Icon8 = dirIconsPath; break;
+                                case 16: icon.Icon16 = dirIconsPath; break;
+                                case 22: icon.Icon22 = dirIconsPath; break;
+                                case 24: icon.Icon24 = dirIconsPath; break;
+                                case 32: icon.Icon32 = dirIconsPath; break;
+                                case 48: icon.Icon48 = dirIconsPath; break;
+                                case 64: icon.Icon64 = dirIconsPath; break;
+                                case 128: icon.Icon128 = dirIconsPath; break;
+                                case 256: icon.Icon256 = dirIconsPath; break;
+                            }
+                        }
                     }
-                    
-                    obj[dir.Context]?.Add(dir);
- 
+                    icons.Add(icon);
                 }
+
             }
 
-        return obj;
+
+
+
+
+
+            // foreach (var dir in dirs)
+            // {
+
+            //     if (dir.Context != null && !files.ContainsKey(dir.Context))
+            //     {
+            //         var iconsPath = $"{homePath}/.icons/{theme}/{dir.Path}";
+            //         var fileNames = new DirectoryInfo(iconsPath).GetFiles().Select(n => n.FullName);
+            //         files.Add(dir.Context, fileNames);
+            //     }
+
+
+            //     if (dir.Context != null)
+            //     {
+            //         if (!obj.ContainsKey(dir.Context))
+            //         {
+            //             obj.Add(dir.Context, new List<dynamic>());
+            //         }
+
+            //         obj[dir.Context]?.Add(dir);
+
+            //     }
+            // }
+        }
+
+
+        return result;
 
     }
 
@@ -136,7 +197,7 @@ public class DirectoryController : Controller
                 return defaultTheme;
             }
 
-            defaultTheme = BashRunner.RunCommand("gsettings get org.cinnamon.desktop.interface icon-theme");
+            defaultTheme = BashRunner.RunCommand("gsettings get org.cinnamon.desktop.interface icon-theme").Replace("\n", "").Replace("'", "");
 
             return defaultTheme;
         }
@@ -191,30 +252,29 @@ public class DirectoryController : Controller
             }
 
             var ini = new IniFile(resultingPath);
- 
 
-            var res = new
-            {
-                Name = ini[iconThemeSection, "name"],
-                Comment = ini[iconThemeSection, "Comment"],
-                Inherits = ini[iconThemeSection, "Inherits"],
-                FollowsColorScheme = ini[iconThemeSection, "FollowsColorScheme"],
-                KdeExtensions = ini[iconThemeSection, "KDE-Extensions"],
-                DisplayDepth = ini[iconThemeSection, "DisplayDepth"],
-                DesktopDefault = parseInt(ini[iconThemeSection, "DisplayDepth"]),
-                DesktopSizes = parseIntArray(ini[iconThemeSection, "DesktopSizes"]),
-                ToolbarDefault = parseInt(ini[iconThemeSection, "ToolbarDefault"]),
-                ToolbarSizes = parseIntArray(ini[iconThemeSection, "ToolbarSizes"]),
-                MainToolbarDefault = parseInt(ini[iconThemeSection, "MainToolbarDefault"]),
-                MainToolbarSizes = parseIntArray(ini[iconThemeSection, "MainToolbarSizes"]),
-                SmallDefault = parseInt(ini[iconThemeSection, "SmallDefault"]),
-                SmallSizes = parseIntArray(ini[iconThemeSection, "SmallSizes"]),
-                PanelDefault = parseInt(ini[iconThemeSection, "PanelDefault"]),
-                PanelSizes = parseIntArray(ini[iconThemeSection, "PanelSizes"]),
-                DialogDefault = parseInt(ini[iconThemeSection, "DialogDefault"]),
-                DialogSizes = parseIntArray(ini[iconThemeSection, "DialogSizes"]),
-                Directory = makeDirectories(ini)
-            };
+
+            var res = new IconMetaData(
+                Name:  ini[iconThemeSection, "name"],
+                Comment: ini[iconThemeSection, "Comment"],
+                Inherits:  ini[iconThemeSection, "Inherits"],
+                FollowsColorScheme: Boolean.Parse(ini[iconThemeSection, "FollowsColorScheme"]),
+                KdeExtensions: ini[iconThemeSection, "KDE-Extensions"],
+                DisplayDepth: parseInt(ini[iconThemeSection, "DisplayDepth"]),
+                DesktopDefault: parseInt(ini[iconThemeSection, "DisplayDepth"]),
+                DesktopSizes: parseIntArray(ini[iconThemeSection, "DesktopSizes"]),
+                ToolbarDefault: parseInt(ini[iconThemeSection, "ToolbarDefault"]),
+                ToolbarSizes: parseIntArray(ini[iconThemeSection, "ToolbarSizes"]),
+                MainToolbarDefault: parseInt(ini[iconThemeSection, "MainToolbarDefault"]),
+                MainToolbarSizes: parseIntArray(ini[iconThemeSection, "MainToolbarSizes"]),
+                SmallDefault: parseInt(ini[iconThemeSection, "SmallDefault"]),
+                SmallSizes: parseIntArray(ini[iconThemeSection, "SmallSizes"]),
+                PanelDefault: parseInt(ini[iconThemeSection, "PanelDefault"]),
+                PanelSizes: parseIntArray(ini[iconThemeSection, "PanelSizes"]),
+                DialogDefault: parseInt(ini[iconThemeSection, "DialogDefault"]),
+                DialogSizes: parseIntArray(ini[iconThemeSection, "DialogSizes"]),
+                Directory: makeDirectories(ini, theme)
+            );
 
 
 
