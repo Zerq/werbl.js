@@ -12,6 +12,7 @@ public interface IIcon
     string? Icon128 { get; set; }
     string? Icon256 { get; set; }
 }
+ 
 
 public class Icon : IIcon
 {

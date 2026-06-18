@@ -39,7 +39,7 @@ public class DirectoryController : Controller
 
 
 
-    [HttpGet("/icons")]
+    [HttpGet("/api/icons")]
     public JsonResult index()
     {
         if (homePath != null)
@@ -204,13 +204,19 @@ public class DirectoryController : Controller
     }
 
 
-    [HttpGet("/default-icons/default")]
+    [HttpGet("/api/default-icons/default")]
     public string getDefaultIcon()
     {
         return DefaultTheme;
     }
 
-    [HttpGet("/icons/{theme}/{path}")]
+    [HttpGet("/api/defaulticontheme")]
+    public JsonResult DefaultThemeMetadata()
+    {
+     return index(this.getDefaultIcon());
+    }
+
+    [HttpGet("/api/icons/{theme}/{path}")]
     public FileResult GetIcon(string theme, string path)
     {
         if (homePath == null)
@@ -234,7 +240,7 @@ public class DirectoryController : Controller
         return File(bytes, lookup[file.Extension]);
     }
 
-    [HttpGet("/icons/{theme}")]
+    [HttpGet("/api/icons/{theme}")]
     public JsonResult index(string theme)
     {
         if (homePath != null)
@@ -311,7 +317,7 @@ public class DirectoryController : Controller
     }
 
 
-    [HttpGet("/files/{path}")]
+    [HttpGet("/api/files/{path}")]
     public JsonResult GetDirectory(string path)
     {
 

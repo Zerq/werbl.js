@@ -4,8 +4,9 @@ import { React } from "../../JSX.js";
 import { CSS } from "../../CSS.js";
 
 export interface IconLike {
+    name?: string,
     Vector?: string;
-    Icon8?: string;    
+    Icon8?: string;
     Icon16?: string;
     Icon22?: string;
     Icon32?: string;
@@ -15,6 +16,41 @@ export interface IconLike {
     Icon256?: string;
     Alt: string;
 }
+
+export interface IconMetaDataLike {
+    Name?: string;
+    Comment?: string;
+    Inherits?: string;
+    FollowsColorScheme?: boolean;
+    KdeExtensions?: string;
+    DisplayDepth?: number;
+    DesktopDefault?: number;
+    DesktopSizes?: Array<number>
+    ToolbarDefault?: number;
+    ToolbarSizes?: Array<number>;
+    MainToolbarDefault?: number;
+    MainToolbarSizes?: Array<number>;
+    SmallDefault?: number;
+    SmallSizes?: Array<number>;
+    PanelDefault?: number;
+    PanelSizes?: Array<number>;
+    DialogDefault?: number;
+    DialogSizes?: Array<number>;
+    Directory?: { [name: string]: IconLike };
+}
+
+
+
+export interface ListViewModelLike<T> {
+    IconSource: IconSouceLikeLike;
+    RenderMode: ListViewRenderMode;
+    Data: Array<T>;
+    Getters: Array<FieldGetter<T>>;
+    Selection: Selection;
+    GetIcon: (item: T) => string;
+}
+
+
 
 export interface IconSouceLikeLike {
     GetIcon(key: string): Promise<IconLike>;
@@ -36,14 +72,7 @@ export interface FieldGetter<T> {
     Getter: (item: T) => any;
 }
 
-export interface ListViewModelLike<T> {
-    IconSource: IconSouceLikeLike;
-    RenderMode: ListViewRenderMode;
-    Data: Array<T>;
-    Getters: Array<FieldGetter<T>>;
-    Selection: Selection;
-    GetIcon: (item: T) => string;
-}
+
 
 // @Header(<style id="listview.css" type="text/css">{`
 //     `}</style>)
@@ -66,7 +95,7 @@ export class ListView<T> extends BaseComponent<ListViewModelLike<T>> {
         if (name.toLowerCase() === "id") {
             this.Container.id = value;
         }
-        
+
         if (name.toLowerCase() === "class") {
             this.Container.className = value;
         }
