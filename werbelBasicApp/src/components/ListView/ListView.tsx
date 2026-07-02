@@ -1,10 +1,10 @@
-import { BaseComponent } from "../../BaseComponent.js";
-import { Component } from "../../Component.js";
-import { React } from "../../JSX.js";
-import { CSS } from "../../CSS.js";
+import { BaseComponent } from "../../libs/worbl/BaseComponent.js";
+import { Component } from "../../libs/worbl/Component.js";
+import { React } from "../../libs/worbl/JSX.js";
+import { CSS } from "../../libs/worbl/CSS.js";
 
 export interface IconLike {
-    name?: string,
+    Name?: string,
     Vector?: string;
     Icon8?: string;
     Icon16?: string;
@@ -36,7 +36,7 @@ export interface IconMetaDataLike {
     PanelSizes?: Array<number>;
     DialogDefault?: number;
     DialogSizes?: Array<number>;
-    Directory?: { [name: string]: IconLike };
+    Directory?: { [name: string]: Array<IconLike> };
 }
 
 
@@ -90,6 +90,15 @@ export class ListView<T> extends BaseComponent<ListViewModelLike<T>> {
         return this.makeContainerDefault(ListView, { "class": "ListView" } as any);
     }
 
+    public set  IconSource(source:IconSouceLikeLike){
+        if (!this.Model){
+            throw new Error("model not defined");            
+        }
+        this.Model.IconSource = source;
+    }
+
+    public IconPathModifier = (path:string)=> path;
+
     public SetParam(name: string, value: any) {
 
         if (name.toLowerCase() === "id") {
@@ -98,6 +107,10 @@ export class ListView<T> extends BaseComponent<ListViewModelLike<T>> {
 
         if (name.toLowerCase() === "class") {
             this.Container.className = value;
+        }
+
+        if (name.toLocaleLowerCase() === "iconpathmodifier"){
+            this.IconPathModifier = value;
         }
 
         if (name.toLowerCase() === "data" && typeof (value) === "object" && Object.getPrototypeOf(value).constructor.name === "Array") {
@@ -139,7 +152,7 @@ export class ListView<T> extends BaseComponent<ListViewModelLike<T>> {
                 {... await this.Model.Data.map(async n => {
                     const key = this.Model.GetIcon(n);
                     const icon = await this.Model.IconSource.GetIcon(key);
-                    const iconPath = icon.Vector ?? icon.Icon256 ?? icon.Icon128 ?? icon.Icon64 ?? icon.Icon48 ?? icon.Icon32 ?? icon.Icon16;
+                    const iconPath = this.IconPathModifier(icon.Vector ?? icon.Icon256 ?? icon.Icon128 ?? icon.Icon64 ?? icon.Icon48 ?? icon.Icon32 ?? icon.Icon16?? "");
                     return <li>
                         <img class="icon" src={iconPath} alt={icon.Alt} />
                         <dl>
@@ -147,8 +160,14 @@ export class ListView<T> extends BaseComponent<ListViewModelLike<T>> {
                                 const title = x.Title;
                                 const content = x.Getter(n).toString();
 
+                                const titleHider:any = {};
+                                if (title === ""){
+                                    titleHider.style ="display:none";
+                                }
+                                 
+
                                 return <>
-                                    <dt>{title}:</dt>
+                                    <dt {...titleHider}>{title}:</dt>
                                     <dd>{content}</dd>
                                 </>;
                             })}
@@ -171,8 +190,14 @@ export class ListView<T> extends BaseComponent<ListViewModelLike<T>> {
                                 const title = x.Title;
                                 const content = x.Getter(n).toString();
 
+                                const titleHider:any = {};
+                                if (title === ""){
+                                    titleHider.style ="display:none";
+                                }
+                                 
+
                                 return <>
-                                    <dt>{title}:</dt>
+                                    <dt {...titleHider}>{title}:</dt>
                                     <dd>{content}</dd>
                                 </>;
                             })}

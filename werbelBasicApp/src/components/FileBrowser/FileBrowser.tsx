@@ -11,14 +11,19 @@ export function Frame(): Promise<void> {
     });
 }
 
-import { type ListView, IconSouceLikeLike, IconLike } from "../../libs/worbl/Components/ListView/ListView.js";
+import { type ListView, IconSouceLikeLike, IconLike, ListViewRenderMode, FieldGetter, IconMetaDataLike } from "../ListView/ListView.js";
 
 
+type FsType = "File" | "Directory";
 
-
-export interface FileInfoLike {
+export interface FsTypeLike {
     Name: string,
+    Type: FsType,
     FullName: string,
+}
+
+export interface FileInfoLike extends FsTypeLike {
+    Type: "File"
     Length: number,
     Extension: string,
     Mime: string,
@@ -27,9 +32,8 @@ export interface FileInfoLike {
     LastWriteTime: Date
 }
 
-export interface DirectoryInfoLike {
-    Name: string,
-    FullName: string,
+export interface DirectoryInfoLike extends FsTypeLike {
+    Type: "Directory"
     Parent?: DirectoryInfoLike,
     Directories?: Array<DirectoryInfoLike>
     Files?: Array<FileInfoLike>
@@ -37,40 +41,59 @@ export interface DirectoryInfoLike {
 
 
 export class IconSource implements IconSouceLikeLike {
-    #map = new Map<string, IconLike>();
-
-    #defaultTheme?: string = undefined;
+    #defaultTheme?: IconMetaDataLike = undefined;
 
     readonly #getDefaultTheme = async () => {
         if (!this.#defaultTheme) {
-            const request = await fetch(location.origin + "/default-icons/default");
-            this.#defaultTheme = await request.text();
+            const request = await fetch(location.origin + "/api/defaulticontheme");
+            this.#defaultTheme = await request.json() as IconMetaDataLike;
+
+            // if (this.#defaultTheme.Directory && this.#defaultTheme.Directory.MimeTypes) {
+            //     this.#defaultTheme.Directory.MimeTypes.forEach(i => {
+            //         if (i !== undefined && i.Name !== undefined) {
+            //             this.#map.set(i.Name, i);
+            //         }
+            //     });
+            // }
+
             return this.#defaultTheme;
         }
+
         return this.#defaultTheme;
     };
 
 
- 
+    public async Initialize() {
+        await this.#getDefaultTheme();
+    }
 
 
     public readonly GetIcon = async (key: string) => {
-
+        const [section, name] = key.split("+");
         const theme = await this.#getDefaultTheme();
 
-
-
-
-
-        if (this.#map.has(key)) {
-            return this.#map!.get(key)!;
+        if (theme.Directory === undefined) {
+            throw Error("cant find theme");
         }
 
-        await Frame();
+        if (
+            theme.Directory?.[section] === undefined
+            ||
+            theme.Directory![section].find(n => n.Name === name) === undefined
+        ) {
 
-        return {} as unknown as IconLike;
 
 
+            const fallback = theme.Directory!.MimeTypes!.find(n => n.Name === "gnome-fs-regular.svg");
+            if (!fallback) {
+                throw new Error("Defalt fallback file icon not found");
+            }
+
+            return fallback;
+
+        }
+
+        return theme.Directory![section].find(n => n.Name === name)!;
     };
 
 }
@@ -81,13 +104,12 @@ export class FileBrowser extends BaseComponent<DirectoryInfoLike> {
 
     public constructor() {
         super();
-
-
-
-
     }
 
     #iconSource = new IconSource();
+    #iconPathTransformer = (path: string) => {
+        return `${location.origin}/api/deficons/${encodeURIComponent(path)}`;
+    };
 
 
     protected makeContainer(): HTMLElement {
@@ -102,18 +124,71 @@ export class FileBrowser extends BaseComponent<DirectoryInfoLike> {
     }
 
     //  #iconSource = new IconSource();
+    #getters = new Array<FieldGetter<FileInfoLike | DirectoryInfoLike>>(
+        {
+            Title: "",
+            Getter: n => n?.Name
+        }
+    );
+
+    readonly #getIcon = (t: FileInfoLike | DirectoryInfoLike) => {
+        if (t.Type === "Directory") {
+            return "Places+folder.svg";
+        }
+
+        return "Mimetypes+" + ((t as FileInfoLike)?.Mime?.replace("\/", "_") ?? "application-x-zerosize");
+    };
 
     protected readonly ViewAsync = async () => {
 
+        await this.#iconSource.Initialize();
+
+
         if (this.Model) {
 
-            return <list-view>
+
+            console.log("filebrowser render list", IconSource, this.Model);
+
+            const temp: Array<DirectoryInfoLike | FileInfoLike> = [];
+
+            if (this.Model) {
+
+                this.Model.Directories?.forEach(n => {
+                    if (n) {
+                        temp.push(n);
+                    }
+                });
+
+                this.Model.Files?.forEach(n => {
+                    if (n) { temp.push(n); }
+                });
+
+                temp.sort((a, b) => a.Type.localeCompare(b.Type) || a.Name.localeCompare(b.Name));
+
+            }
+
+
+
+
+
+            return <listview
+                class="listView1"
                 iconsource={this.#iconSource}
-            </list-view>;
+                iconpathmodifier={this.#iconPathTransformer}
+                rendermode={("Big" as ListViewRenderMode)}
+                data={temp}
+                getters={this.#getters}
+                geticon={this.#getIcon}
+            ></listview>;
+
+
+
 
 
         }
 
+
+        console.log("filebrowser renderNull")
         return <></>;
     };
 
@@ -131,9 +206,9 @@ export class FileBrowser extends BaseComponent<DirectoryInfoLike> {
             await Frame();
 
 
-
-            const request = await fetch(location.origin + "/files/%2Fhome%2Farch%2Ffirestorm");
-            this.Model = await request.json() as DirectoryInfoLike;
+            //  const url = location.origin + "/api/files/%2Fhome%2Farch%2F.firestorm_x64";
+            // const request = await fetch(url);
+            // this.Model = await request.json() as DirectoryInfoLike;
             await this.RenderAsync();
         };
 

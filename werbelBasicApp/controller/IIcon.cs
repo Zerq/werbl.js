@@ -1,6 +1,6 @@
 public interface IIcon
 {
-    string Name { get; set; }
+    string? Name { get; set; }
     string? Vector { get; set; }
     string? Icon8 { get; set; }
     string? Icon16 { get; set; }
@@ -17,7 +17,7 @@ public interface IIcon
 public class Icon : IIcon
 {
     public Icon(string name) { this.Name = name; }
-    public string Name { get; set; }
+    public string? Name { get; set; }
     public string? Vector { get; set; }
     public string? Icon8 { get; set; }
     public string? Icon16 { get; set; }
@@ -33,7 +33,7 @@ public class Icon : IIcon
 
 public interface IIconMetaData
 {
-    string Name { get; set; }
+    string? Name { get; set; }
     string? Comment { get; set; }
     string? Inherits { get; set; }
     bool? FollowsColorScheme { get; set; }
@@ -56,7 +56,6 @@ public interface IIconMetaData
 
 public class IconMetaData : IIconMetaData
 {
-
     public string? Name { get; set; }
     public string? Comment { get; set; }
     public string? Inherits { get; set; }
@@ -75,7 +74,7 @@ public class IconMetaData : IIconMetaData
     public IEnumerable<int>? PanelSizes { get; set; }
     public int? DialogDefault { get; set; }
     public IEnumerable<int>? DialogSizes { get; set; }
-    public IDictionary<string, IEnumerable<IIcon>>? Directory { get; set; }
+    public IDictionary<string, IEnumerable<IIcon>> Directory { get; set; } = new Dictionary<string, IEnumerable<IIcon>>();
 
     public IconMetaData(
     string? Name,
@@ -96,7 +95,7 @@ public class IconMetaData : IIconMetaData
     IEnumerable<int>? PanelSizes,
     int? DialogDefault,
     IEnumerable<int>? DialogSizes,
-    IDictionary<string,IEnumerable<IIcon>>? Directory
+    IDictionary<string,IEnumerable<IIcon>> Directory
     )
     {
         this.Name = Name;

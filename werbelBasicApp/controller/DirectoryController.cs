@@ -3,6 +3,7 @@ using System.Data;
 using System.Diagnostics.CodeAnalysis;
 using System.Dynamic;
 using System.Text.Encodings.Web;
+using System.Text.Json;
 using System.Web;
 using INIParser;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +12,19 @@ using Microsoft.AspNetCore.StaticAssets;
 using Microsoft.AspNetCore.StaticFiles;
 
 
+public class AsIsNamingPolicy : JsonNamingPolicy
+{
+    public override string ConvertName(string name) => name;
+}
 
 
 
 public class DirectoryController : Controller
 {
+
+
+
+
 
 
     private string? homePath
@@ -101,6 +110,12 @@ public class DirectoryController : Controller
 
             foreach (var context in dirs.Where(n => n.Context != null).Select(n => n.Context as string).Distinct())
             {
+
+                if (context == null)
+                {
+                    continue;
+                }
+
                 var icons = new List<IIcon>();
                 var iconsPath = $"{homePath}/.icons/{theme}/{dirs.First(n => n.Context == context).Path}";
                 var fileNames = new DirectoryInfo(iconsPath).GetFiles().Select(n => n.Name);
@@ -111,7 +126,7 @@ public class DirectoryController : Controller
                 foreach (var fileName in fileNames)
                 {
                     IIcon icon = new Icon(fileName);
-                
+
                     foreach (var dir in dirs.Where(n => n.Context == context))
                     {
 
@@ -178,7 +193,7 @@ public class DirectoryController : Controller
 
     private Dictionary<string, string> lookup = new Dictionary<string, string>
     {
-        {".svg","text/svg"},
+        {".svg","image/svg+xml"},
         {".png","image/png"},
         {".jpeg","image/jpeg"},
         {".jpg","image/jpeg"},
@@ -204,7 +219,7 @@ public class DirectoryController : Controller
     }
 
 
-    [HttpGet("/api/default-icons/default")]
+    [HttpGet("/api/default-icons")]
     public string getDefaultIcon()
     {
         return DefaultTheme;
@@ -213,7 +228,7 @@ public class DirectoryController : Controller
     [HttpGet("/api/defaulticontheme")]
     public JsonResult DefaultThemeMetadata()
     {
-     return index(this.getDefaultIcon());
+        return index(this.getDefaultIcon());
     }
 
     [HttpGet("/api/icons/{theme}/{path}")]
@@ -237,7 +252,14 @@ public class DirectoryController : Controller
         }
 
         var bytes = System.IO.File.ReadAllBytes(resultingPath);
-        return File(bytes, lookup[file.Extension]);
+        return File(bytes, lookup[file.Extension],file.Name, true);
+    }
+
+
+    [HttpGet("/api/deficons/{path}")]
+    public FileResult GetDefaultIcon(string path)
+    {
+       return GetIcon(DefaultTheme, path);
     }
 
     [HttpGet("/api/icons/{theme}")]
@@ -259,12 +281,14 @@ public class DirectoryController : Controller
 
             var ini = new IniFile(resultingPath);
 
+            var colorschemeRaw = ini[iconThemeSection, "FollowsColorScheme"];
+
 
             var res = new IconMetaData(
-                Name:  ini[iconThemeSection, "name"],
+                Name: ini[iconThemeSection, "name"],
                 Comment: ini[iconThemeSection, "Comment"],
-                Inherits:  ini[iconThemeSection, "Inherits"],
-                FollowsColorScheme: Boolean.Parse(ini[iconThemeSection, "FollowsColorScheme"]),
+                Inherits: ini[iconThemeSection, "Inherits"],
+                FollowsColorScheme: colorschemeRaw != null ? Boolean.Parse(colorschemeRaw) : null,
                 KdeExtensions: ini[iconThemeSection, "KDE-Extensions"],
                 DisplayDepth: parseInt(ini[iconThemeSection, "DisplayDepth"]),
                 DesktopDefault: parseInt(ini[iconThemeSection, "DisplayDepth"]),
@@ -292,7 +316,11 @@ public class DirectoryController : Controller
 
 
 
-            return new JsonResult(res);
+            return new JsonResult(res, new JsonSerializerOptions
+        {
+            PropertyNamingPolicy =new  AsIsNamingPolicy()
+
+        });
 
         }
 
@@ -321,6 +349,7 @@ public class DirectoryController : Controller
     public JsonResult GetDirectory(string path)
     {
 
+
         path = HttpUtility.UrlDecode(path);
         var dir = new DirectoryInfo(path);
 
@@ -331,6 +360,7 @@ public class DirectoryController : Controller
             Directories = dir.GetDirectories().Select(n => new
             {
                 n.Name,
+                Type="Directory",
                 n.FullName,
             }),
             Parent = dir.Parent != null ? new
@@ -342,6 +372,7 @@ public class DirectoryController : Controller
             {
                 n.Name,
                 n.FullName,
+                Type="File",
                 n.Length,
                 n.Extension,
                 Mime = getMime(n),
@@ -352,7 +383,11 @@ public class DirectoryController : Controller
         };
 
 
-        return new JsonResult(obj);
+        return new JsonResult(obj, new JsonSerializerOptions
+        {
+            PropertyNamingPolicy =new  AsIsNamingPolicy()
+
+        });
     }
 
 
