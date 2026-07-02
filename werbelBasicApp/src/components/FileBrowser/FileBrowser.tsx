@@ -98,7 +98,7 @@ export class IconSource implements IconSouceLikeLike {
 
 }
 
-
+@CSS("./FileBrowser.css")
 @Component("file-browser")
 export class FileBrowser extends BaseComponent<DirectoryInfoLike> {
 
@@ -116,8 +116,12 @@ export class FileBrowser extends BaseComponent<DirectoryInfoLike> {
         return this.makeContainerDefault(FileBrowser, { class: "FileBrowser" });
     }
     public SetParam(name: string, value: any): void {
-        if (name === "model") {
+        if (name.toLowerCase() === "model") {
             this.Model = value;
+            this.RenderAsync();
+        }
+        if (name.toLocaleLowerCase() === "rendermode") {
+            this.RenderMode = value;
             this.RenderAsync();
         }
 
@@ -127,7 +131,7 @@ export class FileBrowser extends BaseComponent<DirectoryInfoLike> {
     #getters = new Array<FieldGetter<FileInfoLike | DirectoryInfoLike>>(
         {
             Title: "",
-            Getter: n => n?.Name
+            Getter: n => n.Type === "Directory" ? `[${n?.Name}]` : n?.Name
         }
     );
 
@@ -139,82 +143,51 @@ export class FileBrowser extends BaseComponent<DirectoryInfoLike> {
         return "Mimetypes+" + ((t as FileInfoLike)?.Mime?.replace("\/", "_") ?? "application-x-zerosize");
     };
 
+    public RenderMode: ListViewRenderMode = "Big";
+
     protected readonly ViewAsync = async () => {
 
         await this.#iconSource.Initialize();
+        await Frame();
 
-
-        if (this.Model) {
-
-
-            console.log("filebrowser render list", IconSource, this.Model);
-
-            const temp: Array<DirectoryInfoLike | FileInfoLike> = [];
-
-            if (this.Model) {
-
-                this.Model.Directories?.forEach(n => {
-                    if (n) {
-                        temp.push(n);
-                    }
-                });
-
-                this.Model.Files?.forEach(n => {
-                    if (n) { temp.push(n); }
-                });
-
-                temp.sort((a, b) => a.Type.localeCompare(b.Type) || a.Name.localeCompare(b.Name));
-
-            }
-
-
-
-
-
-            return <listview
-                class="listView1"
-                iconsource={this.#iconSource}
-                iconpathmodifier={this.#iconPathTransformer}
-                rendermode={("Big" as ListViewRenderMode)}
-                data={temp}
-                getters={this.#getters}
-                geticon={this.#getIcon}
-            ></listview>;
-
-
-
-
-
+        if (!this.Model) {
+            return <></>;
         }
 
 
-        console.log("filebrowser renderNull")
-        return <></>;
+        console.log("filebrowser render list", IconSource, this.Model);
+        const temp: Array<DirectoryInfoLike | FileInfoLike> = [];
+
+
+        this.Model.Directories?.forEach(n => {
+            if (n) {
+                temp.push(n);
+            }
+        });
+
+        this.Model.Files?.forEach(n => {
+            if (n) { temp.push(n); }
+        });
+
+        temp.sort((a, b) => a.Type.localeCompare(b.Type) || a.Name.localeCompare(b.Name));
+
+        return <listview
+            class="listView1"
+            iconsource={this.#iconSource}
+            iconpathmodifier={this.#iconPathTransformer}
+            rendermode={this.RenderMode}
+            data={temp}
+            getters={this.#getters}
+            geticon={this.#getIcon}
+        ></listview>;
     };
 
-
-
-
-
-
-
-
     protected View(): any {
-
-
         const load = async () => {
             await Frame();
-
-
-            //  const url = location.origin + "/api/files/%2Fhome%2Farch%2F.firestorm_x64";
-            // const request = await fetch(url);
-            // this.Model = await request.json() as DirectoryInfoLike;
             await this.RenderAsync();
         };
-
         load().then();
-
-
         return <></>;
     }
 

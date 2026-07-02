@@ -182,7 +182,7 @@ export class ListView<T> extends BaseComponent<ListViewModelLike<T>> {
                 {...await this.Model.Data.map(async n => {
                     let key = this.Model.GetIcon(n);
                     let icon = await this.Model.IconSource.GetIcon(key);
-                    let iconPath = icon.Vector ?? icon.Icon48 ?? icon.Icon32 ?? icon.Icon16;
+                    let iconPath = this.IconPathModifier(icon.Vector ?? icon.Icon48 ?? icon.Icon32 ?? icon.Icon16 ?? "");
                     return <li>
                         <img class="icon" src={iconPath} alt={icon.Alt} />
                         <dl>

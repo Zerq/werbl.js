@@ -7,7 +7,7 @@ import { Component } from "../../libs/worbl/Component.js";
 import { type ListView } from "../../components/ListView/ListView.js";
 
 import { ChangeEvent } from "react";
-import { DirectoryInfoLike, Frame } from "../../components/FileBrowser/FileBrowser.js";
+import { DirectoryInfoLike, FileBrowser, Frame } from "../../components/FileBrowser/FileBrowser.js";
 
 
 export class IconList123 implements IconSouceLikeLike {
@@ -47,7 +47,7 @@ export class ListViewTest extends BaseComponent<DirectoryInfoLike> {
 
 
     readonly #getFileTest = async () => {
-        const url = location.origin + "/api/files/"+ encodeURIComponent("/home/arch/Downloads");
+        const url = location.origin + "/api/files/" + encodeURIComponent("/home/arch/Downloads");
         const request = await fetch(url);
         const json = await request.json();
 
@@ -100,6 +100,7 @@ export class ListViewTest extends BaseComponent<DirectoryInfoLike> {
     public readonly onChange = async (e: ChangeEvent) => {
         const select = e.target as HTMLSelectElement;
         const list = GetComponent<ListView<Bork>>(".listView1");
+        const fileList = GetComponent<FileBrowser>(".FileBrowser");
 
 
 
@@ -107,6 +108,11 @@ export class ListViewTest extends BaseComponent<DirectoryInfoLike> {
         if (list !== null) {
             list.Model.RenderMode = select.value as ListViewRenderMode;
             await list.RenderAsync();
+        }
+
+        if (fileList !== null) {
+            fileList.RenderMode =  select.value as ListViewRenderMode;
+            await fileList.RenderAsync();
         }
     };
 
