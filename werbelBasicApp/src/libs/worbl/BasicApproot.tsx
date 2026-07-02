@@ -1,4 +1,4 @@
-import { LinkLike } from "./Components/NavMenu/NavMenu.js";
+import { LinkLike } from "../../components/NavMenu/NavMenu.js";
 import { IOC } from "./IOC.js";
 import { React } from "./JSX.js";
 import { BaseComponent } from "./BaseComponent.js";

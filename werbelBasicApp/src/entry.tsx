@@ -9,13 +9,13 @@ import { React } from "./libs/worbl/JSX.js"
 import { CSS } from "./libs/worbl/CSS.js"
 
 import { Component } from "./libs/worbl/Component.js";
-import "./libs/worbl/Components/NavMenu/NavMenu.js";
-import "./libs/worbl/Components/Box/Box.js";
-import "./libs/worbl/Components/TabView/TabView.js";
-import "./libs/worbl/Components/ListView/ListView.js";
+import "./components/NavMenu/NavMenu.js";
+import "./components/Box/Box.js";
+import "./components/TabView/TabView.js";
+import "./components/ListView/ListView.js";
+import "./components/FileBrowser/FileBrowser.js";
 
-
-import { LinkLike, LogoPosition, BrandingDisplayMode, TitleSize } from "./libs/worbl/Components/NavMenu/NavMenu.js";
+import { LinkLike, LogoPosition, BrandingDisplayMode, TitleSize } from "./components/NavMenu/NavMenu.js";
 
 import "./components/FormatCode/FormatCode.js";
 

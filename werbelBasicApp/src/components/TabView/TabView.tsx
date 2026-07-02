@@ -1,7 +1,7 @@
-import { BaseComponent } from "../../BaseComponent.js";
-import { Component } from "../../Component.js";
-import { React,Fragment } from "../../JSX.js";
-import { Header } from "../../CSS.js";
+import { BaseComponent } from "../../libs/worbl/BaseComponent.js";
+import { Component } from "../../libs/worbl/Component.js";
+import { React,Fragment } from "../../libs/worbl/JSX.js";
+import { Header } from "../../libs/worbl/CSS.js";
 
 @Header(<style id="TabView.css" type="text/css">{`.TabView {
     display: flex;

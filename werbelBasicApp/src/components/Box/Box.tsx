@@ -1,7 +1,7 @@
-import { BaseComponent } from "../../BaseComponent.js";
-import { Component } from "../../Component.js";
-import { React } from "../../JSX.js";
-import { Header } from "../../CSS.js";
+import { BaseComponent } from "../../libs/worbl/BaseComponent.js";
+import { Component } from "../../libs/worbl/Component.js";
+import { React } from "../../libs/worbl/JSX.js";
+import { Header } from "../../libs/worbl/CSS.js";
 
 declare type Orientation = "Vertical" | "Horizontal" | "V" | "H";
 

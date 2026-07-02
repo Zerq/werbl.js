@@ -1,0 +1,11 @@
+               ul.BigList {
+                   & li {
+                       & dl {
+                           dd {
+                               margin-inline: 0 !important;
+                               width: 5rem  !important;
+                               word-break: break-word  !important;
+                           }
+                       }
+                   }
+               }

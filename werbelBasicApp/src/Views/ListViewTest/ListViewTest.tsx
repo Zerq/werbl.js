@@ -1,12 +1,13 @@
 import { React } from "../../libs/worbl/JSX.js";
 import { BaseComponent, GetComponent } from "../../libs/worbl/BaseComponent.js";
 import { Route } from "../../libs/worbl/Router.js";
-import { FieldGetter, IconLike, IconSouceLikeLike } from "../../libs/worbl/Components/ListView/ListView.js";
-import { ListViewRenderMode } from '../../libs/worbl/Components/ListView/ListView.js';
+import { FieldGetter, IconLike, IconSouceLikeLike } from "../../components/ListView/ListView.js";
+import { ListViewRenderMode } from '../../components/ListView/ListView.js';
 import { Component } from "../../libs/worbl/Component.js";
-import { type ListView } from "../../libs/worbl/Components/ListView/ListView.js";
+import { type ListView } from "../../components/ListView/ListView.js";
 
 import { ChangeEvent } from "react";
+import { DirectoryInfoLike, FileBrowser, Frame } from "../../components/FileBrowser/FileBrowser.js";
 
 
 export class IconList123 implements IconSouceLikeLike {
@@ -36,7 +37,27 @@ type KVP<k, v> = {
 
 @Component("list-view-test")
 @Route("#listview")
-export class ListViewTest extends BaseComponent<void> {
+export class ListViewTest extends BaseComponent<DirectoryInfoLike> {
+
+    public constructor() {
+        super();
+        this.#getFileTest().then();
+
+    }
+
+
+    readonly #getFileTest = async () => {
+        const url = location.origin + "/api/files/" + encodeURIComponent("/home/arch/Downloads");
+        const request = await fetch(url);
+        const json = await request.json();
+
+        this.Model = json as DirectoryInfoLike;
+
+        const fileList = GetComponent<FileList>(".fileView1");
+        await Frame();
+        this.Render();
+
+    };
 
     #data = new Array<Bork>(
         { icon: "zog", title: "borkator", bork: false },
@@ -76,15 +97,29 @@ export class ListViewTest extends BaseComponent<void> {
     }
 
 
-    public readonly  onChange = async (e:ChangeEvent)=> {
-     const select = e.target as HTMLSelectElement;
-     const list = GetComponent<ListView<Bork>>(".listView1");
+    public readonly onChange = async (e: ChangeEvent) => {
+        const select = e.target as HTMLSelectElement;
+        const list = GetComponent<ListView<Bork>>(".listView1");
+        const fileList = GetComponent<FileBrowser>(".FileBrowser");
 
-        if(list !== null){
+
+
+
+        if (list !== null) {
             list.Model.RenderMode = select.value as ListViewRenderMode;
             await list.RenderAsync();
         }
+
+        if (fileList !== null) {
+            fileList.RenderMode =  select.value as ListViewRenderMode;
+            await fileList.RenderAsync();
+        }
     };
+
+
+
+
+
 
     protected View(): HTMLElement {
         return <>
@@ -101,6 +136,10 @@ export class ListViewTest extends BaseComponent<void> {
                 getters={this.#getters}
                 geticon={this.#getIcon}
             ></listview>
+            <file-browser class="fileView1" model={this.Model}>
+
+            </file-browser>
+
 
         </>
     }

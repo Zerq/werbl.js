@@ -1,7 +1,7 @@
-import { Component } from "../../Component.js";
-import { /*Header,*/ CSS } from "../../CSS.js";
-import { React } from "../../JSX.js"//[[ts]]
-import { BaseComponent } from "../../BaseComponent.js";
+import { Component } from "../../libs/worbl/Component.js";
+import { /*Header,*/ CSS } from "../../libs/worbl/CSS.js";
+import { React } from "../../libs/worbl/JSX.js"//[[ts]]
+import { BaseComponent } from "../../libs/worbl/BaseComponent.js";
 import {  ReactElement, ReactSVGElement } from 'react';
  
 

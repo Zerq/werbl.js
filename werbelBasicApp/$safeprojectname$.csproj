@@ -4,4 +4,12 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="INIParser" Version="1.0.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="package*.json" CopyToOutputDirectory="Never" />
+    <Content Update="package-lock.json" CopyToOutputDirectory="Never" />
+    <Content Update="tsconfig.json" CopyToOutputDirectory="Never" />
+  </ItemGroup>
 </Project>
