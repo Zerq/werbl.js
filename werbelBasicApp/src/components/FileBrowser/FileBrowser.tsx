@@ -3,15 +3,10 @@ import { Component } from "../../libs/worbl/Component.js";
 import { React, Fragment } from "../../libs/worbl/JSX.js";
 import { CSS } from "../../libs/worbl/CSS.js";
 
-export function Frame(): Promise<void> {
-    return new Promise((resolve, reject) => {
-        requestAnimationFrame(() => {
-            resolve();
-        });
-    });
-}
+
 
 import { type ListView, IconSouceLikeLike, IconLike, ListViewRenderMode, FieldGetter, IconMetaDataLike } from "../ListView/ListView.js";
+import { Frame } from "../../libs/worbl/frame.js";
 
 
 type FsType = "File" | "Directory";
@@ -148,7 +143,6 @@ export class FileBrowser extends BaseComponent<DirectoryInfoLike> {
     protected readonly ViewAsync = async () => {
 
         await this.#iconSource.Initialize();
-        await Frame();
 
         if (!this.Model) {
             return <></>;

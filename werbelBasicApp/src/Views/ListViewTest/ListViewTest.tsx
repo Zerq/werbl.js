@@ -7,7 +7,8 @@ import { Component } from "../../libs/worbl/Component.js";
 import { type ListView } from "../../components/ListView/ListView.js";
 
 import { ChangeEvent } from "react";
-import { DirectoryInfoLike, FileBrowser, Frame } from "../../components/FileBrowser/FileBrowser.js";
+import { DirectoryInfoLike, FileBrowser } from "../../components/FileBrowser/FileBrowser.js";
+import { Frame } from "../../libs/worbl/frame.js";
 
 
 export class IconList123 implements IconSouceLikeLike {
