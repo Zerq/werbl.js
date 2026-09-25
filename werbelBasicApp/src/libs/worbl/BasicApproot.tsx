@@ -1,4 +1,4 @@
-import { LinkLike } from "../../components/NavMenu/NavMenu.js";
+import { LinkLike } from "./Components/NavMenu/NavMenu.js";
 import { IOC } from "./IOC.js";
 import { React } from "./JSX.js";
 import { BaseComponent } from "./BaseComponent.js";
@@ -30,12 +30,15 @@ export abstract class BasicAppRoot extends BaseComponent<unknown> {
 
     public renderView(view: string, params: { [name: string]: any }, children: Array<string | HTMLElement>) {
         const result = this.#componentRegistry.CreateElement(view, params, children);
-
-        if (this.Container.querySelector("main") != undefined) {
-            this.Container.querySelector("main").innerHTML = "";
-            result.Render();
-            this.Container.querySelector("main").appendChild(result.Container);
+        const main = this.Container.querySelector("main");
+        if (!main || !result) {
+            return;
         }
+
+        main.innerHTML = "";
+        result.Render();
+        main.appendChild(result.Container);
+
     }
 
     protected abstract menuItems: Array<LinkLike>;
