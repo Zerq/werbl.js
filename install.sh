@@ -16,7 +16,7 @@ propLib(){
 echo "---starting installation---"
 propLib
 install_template "./werbelBasicApp"
-install_template "./werblEsBuildInline"
-install_template "./werblEsBuild"
+#install_template "./werblEsBuildInline"
+#install_template "./werblEsBuild"
 
 echo "---installation complete---"

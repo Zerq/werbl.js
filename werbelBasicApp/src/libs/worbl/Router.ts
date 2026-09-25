@@ -45,6 +45,7 @@ export class Router implements IRouter {
             }
         }
 
+
         return false;
     }
 
@@ -70,12 +71,9 @@ export class Router implements IRouter {
                         throw new Error("Route not defined");
                     }
                     const tag = this.componentRegistry.GetTagByCtrName(route.ctrName);
-                   
-                    if (tag=== undefined){
-                        throw Error("tag not found");
+                    if (!tag){
+                        return;
                     }
-
-
                     this.defaultRouteHandler?.(tag, params ? params : {});
                     break;
                 }
