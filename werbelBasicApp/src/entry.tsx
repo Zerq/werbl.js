@@ -24,6 +24,7 @@ import "./Views/Home/HomeView.js";
 import "./Views/Components/ComponentsView.js";
 import "./Views/NameSpaceShifting/NameSpaceShifting.js";
 import "./Views/ListViewTest/ListViewTest.js";
+import "./Views/Test/Text.js";
 
 
 import { IRouter } from "./libs/worbl/types.js";
@@ -37,10 +38,11 @@ export class AppComponent extends BasicAppRoot {
     protected menuItems: LinkLike[] =
         [
             { Name: "Home", Url: "#home" },
+            { Name: "Tests", Url: "#test" },
             { Name: "Namespace changing", Url: "#changens" },
             { Name: "Components", Url: "#components" },
             { Name: "ListViewtest", Url: "#listview" },
-            
+
             {
                 Name: "Invert", action: (e: Event) => {
                     e.preventDefault();

@@ -4,10 +4,10 @@
         "watch": "tsc --watch"
     },
     "devDependencies": {
-        "typescript":"7.0.2",
-        "@types/react":"19.0.8",
-        "gulp":"5.0.0",
-        "gulp-newer":"1.4.0"
-
+        "typescript": "7.0.2",
+        "@types/react": "19.0.8",
+        "gulp": "5.0.0",
+        "gulp-newer": "1.4.0",
+        "vitest": "5.0.2"
     }
 }

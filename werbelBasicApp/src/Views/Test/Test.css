@@ -1,0 +1,28 @@
+          .testPass {
+              border-radius: 1rem;
+              background-color: aqua;
+              border: black 0.1rem solid;
+              padding: 0.4rem;
+              color: black;
+          }
+
+          .testFailed {
+              border-radius: 1rem;
+              background-color: rgb(245, 147, 130);
+              border: black 0.1rem solid;
+              padding: 0.4rem;
+              color: black;
+          }
+
+
+          .padded {
+              padding: 0.5rem;
+          }
+
+          .testList dl {
+              display: grid;
+              grid-template-columns: max-content max-content;
+              height: fit-content;
+              grid-row-gap: 1.3rem;
+              text-align: right;
+          }
