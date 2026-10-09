@@ -1,6 +1,6 @@
 import { BaseComponent } from "../../libs/worbl/BaseComponent.js";
 import { Component } from "../../libs/worbl/Component.js";
-import { React } from "../../libs/worbl/JSX.js";
+import { AnyElement, React } from "../../libs/worbl/JSX.js";
 import { Route } from "../../libs/worbl/Router.js";
 import { CSS } from "../../libs/worbl/CSS.js";
 
@@ -26,7 +26,7 @@ export class HomeView extends BaseComponent<TestType> {
         this.Render();
     }
 
-    protected makeContainer(): HTMLElement {
+    protected makeContainer(): AnyElement {
         return this.makeContainerDefault(HomeView, { class: "HomeView" });
     }
 
@@ -44,7 +44,7 @@ export class HomeView extends BaseComponent<TestType> {
         console.log("checkbox changed to " + e.detail)  
     }
 
-    protected View(): HTMLElement {
+    protected View(): AnyElement {
         return <div>
             <h2>What is werbl.js</h2>
             <p>

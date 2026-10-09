@@ -1,6 +1,6 @@
 import { Component } from "../../libs/worbl/Component.js";
 import { /*Header,*/ CSS } from "../../libs/worbl/CSS.js";
-import { React } from "../../libs/worbl/JSX.js"//[[ts]]
+import { AnyElement, React } from "../../libs/worbl/JSX.js"//[[ts]]
 import { BaseComponent } from "../../libs/worbl/BaseComponent.js";
 import {  ReactElement, ReactSVGElement } from 'react';
  
@@ -43,7 +43,7 @@ export interface MenuDataLike {
 @Component("navbox")
 @CSS("./NavMenu.css", import.meta)
 export class NavMenu extends BaseComponent<MenuDataLike> {
-    protected ViewAsync?: () => Promise<HTMLElement>;
+    protected ViewAsync?: () => Promise<AnyElement>;
 
     public get Component(): unknown {
         return this;
@@ -54,7 +54,7 @@ export class NavMenu extends BaseComponent<MenuDataLike> {
         this.Model = { Title: "", Items: [], "DisplayMode": undefined, "LogoPosition": undefined, "TitleSize": undefined, IconSize: "3rem" };
     }
 
-    protected makeContainer(): HTMLElement {
+    protected makeContainer(): AnyElement {
         return this.makeContainerDefault(NavMenu, { class: "navMenu" });
     }
 
@@ -173,7 +173,7 @@ export class NavMenu extends BaseComponent<MenuDataLike> {
 
     };
 
-    protected View(): HTMLElement {
+    protected View(): AnyElement {
         return <header>
             <div class="branding">
                 {this.#Branding()}

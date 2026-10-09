@@ -1,6 +1,6 @@
 import { BaseComponent } from "../../libs/worbl/BaseComponent.js";
 import { Component } from "../../libs/worbl/Component.js";
-import { React } from "../../libs/worbl/JSX.js";
+import { AnyElement, React } from "../../libs/worbl/JSX.js";
 import { Header } from "../../libs/worbl/CSS.js";
 
 declare type Orientation = "Vertical" | "Horizontal" | "V" | "H";
@@ -30,8 +30,8 @@ declare type Orientation = "Vertical" | "Horizontal" | "V" | "H";
     `}</style>)
 @Component("box")
 export class Box extends BaseComponent<Orientation> {
-    protected ViewAsync?: () => Promise<HTMLElement>;
-    protected makeContainer(): HTMLElement {
+    protected ViewAsync?: () => Promise<AnyElement>;
+    protected makeContainer(): AnyElement {
         const defaultOrientation: Orientation = "Vertical";
         const result = this.makeContainerDefault(Box, { "class": "Box", "data-orientation": defaultOrientation } as any);
         if (result === undefined){
@@ -44,11 +44,11 @@ export class Box extends BaseComponent<Orientation> {
     public SetParam(name: string, value: any) {
         if (name === "orientation") {
             this.Model = value as Orientation;
-            this.Container.setAttribute("data-orientation", this.Model);
+            (this.Container as HTMLElement).setAttribute("data-orientation", this.Model);
         }
     }
 
-    protected View(): HTMLElement {
+    protected View(): AnyElement {
         if (typeof (this.children) === "object" && Object.getPrototypeOf(this.children).constructor.name === "Array") {
             return <>{...this.children}</>;
         }

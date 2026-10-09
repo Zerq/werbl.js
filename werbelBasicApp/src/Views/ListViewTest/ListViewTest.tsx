@@ -1,4 +1,4 @@
-import { React } from "../../libs/worbl/JSX.js";
+import { AnyElement, React } from "../../libs/worbl/JSX.js";
 import { BaseComponent, GetComponent } from "../../libs/worbl/BaseComponent.js";
 import { Route } from "../../libs/worbl/Router.js";
 import { FieldGetter, IconLike, IconSouceLikeLike } from "../../components/ListView/ListView.js";
@@ -87,7 +87,7 @@ export class ListViewTest extends BaseComponent<DirectoryInfoLike> {
 
 
 
-    protected makeContainer(): HTMLElement {
+    protected makeContainer(): AnyElement {
         return this.makeContainerDefault(ListViewTest);
     }
 
@@ -115,13 +115,7 @@ export class ListViewTest extends BaseComponent<DirectoryInfoLike> {
             await fileList.RenderAsync();
         }
     };
-
-
-
-
-
-
-    protected View(): HTMLElement {
+    protected View(): AnyElement {
         return <>
             <select id="listStyle" onchange={this.onChange}>
                 <option value="Big" selected>Big</option>
@@ -134,13 +128,10 @@ export class ListViewTest extends BaseComponent<DirectoryInfoLike> {
                 rendermode={("Big" as ListViewRenderMode)}
                 data={this.#data}
                 getters={this.#getters}
-                geticon={this.#getIcon}
-            ></listview>
+                geticon={this.#getIcon}>
+                </listview>
             <file-browser class="fileView1" model={this.Model}>
-
             </file-browser>
-
-
         </>
     }
 

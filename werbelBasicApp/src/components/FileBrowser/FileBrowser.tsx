@@ -1,6 +1,6 @@
 import { BaseComponent } from "../../libs/worbl/BaseComponent.js";
 import { Component } from "../../libs/worbl/Component.js";
-import { React, Fragment } from "../../libs/worbl/JSX.js";
+import { React, Fragment, AnyElement } from "../../libs/worbl/JSX.js";
 import { CSS } from "../../libs/worbl/CSS.js";
 
 export function Frame(): Promise<void> {
@@ -112,7 +112,7 @@ export class FileBrowser extends BaseComponent<DirectoryInfoLike> {
     };
 
 
-    protected makeContainer(): HTMLElement {
+    protected makeContainer(): AnyElement {
         return this.makeContainerDefault(FileBrowser, { class: "FileBrowser" });
     }
     public SetParam(name: string, value: any): void {

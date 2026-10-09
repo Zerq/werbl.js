@@ -1,6 +1,6 @@
 import { Component } from "../../Component.js";
 import { Header } from "../../CSS.js";
-import { React } from "../../JSX.js"//[[ts]]
+import { AnyElement, React } from "../../JSX.js"//[[ts]]
 import { BaseComponent } from "../../BaseComponent.js";
 import {  ReactElement, ReactSVGElement } from 'react';
  
@@ -54,7 +54,7 @@ export class NavMenu extends BaseComponent<MenuDataLike> {
         this.Model = { Title: "", Items: [], "DisplayMode": undefined, "LogoPosition": undefined, "TitleSize": undefined, IconSize: "3rem" };
     }
 
-    protected makeContainer(): HTMLElement {
+    protected makeContainer(): AnyElement {
         return this.makeContainerDefault(NavMenu, { class: "navMenu" });
     }
 
@@ -173,7 +173,7 @@ export class NavMenu extends BaseComponent<MenuDataLike> {
 
     };
 
-    protected View(): HTMLElement {
+    protected View(): AnyElement {
         return <header>
             <div class="branding">
                 {this.#Branding()}

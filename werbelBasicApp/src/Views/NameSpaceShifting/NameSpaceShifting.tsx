@@ -1,6 +1,6 @@
 import { BaseComponent } from "../../libs/worbl/BaseComponent.js";
 import { Component } from "../../libs/worbl/Component.js";
-import { React } from "../../libs/worbl/JSX.js";
+import { AnyElement, React } from "../../libs/worbl/JSX.js";
 import { Route } from "../../libs/worbl/Router.js";
 
 type TestTypeItem = { burklax: number, blarg: boolean, splarg: string };
@@ -24,7 +24,7 @@ export class NameSpaceShifting extends BaseComponent<TestType> {
         this.Render();
     }
 
-    protected makeContainer(): HTMLElement {
+    protected makeContainer(): AnyElement {
         return this.makeContainerDefault(NameSpaceShifting, { class: "HomeView" });
     }
 
@@ -42,7 +42,7 @@ export class NameSpaceShifting extends BaseComponent<TestType> {
         console.log("checkbox changed to " + e.detail);
     }
 
-    protected View(): HTMLElement {
+    protected View(): AnyElement {
         return <div>
             <h2>Changing namespaces</h2>
             <p>

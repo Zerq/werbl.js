@@ -1,12 +1,12 @@
 import { CSS } from "../../libs/worbl/CSS.js";
 import { Component } from "../../libs/worbl/Component.js";
 import { BaseComponent } from "../../libs/worbl/BaseComponent.js";
-import { React } from "../../libs/worbl/JSX.js";
+import { AnyElement, React } from "../../libs/worbl/JSX.js";
 
 @CSS("./FormatCode.css", import.meta)
 @Component("format-code")
 export class FormatCode extends BaseComponent<string> {
-    protected makeContainer(): HTMLElement {
+    protected makeContainer(): AnyElement {
         return this.makeContainerDefault(FormatCode, { tagType: "code", class: "formatedCode" });
     }
 
@@ -20,7 +20,7 @@ export class FormatCode extends BaseComponent<string> {
         }
     }
 
-    protected View(): HTMLElement {
+    protected View(): AnyElement {
         if (!this.Model) {
             return <span></span>;
         }

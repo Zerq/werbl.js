@@ -5,7 +5,8 @@ import "./libs/worbl/ComponentRegistry.js";
 import "./libs/worbl/Router.js";
 import "./libs/worbl/JSX.js"
 
-import { React } from "./libs/worbl/JSX.js"
+import { React, Fragment, AnyElement } from "./libs/worbl/JSX.js"
+ 
 import { CSS } from "./libs/worbl/CSS.js"
 
 import { Component } from "./libs/worbl/Component.js";
@@ -24,7 +25,7 @@ import "./Views/Home/HomeView.js";
 import "./Views/Components/ComponentsView.js";
 import "./Views/NameSpaceShifting/NameSpaceShifting.js";
 import "./Views/ListViewTest/ListViewTest.js";
-
+import "./Views/Test/TestView.js";
 
 import { IRouter } from "./libs/worbl/types.js";
 
@@ -37,10 +38,11 @@ export class AppComponent extends BasicAppRoot {
     protected menuItems: LinkLike[] =
         [
             { Name: "Home", Url: "#home" },
+            { Name: "Tests", Url: "#test" },
             { Name: "Namespace changing", Url: "#changens" },
             { Name: "Components", Url: "#components" },
             { Name: "ListViewtest", Url: "#listview" },
-            
+
             {
                 Name: "Invert", action: (e: Event) => {
                     e.preventDefault();
@@ -71,7 +73,7 @@ export class AppComponent extends BasicAppRoot {
         };
     }
 
-    protected View(): HTMLElement {
+    protected View(): AnyElement {
         const displaymode: BrandingDisplayMode = "IconOnly"
         const position: LogoPosition = "Below";
         const titlesize: TitleSize = "N";
