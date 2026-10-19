@@ -1,6 +1,6 @@
 import { BaseComponent } from "../../BaseComponent.js";
 import { Component } from "../../Component.js";
-import { React } from "../../JSX.js";
+import { AnyElement, React } from "../../JSX.js";
 import { Header } from "../../CSS.js";
  
 export interface IconLike {
@@ -49,7 +49,7 @@ export interface ListViewModelLike<T> {
     `}</style>)
 @Component("listview")
 export class ListView<T> extends BaseComponent<ListViewModelLike<T>> {
-    protected ViewAsync?: () => Promise<HTMLElement>;
+    protected ViewAsync?: () => Promise<AnyElement>;
    
     public constructor() {
         super();
@@ -57,7 +57,7 @@ export class ListView<T> extends BaseComponent<ListViewModelLike<T>> {
         this.Model.RenderMode = "List";
     }
 
-    protected makeContainer(): HTMLElement {
+    protected makeContainer(): AnyElement {
         return this.makeContainerDefault(ListView, { "class": "ListView" } as any);
     }
 
@@ -174,7 +174,7 @@ export class ListView<T> extends BaseComponent<ListViewModelLike<T>> {
     };
 
 
-    protected View(): HTMLElement {
+    protected View(): AnyElement {
       
 
  

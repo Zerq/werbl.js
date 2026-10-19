@@ -1,15 +1,64 @@
 import { IOC } from "./IOC.js";
-import { IComponentRegistry, IMetaDataService } from "./types.js";
+import { IComponentRegistry } from "./types.js";
+
+
+/*
+i am trying to mimic react rather then use the react-jsx mode since i could never figure out how to set the intrincic Element stuff but for some annoying reason i cant get Fragment to really detect... it end up being undefined for some reason..
+currently i am just detecting if its undefined and if so is children not null.. and then assuming that means fragment which seam to mostly work out... this may yield a silent bug if you forget to register an element properly... maybe... need testing
+recently also changed htmlelement stuff to a anyelement type... this kinda mirror the JSXElement stuff react used i suppose... but it seamed nessesary it did make things a bit more akward... might try to ommit the type where i can idk...
+*/
+
 class jsxContext {
     static nameSpace: string | undefined = undefined;
 }
 
-export const Fragment = Symbol.for("react.fragment");
+export const Fragment = Symbol.for("React.Fragment"); //not sure why this thing is not landing like it should.... this should be getting inserted where <></> are used in place of the tag...
+
+export type AnyElement = string | boolean | number | bigint | Date | HTMLElement | Element | DocumentFragment | Array<AnyElement>;
+
+const appendAny = (root: Element, elm: AnyElement) => {
+    const type = typeof (elm);
+
+    if (type === "object") {
+        const proto = Object.getPrototypeOf(elm).constructor.name;
+        if (proto === "Array") {
+            (elm as unknown as Array<AnyElement>).forEach(n => {
+                appendAny(root, n);
+            });
+            return;
+        }
+
+        if (proto === "Date") {
+            root.appendChild(document.createTextNode((elm as Date).toString()));
+            return;
+        }
+    }
+
+    if (type === "string") {
+        root.appendChild(document.createTextNode(elm as string));
+        return;
+    }
+
+    if (type === "number") {
+        root.appendChild(document.createTextNode(elm + ""));
+        return;
+    }
+
+    if (type === "bigint") {
+        root.appendChild(document.createTextNode(elm + ""));
+        return;
+    }
+    if (type === "boolean") {
+        root.appendChild(document.createTextNode(elm + ""));
+        return;
+    }
+
+    root.appendChild((elm as HTMLElement));
+};
 
 export namespace React {
 
-    export function createElement(tag: string, attributes: { [name: string]: any; }, ...children: Array<string | number | boolean | bigint | Date | HTMLElement>) {
-        const metaData = IOC.Instance.Service(IMetaDataService);
+    export function createElement(tag: string, attributes: { [name: string]: any; }, ...children: Array<string | number | boolean | bigint | Date | HTMLElement>): AnyElement {
         const componentRegistry = IOC.Instance.Service(IComponentRegistry);
 
 
@@ -20,47 +69,19 @@ export namespace React {
                 jsxContext.nameSpace = undefined;
             }
 
-            return;
+            return [];
         }
 
 
-        if (tag as any === Fragment) {
+        if (tag === undefined && children) { //fragment detection does not work for some reason using this work around for now... this may treat unregistered component like a fragment...  
+            //   if (tag as any === Fragment) {
             const docFrag = document.createDocumentFragment();
             children.forEach(child => {
-
                 if (!child) {
                     return;
                 }
-
-                const type = metaData.Get(child);
-
-                if (type.Name === "string") {
-                    docFrag.appendChild(document.createTextNode(child as string));
-                    return;
-                }
-
-                if (type.Name === "number") {
-                    docFrag.appendChild(document.createTextNode(child + ""));
-                    return;
-                }
-
-                if (type.Name === "bigint") {
-                    docFrag.appendChild(document.createTextNode(child + ""));
-                    return;
-                }
-                if (type.Name === "boolean") {
-                    docFrag.appendChild(document.createTextNode(child + ""));
-                    return;
-                }
-
-                if (type.Name === "Date") {
-                    docFrag.appendChild(document.createTextNode((child as Date).toString()));
-                    return;
-                }
-
-                docFrag.appendChild(child as HTMLElement);
+                appendAny(docFrag as unknown as HTMLElement, child);
             });
-
             return docFrag;
         }
 
@@ -73,9 +94,6 @@ export namespace React {
 
             return newElement.Container;
         }
-
-
-
 
         let newElement: Element | undefined;
 
@@ -105,43 +123,13 @@ export namespace React {
                 return;
             }
 
-            const type = metaData.Get(elm);
-
-            if (type.Name === "string") {
-                let txt = (elm as string).replace(`
-`, "\n");
-
-
-                newElement.appendChild(document.createTextNode(txt));
-                return;
-            }
-
-            if (type.Name === "number") {
-                newElement.appendChild(document.createTextNode(elm + ""));
-                return;
-            }
-
-            if (type.Name === "bigint") {
-                newElement.appendChild(document.createTextNode(elm + ""));
-                return;
-            }
-            if (type.Name === "boolean") {
-                newElement.appendChild(document.createTextNode(elm + ""));
-                return;
-            }
-
-            if (type.Name === "Date") {
-                newElement.appendChild(document.createTextNode((elm as Date).toString()));
-                return;
-            }
-
-
-
-            newElement.appendChild((elm as HTMLElement));
+            appendAny(newElement, elm);
 
         });
         return newElement;
     }
+
+
 
     export namespace JSX {
         function SetNameSpace(namespace: string) {
@@ -156,6 +144,6 @@ export namespace React {
 }
 
 
-export function SetNameSpace(namespace: string|undefined) {
+export function SetNameSpace(namespace: string | undefined) {
     jsxContext.nameSpace = namespace;
 }

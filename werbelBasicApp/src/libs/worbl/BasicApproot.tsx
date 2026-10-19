@@ -1,6 +1,6 @@
 import { LinkLike } from "./Components/NavMenu/NavMenu.js";
 import { IOC } from "./IOC.js";
-import { React } from "./JSX.js";
+import { AnyElement, React } from "./JSX.js";
 import { BaseComponent } from "./BaseComponent.js";
 import { IComponentRegistry, IRouter } from "./types.js";
 
@@ -28,22 +28,22 @@ export abstract class BasicAppRoot extends BaseComponent<unknown> {
     }
 
 
-    public renderView(view: string, params: { [name: string]: any }, children: Array<string | HTMLElement>) {
+    public renderView(view: string, params: { [name: string]: any }, children: Array<AnyElement>) {
         const result = this.#componentRegistry.CreateElement(view, params, children);
-        const main = this.Container.querySelector("main");
+        const main = (this.Container as HTMLElement).querySelector("main");
         if (!main || !result) {
             return;
         }
 
         main.innerHTML = "";
         result.Render();
-        main.appendChild(result.Container);
+        main.appendChild(result.Container as HTMLElement);
 
     }
 
     protected abstract menuItems: Array<LinkLike>;
 
-    protected makeContainer(): HTMLElement {
+    protected makeContainer(): AnyElement {
         this.Id = crypto.randomUUID();
         return <div class="appContainer" id={this.Id}></div>;
     }
