@@ -4,61 +4,64 @@ import { AnyElement, React } from "../../libs/worbl/JSX.js";
 import { Route } from "../../libs/worbl/Router.js";
 import { CSS } from "../../libs/worbl/CSS.js";
 import { PsudoInterface } from "../../libs/worbl/PsudoInterface.js";
- 
 
-export interface TypedLike{
-    $type:string;
+
+export interface TypedLike {
+    $type: string;
 }
 
-export type Handler = { Revitalize: (t: TypedLike)=> any, replacer:(obj:any)=> any};
+export type Handler = { Revitalize: (t: TypedLike) => any, replacer: (obj: any) => any };
 
-export abstract class ISerializer extends PsudoInterface{
-    public constructor(){
+export abstract class ISerializer extends PsudoInterface {
+    public constructor() {
         super();
     }
 
-    public abstract Serialize<T extends TypedLike>(obj:T):string;
-    public abstract Deserialize<T extends TypedLike>(json:string):T;
+    public abstract Serialize<T extends TypedLike>(obj: T): string;
+    public abstract Deserialize<T extends TypedLike>(json: string): T;
 
-    public abstract SetHandler(type:string, handler:Handler):void;
-    public abstract GetHandler(type:string): Handler;
+    public abstract SetHandler(type: string, handler: Handler): void;
+    public abstract GetHandler(type: string): Handler;
 }
 
 
-export class Serialize implements ISerializer{
-    
+export class Serialize implements ISerializer {
+
     #map = new Map<string, Handler>();
 
     public Serialize<T extends TypedLike>(obj: T): string {
-        
-        if (obj.$type && this.#map.has(obj.$type)) {
-           
 
-                 return JSON.stringify(obj,this.bork);
+        if (obj.$type && this.#map.has(obj.$type)) {
+            return JSON.stringify(obj, function (this: any, key: string, value: string) {
+                return this;
+            });
         }
 
         return JSON.stringify(obj);
     }
 
     public Deserialize<T extends TypedLike>(json: string): T {
-    
-            
-        if (obj.$type && this.#map.has(obj.$type)) {
-           obj = this.#map.get(obj.$type)?.replacer(obj);
-        }
-
-
-        return JSON.parse(json);
+        const map = this.#map;
+        return JSON.parse(json, function (this: any, key, value) {
+            if (typeof (this[key]) === "object") {
+                const type: string | undefined = this?.[key]?.["$type"];
+                if (type) {
+                    const handler = map.get(type);
+                    this[key] = handler?.Revitalize(this[key]);
+                }
+            }
+            return this;
+        });
     }
 
-    public SetHandler(type:string, handler:Handler):void {
+    public SetHandler(type: string, handler: Handler): void {
         this.#map.set(type, handler);
     }
 
-    public GetHandler(type:string): Handler {
+    public GetHandler(type: string): Handler {
         const result = this.#map.get(type);
 
-        if (!result){
+        if (!result) {
             throw new Error("handler not found for " + type);
         }
 
@@ -71,23 +74,23 @@ export class Serialize implements ISerializer{
 @CSS("./TestView.css", import.meta)
 @Route("#test")
 @Component("test-view")
-export class TestView extends BaseComponent<Map<string,()=> boolean>> {
-    Name ="";
+export class TestView extends BaseComponent<Map<string, () => boolean>> {
+    Name = "";
 
     public constructor() {
         super();
         this.Model = new Map();
 
-        this.Model.set("test1", ()=> {  
-            const val = 1+1;
+        this.Model.set("test1", () => {
+            const val = 1 + 1;
             return val === 2;
-          })
+        })
 
         this.Render();
     }
 
     protected makeContainer(): AnyElement {
-        return this.makeContainerDefault(TestView, { tagType:"dl", class: "HomeView" });
+        return this.makeContainerDefault(TestView, { tagType: "dl", class: "HomeView" });
     }
 
     public SetParam(name: string, value: any) {
@@ -96,13 +99,13 @@ export class TestView extends BaseComponent<Map<string,()=> boolean>> {
         }
     }
 
-    protected View(): AnyElement { 
-        return  <>
+    protected View(): AnyElement {
+        return <>
             {
-            ...Array.from(this.Model).map(n=> <>
-                <dt>{n[0]}</dt>
-                <dd className={"result_" + n[1]?.()}>{n[1]?.()}</dd>
-            </>)                  
+                ...Array.from(this.Model).map(n => <>
+                    <dt>{n[0]}</dt>
+                    <dd className={"result_" + n[1]?.()}>{n[1]?.()}</dd>
+                </>)
             }
         </>
     }
