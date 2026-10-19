@@ -4,72 +4,35 @@ import { AnyElement, React } from "../../libs/worbl/JSX.js";
 import { Route } from "../../libs/worbl/Router.js";
 import { CSS } from "../../libs/worbl/CSS.js";
 import { PsudoInterface } from "../../libs/worbl/PsudoInterface.js";
+import { IOC, RegisterService } from "../../libs/worbl/IOC.js";
+import { Ctr, ISerializer } from "../../libs/worbl/types.js";
 
-
-export interface TypedLike {
-    $type: string;
+export function RegisterHandler<T>(handler: (obj: any) => T) {
+    return (ctor: Ctr<T>) => {
+        IOC.Instance.Service(ISerializer).RegisterTypeHandler(ctor.name, handler);
+    };
 }
 
-export type Handler = { Revitalize: (t: TypedLike) => any, replacer: (obj: any) => any };
-
-export abstract class ISerializer extends PsudoInterface {
-    public constructor() {
-        super();
+@RegisterHandler(n => Object.assign(new Bork(), n))
+export class Bork {
+    public $type = Bork.name;
+    public Nr: number = 0;
+    public Increment() {
+        this.Nr++;
     }
-
-    public abstract Serialize<T extends TypedLike>(obj: T): string;
-    public abstract Deserialize<T extends TypedLike>(json: string): T;
-
-    public abstract SetHandler(type: string, handler: Handler): void;
-    public abstract GetHandler(type: string): Handler;
 }
 
 
-export class Serialize implements ISerializer {
+export interface TestDataLike {
+    Zog: string;
+    Börk: Bork;
+};
 
-    #map = new Map<string, Handler>();
-
-    public Serialize<T extends TypedLike>(obj: T): string {
-
-        if (obj.$type && this.#map.has(obj.$type)) {
-            return JSON.stringify(obj, function (this: any, key: string, value: string) {
-                return this;
-            });
-        }
-
-        return JSON.stringify(obj);
-    }
-
-    public Deserialize<T extends TypedLike>(json: string): T {
-        const map = this.#map;
-        return JSON.parse(json, function (this: any, key, value) {
-            if (typeof (this[key]) === "object") {
-                const type: string | undefined = this?.[key]?.["$type"];
-                if (type) {
-                    const handler = map.get(type);
-                    this[key] = handler?.Revitalize(this[key]);
-                }
-            }
-            return this;
-        });
-    }
-
-    public SetHandler(type: string, handler: Handler): void {
-        this.#map.set(type, handler);
-    }
-
-    public GetHandler(type: string): Handler {
-        const result = this.#map.get(type);
-
-        if (!result) {
-            throw new Error("handler not found for " + type);
-        }
-
-        return result;
-    }
-
+class TestNode {
+    public constructor(public Name: string) { }
+    public Parent?: TestNode = undefined;
+    public Children: Array<TestNode> = [];
 }
-
 
 @CSS("./TestView.css", import.meta)
 @Route("#test")
@@ -81,10 +44,44 @@ export class TestView extends BaseComponent<Map<string, () => boolean>> {
         super();
         this.Model = new Map();
 
-        this.Model.set("test1", () => {
-            const val = 1 + 1;
-            return val === 2;
-        })
+        this.Model.set("circularrefernce test", () => {
+            const root = new TestNode("Root");
+
+            const rootChild1 = new TestNode("RootChild1");
+            rootChild1.Parent = root;
+
+            const rootChild2 = new TestNode("RootChild2");
+            rootChild2.Parent = root;
+
+            const childOfChild1 = new TestNode("Child of Child");
+            childOfChild1.Parent = rootChild1;
+
+            rootChild1.Children.push(childOfChild1);
+
+            root.Children.push(rootChild1);
+            root.Children.push(rootChild2);
+
+            const ser = IOC.Instance.Service(ISerializer);
+            const json = ser.Serialize(root);
+
+            const andBackAgain = ser.Deserialize<TestNode>(json);
+            return andBackAgain?.Children[0]?.Children[0]?.Name === "Child of Child";
+        });
+
+        this.Model.set("I can serialize and deserialize and revive prototypes", () => {
+            const test1Data = {
+                Zog: "bork",
+                Börk: new Bork()
+            };
+            test1Data.Börk.Increment();
+            test1Data.Börk.Increment();
+            test1Data.Börk.Increment();
+            const ser = IOC.Instance.Service(ISerializer);
+            const x = ser.Serialize(test1Data);
+            const y = ser.Deserialize<TestDataLike>(x);
+            y.Börk.Increment();
+            return y.Börk.Nr === 4;
+        });
 
         this.Render();
     }
@@ -102,10 +99,14 @@ export class TestView extends BaseComponent<Map<string, () => boolean>> {
     protected View(): AnyElement {
         return <>
             {
-                ...Array.from(this.Model).map(n => <>
-                    <dt>{n[0]}</dt>
-                    <dd className={"result_" + n[1]?.()}>{n[1]?.()}</dd>
-                </>)
+                ...Array.from(this.Model).map(n => {
+                    const desc = n[0];
+                    const result = n[1]() + "";
+                    return <>
+                        <dt>{desc}</dt>
+                        <dd className={"result_" + result}>{result}</dd>
+                    </>
+                })
             }
         </>
     }

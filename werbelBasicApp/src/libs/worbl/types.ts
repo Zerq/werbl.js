@@ -53,3 +53,12 @@ export interface BaseComponentLike<T> {
     RenderAsync?:() => void;
     IsInitialized:boolean;
 }
+
+export abstract class ISerializer extends PsudoInterface {
+    public constructor() {
+        super();
+    }
+    public abstract Serialize<T>(obj: T): string;
+    public abstract Deserialize<T>(json: string): T;
+    public abstract RegisterTypeHandler(name: string, handler: (obj: any) => any): void;
+}

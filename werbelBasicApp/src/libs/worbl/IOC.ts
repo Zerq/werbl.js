@@ -32,7 +32,7 @@ export class Pipe implements IPipe {
             this.#map.get(name)!.push(subscriber as any);
         }
         else {
-        (this.#map.get(name) as any)![index] = (subscriber);
+            (this.#map.get(name) as any)![index] = (subscriber);
         }
     }
 

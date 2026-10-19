@@ -4,6 +4,7 @@ import "./libs/worbl/MetaData.js";
 import "./libs/worbl/ComponentRegistry.js";
 import "./libs/worbl/Router.js";
 import "./libs/worbl/JSX.js"
+import "./libs/worbl/Serializer.js"
 
 import { React, Fragment, AnyElement } from "./libs/worbl/JSX.js"
  
@@ -26,6 +27,7 @@ import "./Views/Components/ComponentsView.js";
 import "./Views/NameSpaceShifting/NameSpaceShifting.js";
 import "./Views/ListViewTest/ListViewTest.js";
 import "./Views/Test/TestView.js";
+
 
 import { IRouter } from "./libs/worbl/types.js";
 
