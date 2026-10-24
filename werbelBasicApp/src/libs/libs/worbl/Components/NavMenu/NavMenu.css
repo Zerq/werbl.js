@@ -1,0 +1,13 @@
+h1.IconBelow {
+    img {
+        display: block;
+        margin-inline: auto;
+    }
+}
+
+h1.IconAbove {
+    img {
+        display: block;
+        margin-inline: auto;
+    }
+}

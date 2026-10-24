@@ -1,6 +1,6 @@
 import { BaseComponent } from "../../libs/worbl/BaseComponent.js";
 import { Component } from "../../libs/worbl/Component.js";
-import { React } from "../../libs/worbl/JSX.js";
+import { AnyElement, React } from "../../libs/worbl/JSX.js";
 import { Route } from "../../libs/worbl/Router.js";
 
 @Route("#components")
@@ -14,7 +14,7 @@ export class ComponentsView extends BaseComponent<unknown> {
         this.Render();
     }
 
-    protected makeContainer(): HTMLElement {
+    protected makeContainer(): AnyElement {
         return this.makeContainerDefault(ComponentsView, { class: "AboutView" });
     }
 
@@ -24,7 +24,7 @@ export class ComponentsView extends BaseComponent<unknown> {
         }
     }
 
-    protected View(): HTMLElement {
+    protected View(): AnyElement {
         return <tabview>
             <article title="tabview Code">
                 <format-code text={`<tabview>

@@ -1,0 +1,24 @@
+.result_true{
+    background-color: #06b600;
+    color: white;
+    font-weight: bolder;
+    display: inline-block;
+    padding: 0.4rem;
+    border-radius: 0.5rem;
+    border: white dotted 0.1rem;
+}
+
+.result_false{
+    background-color: #c30000;
+    color: white;
+    font-weight: bolder;
+    display: inline-block;
+    padding: 0.4rem;
+    border-radius: 0.5rem;
+    border: white dotted 0.1rem;
+}
+
+dl {
+    display: grid !important;
+    grid-template-columns: min-content min-content
+}

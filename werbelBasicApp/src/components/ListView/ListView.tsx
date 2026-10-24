@@ -1,6 +1,6 @@
 import { BaseComponent } from "../../libs/worbl/BaseComponent.js";
 import { Component } from "../../libs/worbl/Component.js";
-import { React } from "../../libs/worbl/JSX.js";
+import { AnyElement, React } from "../../libs/worbl/JSX.js";
 import { CSS } from "../../libs/worbl/CSS.js";
 
 export interface IconLike {
@@ -86,7 +86,7 @@ export class ListView<T> extends BaseComponent<ListViewModelLike<T>> {
         this.Model.RenderMode = "List";
     }
 
-    protected makeContainer(): HTMLElement {
+    protected makeContainer(): AnyElement {
         return this.makeContainerDefault(ListView, { "class": "ListView" } as any);
     }
 
@@ -102,11 +102,11 @@ export class ListView<T> extends BaseComponent<ListViewModelLike<T>> {
     public SetParam(name: string, value: any) {
 
         if (name.toLowerCase() === "id") {
-            this.Container.id = value;
+            (this.Container as HTMLElement).id = value;
         }
 
         if (name.toLowerCase() === "class") {
-            this.Container.className = value;
+            (this.Container as HTMLElement).className = value;
         }
 
         if (name.toLocaleLowerCase() === "iconpathmodifier"){
