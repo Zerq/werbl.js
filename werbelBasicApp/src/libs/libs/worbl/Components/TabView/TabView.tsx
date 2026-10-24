@@ -1,6 +1,6 @@
 import { BaseComponent } from "../../BaseComponent.js";
 import { Component } from "../../Component.js";
-import { AnyElement, React } from "../../JSX.js";
+import { React } from "../../JSX.js";
 import { Header } from "../../CSS.js";
 
 @Header(<style id="TabView.css" type="text/css">{`.TabView {
@@ -46,13 +46,13 @@ import { Header } from "../../CSS.js";
 //@CSS("/libs/worbl/Components/TabView/TabView.css")
 @Component("tabview")
 export class TabView extends BaseComponent<number> {
-    protected ViewAsync?: () => Promise<AnyElement>;
+    protected ViewAsync?: () => Promise<HTMLElement>;
     public constructor() {
         super();
         this.Model = 0;
     }
 
-    protected makeContainer(): AnyElement {
+    protected makeContainer(): HTMLElement {
         return this.makeContainerDefault(TabView, { "class": "TabView" } as any);
     }
     
@@ -67,7 +67,7 @@ export class TabView extends BaseComponent<number> {
         this.Render();
     };
 
-    protected View(): AnyElement {
+    protected View(): HTMLElement {
 
         if (typeof (this.children) === "object" && Object.getPrototypeOf(this.children).constructor.name === "Array") {
             return <>

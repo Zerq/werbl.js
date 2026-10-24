@@ -1,6 +1,6 @@
 import { BaseComponent } from "../../BaseComponent.js";
 import { Component } from "../../Component.js";
-import { AnyElement, React } from "../../JSX.js";
+import { React } from "../../JSX.js";
 import { Header } from "../../CSS.js";
 
 declare type Orientation = "Vertical" | "Horizontal" | "V" | "H";
@@ -30,8 +30,8 @@ declare type Orientation = "Vertical" | "Horizontal" | "V" | "H";
     `}</style>)
 @Component("box")
 export class Box extends BaseComponent<Orientation> {
-    protected ViewAsync?: () => Promise<AnyElement>;
-    protected makeContainer(): AnyElement {
+    protected ViewAsync?: () => Promise<HTMLElement>;
+    protected makeContainer(): HTMLElement {
         const defaultOrientation: Orientation = "Vertical";
         const result = this.makeContainerDefault(Box, { "class": "Box", "data-orientation": defaultOrientation } as any);
         if (result === undefined){
@@ -44,23 +44,15 @@ export class Box extends BaseComponent<Orientation> {
     public SetParam(name: string, value: any) {
         if (name === "orientation") {
             this.Model = value as Orientation;
-            (this.Container as HTMLElement).setAttribute("data-orientation", this.Model);
+            this.Container.setAttribute("data-orientation", this.Model);
         }
     }
 
-    protected View(): AnyElement {
+    protected View(): HTMLElement {
         if (typeof (this.children) === "object" && Object.getPrototypeOf(this.children).constructor.name === "Array") {
-            const collection = new Array<AnyElement>();
-            this.children.forEach(n=> {
-                if (typeof(n) === "object" && Object.getPrototypeOf(n).constructor.name  ==="Array"){
-                    collection.push(...(n as Array<AnyElement>));
-                }
-
-                collection.push(n);
-            });
-            return collection;
+            return <>{...this.children}</>;
         }
 
-        return <></>;
+        return <div></div>;
     }
 }

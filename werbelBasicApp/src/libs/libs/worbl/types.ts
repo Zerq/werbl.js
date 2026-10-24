@@ -1,12 +1,11 @@
 import { ParamsObj } from "./Router.js";
 import { PsudoInterface } from "./PsudoInterface.js";
 import { Routmappinng } from "./Routmappinng.js";
-import { AnyElement } from "./JSX.js";
 
 export abstract class IComponentRegistry extends PsudoInterface {
     private constructor() { super(); }
     public abstract RegisterElement<T>(tag: string, ctr: Ctr<BaseComponentLike<T>>): void;
-    public abstract CreateElement<T, V extends BaseComponentLike<T>>(tag: string, params: { [name: string]: any; }, children: AnyElement): BaseComponentLike<V>| undefined;
+    public abstract CreateElement<T, V extends BaseComponentLike<T>>(tag: string, params: { [name: string]: any; }, children: Array<string | boolean | number | bigint | Date | HTMLElement>): BaseComponentLike<V>| undefined;
     public abstract Has(tag:string): boolean;
     public abstract GetTag(ctr: Ctr<BaseComponentLike<any>>): string|undefined;
     public abstract GetTagByCtrName(ctrName: string): string|undefined;
@@ -46,19 +45,10 @@ export interface Ctr<T> {
 export type VoidFunc = () => void;
 
 export interface BaseComponentLike<T> {
-    get Container(): AnyElement;
-    SetChildren(children: AnyElement): void;
+    get Container(): HTMLElement;
+    SetChildren(children: Array<string | HTMLElement>): void;
     SetParam(name: string, value: any):void;
     Render(): void;
     RenderAsync?:() => void;
     IsInitialized:boolean;
-}
-
-export abstract class ISerializer extends PsudoInterface {
-    public constructor() {
-        super();
-    }
-    public abstract Serialize<T>(obj: T): string;
-    public abstract Deserialize<T>(json: string): T;
-    public abstract RegisterTypeHandler(name: string, handler: (obj: any) => any): void;
 }

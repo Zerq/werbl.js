@@ -1,5 +1,4 @@
 import { IOC } from "./IOC.js";
-import { AnyElement } from "./JSX.js";
 import { PsudoInterface } from "./PsudoInterface.js";
 import { BaseComponentLike, Ctr, IComponentRegistry } from "./types.js";
 
@@ -13,12 +12,12 @@ export function GetComponent<T>(queryString: string) {
 
 export abstract class BaseComponent<T> implements BaseComponentLike<T> {
     public Model!: T;
-    #container: AnyElement;
+    #container: HTMLElement;
 
     #id: string | undefined;
 
     public get Id(): string {
-        if (this.#id === undefined) {
+        if(this.#id === undefined){
             throw Error("Component Id not assigned before request!");
         }
 
@@ -29,7 +28,7 @@ export abstract class BaseComponent<T> implements BaseComponentLike<T> {
         this.#id = val;
     }
 
-    public get Container(): AnyElement {
+    public get Container(): HTMLElement {
         return this.#container;
     }
 
@@ -41,15 +40,15 @@ export abstract class BaseComponent<T> implements BaseComponentLike<T> {
     public IsInitialized: boolean = false;
 
 
-    protected children: Array<AnyElement> = [];
+    protected children: Array<string | HTMLElement> =[];
 
-    SetChildren(children: Array<AnyElement>): void {
+    SetChildren(children: Array<string | HTMLElement>): void {
         this.children = children;
     }
 
-    protected abstract makeContainer(): AnyElement;
+    protected abstract makeContainer(): HTMLElement;
 
-    protected makeContainerDefault(ctr: Ctr<BaseComponent<any>>, params: { tagType?: string; class?: string; } = { tagType: undefined, class: undefined }): AnyElement {
+    protected makeContainerDefault(ctr: Ctr<BaseComponent<any>>, params: { tagType?: string; class?: string; } = { tagType: undefined, class: undefined }): HTMLElement {
         this.Id = crypto.randomUUID();;
         const componentRegistry = IOC.Instance.Service(IComponentRegistry);
 
@@ -72,14 +71,14 @@ export abstract class BaseComponent<T> implements BaseComponentLike<T> {
         return element;
     }
 
-    public abstract SetParam(name: string, value: any): void;
+    public abstract SetParam(name: string, value: any):void;
     public baseSetParam(name: string, value: any) {
 
     }
-    protected abstract View(): AnyElement;
+    protected abstract View(): HTMLElement;
 
     public readonly RenderAsync = async () => {
-        (this.#container as HTMLElement).innerHTML = "";
+        this.#container.innerHTML = "";
 
         const view = await (this as unknown as AsyncRenderLike).ViewAsync?.() ?? undefined;
 
@@ -87,8 +86,9 @@ export abstract class BaseComponent<T> implements BaseComponentLike<T> {
             return;
         }
 
+
         if (view !== null) {
-            (this.#container as HTMLElement).appendChild(view);
+            this.#container.appendChild(view);
         }
 
         requestAnimationFrame(() => {
@@ -97,22 +97,13 @@ export abstract class BaseComponent<T> implements BaseComponentLike<T> {
     }
 
     public Render() {
-        (this.#container as HTMLElement).innerHTML = "";
+        this.#container.innerHTML = "";
         const view = this.View();
         if (view !== null) {
-
-            if (Object.getPrototypeOf(view).constructor.name === "Array") {
-                (view as unknown as Array<AnyElement>).forEach(n => {
-                    (this.#container as HTMLElement).appendChild(n as unknown as HTMLElement);
-                });
-                return;
-            }
-
-            (this.#container as HTMLElement).appendChild(view as unknown as HTMLElement);
+            this.#container.appendChild(view);
         }
-
         requestAnimationFrame(() => {
-            (this as unknown as PostRenderLike).postRender?.();
+           (this as unknown as PostRenderLike).postRender?.();
         });
     }
 }
